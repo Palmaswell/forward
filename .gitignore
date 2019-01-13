@@ -1,0 +1,9 @@
+node_modules/
+.next/
+yarn-error.log
+dump.rdb
+.env
+gcloud.json
+now.json
+.DS_Store
+./**/*/.DS_Store
