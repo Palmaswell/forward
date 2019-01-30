@@ -6,5 +6,5 @@ test('sRGB Relative luminance in colorimetric spaces', () => {
 })
 
 test('sRGB Calculate the contrast ratio', () => {
-  expect(Color.contrast([227, 178, 60], [66, 62, 55])).toEqual(5.42);
+  expect(Color.contrastRatio([227, 178, 60], [66, 62, 55])).toEqual(5.42);
 })

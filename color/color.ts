@@ -1,4 +1,5 @@
-export enum RGBAverage {
+
+export enum YValues {
   r = 0.2126,
   g = 0.7152,
   b = 0.0722,
@@ -7,27 +8,28 @@ export enum RGBAverage {
  * @name luminance
  * @type { number }
  * @description Relative luminance in colorimetric spaces
- * L = 0.2126 * R + 0.7152 * G + 0.0722 * B
- * where R, G and B are defined as:
+ * Luminance = R *Yr + G*Yg + B*Yb
+ * where R", "G", and "B" refer to the color's RGB values, and Yr, Yg, and Yb
+ * are the respective "Y" values from the sRGB color space's
+ * Red, Blue, and Green XYZ primaries.
  * if R sRGB <= 0.03928 then R = R sRGB /12.92 else R = ((R sRGB +0.055)/1.055) ^ 2.4
  * if G sRGB <= 0.03928 then G = G sRGB /12.92 else G = ((G sRGB +0.055)/1.055) ^ 2.4
  * if B sRGB <= 0.03928 then B = B sRGB /12.92 else B = ((B sRGB +0.055)/1.055) ^ 2.4
  *
  */
-const avgCond = (n: number): boolean => n <= 0.03928;
-const pct = (n: number): number => n / 255;
+
+export function calculateRGBEntry(component: number, y: YValues): number {
+  const average = component / 255;
+
+  return average <= 0.03928
+      ? average / 12.92 * y
+      : ((average + 0.055) / 1.055 ) ** 2.4 * y;
+};
+
 export function luminance(sRGB: number[]): number {
-  const avgComponent = (component: number) => (a: RGBAverage): number => {
-    const n = avgCond(pct(component))
-        ? pct(component) / 12.92
-        : ((pct(component) + 0.055) / 1.055 ) ** 2.4;
-    return n * a
-  }
-  return sRGB.reduce((acc, component, i) => (
-    i === 1
-      ? avgComponent(acc)(RGBAverage.r) + avgComponent(component)(RGBAverage.g)
-      : avgComponent(component)(RGBAverage.b) + acc
-  ));
+  return calculateRGBEntry(sRGB[0], YValues.r)
+  + calculateRGBEntry(sRGB[1], YValues.g)
+  + calculateRGBEntry(sRGB[2], YValues.b);
 }
 /**
  * @name contrastRatio
@@ -35,6 +37,6 @@ export function luminance(sRGB: number[]): number {
  * @description Calculate the contrast ratio
  * (L1 + 0.05) / (L2 + 0.05)
  */
-export function contrast(sRGB: number[], sRGB2: number[]): number {
+export function contrastRatio(sRGB: number[], sRGB2: number[]): number {
   return +((luminance(sRGB) + 0.05) / (luminance(sRGB2) + 0.05)).toFixed(2);
 }
