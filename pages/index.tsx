@@ -1,11 +1,18 @@
+import * as React from 'react';
 import * as Container from '../container';
 
-const IndexPage = () => (
-  <>
-    <h1>A web app will be soon here</h1>
-    <Container.Upload />
-  </>
-);
+export default class IndexPage extends React.Component {
+  static async getInitialProps({ ctx }) {
+    console.log(ctx, '*********');
+    return {};
+  }
 
-
-export default IndexPage;
+  public render(): JSX.Element {
+    return(
+      <>
+      <h1>A web app will be soon here</h1>
+        <Container.Upload />
+      </>
+    )
+  }
+}

@@ -8,3 +8,5 @@ now.json
 .DS_Store
 ./**/*/.DS_Store
 dist/*
+forward.file
+.forward
