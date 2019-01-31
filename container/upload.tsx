@@ -1,10 +1,6 @@
 import * as React from 'react';
 import uuid from 'uuid/v3';
-import axios from 'axios';
-
-export interface UploadState {
-  file: null | FormData;
-}
+import Cookie from 'js-cookie';
 
 export class Upload extends React.Component {
   public state = {
@@ -17,16 +13,8 @@ export class Upload extends React.Component {
   }
 
   public componentDidUpdate(): void {
-    const data = new FormData();
-    data.append('file', this.state.file);
-
-    if (this.state.file) {
-      console.log(this.state.file, 'see what is inhere');
-      axios.post('/', data)
-      .then(res => {
-        console.log(res)
-      })
-    }
+    console.log('!!!!!componentDidUpdate', this.state.file)
+    Cookie.set('file', this.state.file);
   }
 
   public render(): JSX.Element {
