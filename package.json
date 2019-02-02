@@ -35,8 +35,8 @@
   "dependencies": {
     "cookie-parser": "^1.4.3",
     "cookies": "^0.7.3",
-    "express": "^4.16.4",
-    "http": "^0.0.0",
+    "emotion": "^10.0.6",
+    "emotion-server": "^10.0.6",
     "js-cookie": "^2.2.0",
     "koa": "^2.7.0",
     "koa-logger": "^3.2.0",
