@@ -10,10 +10,14 @@ export class Upload extends React.Component {
   private handleSelectedFile(e: React.ChangeEvent<HTMLInputElement>): void {
     e.persist();
     this.setState({...this.state, file: e.target.files[0]});
+    const reader = new FileReader();
+    reader.onload = e => {
+      console.log(reader.result);
+    };
+    reader.readAsText(e.target.files[0]);
   }
 
   public componentDidUpdate(): void {
-    console.log('!!!!!componentDidUpdate', this.state.file)
     Cookie.set('file', this.state.file);
   }
 

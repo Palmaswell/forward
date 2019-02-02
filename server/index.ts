@@ -20,7 +20,6 @@ app.prepare().then(() => {
     const query = {
       file: ctx.cookies.get('file')
     }
-    console.log(query.file, '((((((((');
     await app.render(ctx.req, ctx.res, '/', query);
     ctx.respond = false;
   });
