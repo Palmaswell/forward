@@ -10,5 +10,11 @@ interface StyledTileProps {
 }
 
 const StyledTile = styled.div`
-  background-color: papayawhip;
+  background-color: ${(props: StyledTileProps) => `rgb(${props.color.join()})`};
 `
+
+export const Tile: React.SFC<TileProps> = ({ children, color }): JSX.Element => (
+  <StyledTile color={color}>
+    { children }
+  </StyledTile>
+)

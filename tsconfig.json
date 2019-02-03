@@ -18,6 +18,8 @@
     "lib": [
       "dom",
       "es2017",
-    ]
-  }
+    ],
+    "types": ["@emotion/core"]
+  },
+  "types": ["@emotion/core"]
 }
