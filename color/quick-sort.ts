@@ -21,16 +21,23 @@ import * as Type from '../types';
  * @param {array} a
 */
 export function quickSort(a: number[]): number[] {
-  return a.length > 1 ? (() => {
-    const
-        h = a[0],
-        [less, more] = partition(x => x <= h, a.slice(1));
-        console.log(partition(x => x <= h, a.slice(1)));
-    return [].concat.apply(
-        [], [quickSort(less), h, quickSort(more)]
-    );
-})() : a;
+  if (a.length < 1) {
+    return a;
+  }
+  const pivot = a[a.length / 2];
+  return a;
 }
+// export function quickSort(a: number[]): number[] {
+//   return a.length > 1 ? (() => {
+//     const
+//         h = a[0],
+//         [less, more] = partition(x => x <= h, a.slice(1));
+//         console.log(partition(x => x <= h, a.slice(1)));
+//     return [].concat.apply(
+//         [], [quickSort(less), h, quickSort(more)]
+//     );
+// })() : a;
+// }
 
 /**
  * @name partition
@@ -38,12 +45,27 @@ export function quickSort(a: number[]): number[] {
  * @param { array } a
  * @param { predicate } p
 */
-export function partition(p: (n: number) => boolean, a: number[]): any {
-  return a.reduce((a, x) =>
-  p(x) ? [a[0].concat(x), a[1]] : [a[0], a[1].concat(x)], [
-      [],
-      []
-  ]);
-
+export function partition(p: (c: any) => boolean, a): number[] {
+  return a;
 }
+// export function partition(p: (n: number) => boolean, a: number[]): any {
+//   return a.reduce((a, x) =>
+//   p(x) ? [a[0].concat(x), a[1]] : [a[0], a[1].concat(x)], [
+//       [],
+//       []
+//   ]);
 
+// }
+
+/**
+ * @name swap
+ * @param { array } a
+ * @param { number } low
+ * @param { number } high
+ * @description swaps two values in an array
+ */
+export function swap(a: number[], low, high): number[] {
+  const t = a.slice();
+  [a[low], a[high]] = [a[high], a[low]];
+  return a;
+}
