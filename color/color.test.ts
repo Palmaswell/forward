@@ -1,8 +1,11 @@
 import * as Color from './color';
+import { palette } from './palette';
 
 test('sRGB Relative luminance in colorimetric spaces', () => {
   expect(Color.luminance([255, 255, 255])).toEqual(1);
   expect(Color.luminance([0, 0, 0])).toEqual(0);
+  expect(Color.luminance(palette[5].rgb)).toEqual(0.5023201943423656);
+  expect(Color.luminance(palette[6].rgb)).toEqual( 0.7711529349131155);
 })
 
 test('sRGB Calculate the contrast ratio', () => {
