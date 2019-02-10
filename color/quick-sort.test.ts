@@ -29,8 +29,16 @@ test('swap array elements', () => {
 test('quick sort', () => {
   const arrayMock = [10, 3, 11, 15, 19, 1];
   const arrayMock2 = [11.8, 14.1, 21.3, 8.5, 16.7, 5.7];
-  Color.quickSort(arrayMock);
-  Color.quickSort(arrayMock2);
+  Color.quickSort({
+    a: arrayMock,
+    lo: 0,
+    hi: arrayMock.length - 1
+  });
+  Color.quickSort({
+    a: arrayMock2,
+    lo: 0,
+    hi: arrayMock.length - 1
+  });
 
   expect(arrayMock).toEqual([1, 3, 10, 11, 15, 19]);
   expect(arrayMock2).toEqual([5.7, 8.5, 11.8, 14.1, 16.7, 21.3]);

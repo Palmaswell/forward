@@ -15,11 +15,10 @@
  * to avoid the memory allocation of more arrays.
  */
 
-export interface PartitionProps {
-  a: number[];
-  low: number;
-  high: number;
-  pivot: number;
+export interface QuickSortProps {
+  a: number[]
+  lo: number;
+  hi: number;
 }
 
 /**
@@ -28,12 +27,12 @@ export interface PartitionProps {
  * @param { number } low
  * @param { number } high
 */
-export function quickSort(a, low = 0, high = a.length - 1): void {
-  if (low < high) {
-    const pivot = a[low + Math.floor((high - low) / 2)];
-    let i = low;
-    let j = high;
-    while (i <= j) {
+export function quickSort({ a, lo, hi}: QuickSortProps): void {
+  if (lo < hi) {
+    const pivot = a[Math.floor((lo + hi) / 2)];
+    let i = lo;
+    let j = hi;
+    while(i <= j) {
       while(a[i] < pivot) {
         i++;
       }
@@ -46,10 +45,14 @@ export function quickSort(a, low = 0, high = a.length - 1): void {
         j--;
       }
     };
-    quickSort(a, low, j);
-    quickSort(a, i, high);
+    quickSort({a, lo, hi: j});
+    quickSort({a, lo: i, hi});
   }
 }
+
+// export function partition({a}): number {
+
+// }
 
 
 /**
