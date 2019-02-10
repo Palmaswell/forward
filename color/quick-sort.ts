@@ -15,18 +15,40 @@
  * to avoid the memory allocation of more arrays.
  */
 
+export interface PartitionProps {
+  a: number[];
+  low: number;
+  high: number;
+  pivot: number;
+}
+
 /**
  * @name quickSort
- * @param {array} a
- * @param {low} number
- * @param {high} number
+ * @param { array } a
+ * @param { number } low
+ * @param { number } high
 */
-export function quickSort(a: number[], low: number = 0, high: number = a.length - 1): number[] {
-  if (low >= high) {
-    return a;
+export function quickSort(a, low = 0, high = a.length - 1): void {
+  if (low < high) {
+    const pivot = a[low + Math.floor((high - low) / 2)];
+    let i = low;
+    let j = high;
+    while (i <= j) {
+      while(a[i] < pivot) {
+        i++;
+      }
+      while(a[j] > pivot) {
+        j--;
+      }
+      if (i <= j) {
+        swap(a, i, j);
+        i++;
+        j--;
+      }
+    };
+    quickSort(a, low, j);
+    quickSort(a, i, high);
   }
-  const pivot = a[Math.floor(a.length / 2)];
-  return a;
 }
 
 
@@ -35,13 +57,12 @@ export function quickSort(a: number[], low: number = 0, high: number = a.length 
  * @callback predicate
  * @param { array } a
  * @param { predicate } p
- * @param {low} number
- * @param {high} number
- * @param {pivot} number
+ * @param { number } low
+ * @param { number } high
 */
-export function partition(p: (c: any) => boolean, a, low, high, pivot) {
-  return a;
-}
+
+
+
 
 /**
  * @name swap
@@ -54,3 +75,4 @@ export function swap(a: number[], low, high): number[] {
   [a[low], a[high]] = [a[high], a[low]];
   return a;
 }
+
