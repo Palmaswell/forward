@@ -1,18 +1,19 @@
-import { number } from "prop-types";
-
 /**
- * Quicksort, also known as   partition-exchange sort,   uses these steps.
- * Choose any element of the array to be the pivot.
- * Divide all other elements (except the pivot) into two partitions.
- * All elements less than the pivot must be in the first partition.
- * All elements greater than the pivot must be in the second partition.
- * Use recursion to sort both partitions.
- * Join the first sorted partition, the pivot, and the second sorted partition.
+ * @name Quicksort
+ * @description Quicksort is a fast sorting algorithm
+ * that takes the dived and conquer approach to sorting list.
  *
- * Average time of   O(n log n)
+ * Running time is an important thing to consider when selecting
+ * a sorting algorithm since efficiency is often thought on terms
+ * of speed (runtime).
+ *
+ * Best case run time O(n log n)
+ * Avarage case run time O(n log n)
+ * Worst case run time O(n_2)
 */
 
-/** A better quicksort algorithm works in place,
+/**
+ * A better quicksort algorithms works in place,
  * by swapping elements within the array,
  * to avoid the memory allocation of more arrays.
  */
@@ -37,6 +38,20 @@ export interface PartitionProps {
  * @param { number } high
 */
 export function quickSort({ a, lo, hi }: QuickSortProps): void {
+  if (lo < hi) {
+    const pivot = a[Math.floor((lo + hi) / 2)];
+    const p = partition({
+      a,
+      lo,
+      hi,
+      p: pivot
+    })
+    quickSort({a, lo, hi: p.hi});
+    quickSort({a, lo: p.lo, hi});
+  }
+};
+
+export function quickSortImp({ a, lo, hi }: QuickSortProps): void {
   if (lo < hi) {
     const pivot = a[Math.floor((lo + hi) / 2)];
     let i = lo;

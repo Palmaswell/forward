@@ -1,5 +1,4 @@
 import * as Color from './quick-sort';
-import { array } from 'prop-types';
 
 test('swap array elements', () => {
   const arrayMock = [1, 2, 3, 4, 5];
