@@ -1,3 +1,5 @@
+import { number } from "prop-types";
+
 /**
  * Quicksort, also known as   partition-exchange sort,   uses these steps.
  * Choose any element of the array to be the pivot.
@@ -16,9 +18,16 @@
  */
 
 export interface QuickSortProps {
-  a: number[]
+  a: number[];
   lo: number;
   hi: number;
+}
+
+export interface PartitionProps {
+  a: number[];
+  lo: number;
+  hi: number;
+  p: number;
 }
 
 /**
@@ -27,7 +36,7 @@ export interface QuickSortProps {
  * @param { number } low
  * @param { number } high
 */
-export function quickSort({ a, lo, hi}: QuickSortProps): void {
+export function quickSort({ a, lo, hi }: QuickSortProps): void {
   if (lo < hi) {
     const pivot = a[Math.floor((lo + hi) / 2)];
     let i = lo;
@@ -48,11 +57,58 @@ export function quickSort({ a, lo, hi}: QuickSortProps): void {
     quickSort({a, lo, hi: j});
     quickSort({a, lo: i, hi});
   }
+};
+
+export function partition({ a, lo, hi, p }: PartitionProps): { lo: number, hi: number} {
+  if (lo <= hi) {
+    if (a[lo] < p) {
+      return partition({
+        a,
+        lo: lo + 1,
+        hi,
+        p,
+      });
+    }
+    else if (a[hi] > p) {
+      return partition({
+        a,
+        lo,
+        hi: hi - 1,
+        p
+      })
+    }
+    if (lo <= hi) {
+      swap(a, lo, hi);
+      return partition({
+        a,
+        lo: lo + 1,
+        hi: hi - 1,
+        p
+      })
+    }
+  }
+  return { lo, hi };
+};
+
+export function partitionImp({ a, lo, hi, p }: PartitionProps): { lo: number, hi: number} {
+  const pivot = p;
+  let i = lo;
+  let j = hi;
+  while(i <= j) {
+    while(a[i] < pivot) {
+      i++;
+    }
+    while(a[j] > pivot) {
+      j--;
+    }
+    if (i <= j) {
+      swap(a, i, j);
+      i++;
+      j--;
+    }
+  };
+  return { lo: i, hi: j};
 }
-
-// export function partition({a}): number {
-
-// }
 
 
 /**
