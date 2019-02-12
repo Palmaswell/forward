@@ -1,3 +1,4 @@
 export * from './color';
-export * from './quick-sort';
+export * from './create';
 export * from './palette';
+export * from './sort';

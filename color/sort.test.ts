@@ -30,7 +30,7 @@ test('quick color sort', () => {
     hi: arrayMock.length - 1,
     cb: Color.luminance
   });
-  console.log(arrayMock);
+
   expect(arrayMock[1]).toEqual({
     name: 'Dracula Orchid',
     type: Type.PaletteCase.dracula_orchid,

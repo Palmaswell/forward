@@ -6,10 +6,23 @@ export interface Color {
 
 export type RGB = [number, number, number];
 
+export interface EnhancedColor {
+  name: string;
+  type: PaletteCase;
+  rgb: RGB;
+  aa: Map<any, number>;
+  aaa: Map<any, number>;
+}
+
 export enum YValues {
   r = 0.2126,
   g = 0.7152,
   b = 0.0722,
+}
+
+export enum a11yRatio {
+  aa = 4.5,
+  aaa = 7,
 }
 
 export enum PaletteCase {
