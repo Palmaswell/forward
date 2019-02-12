@@ -6,6 +6,12 @@ export interface Color {
 
 export type RGB = [number, number, number];
 
+export enum YValues {
+  r = 0.2126,
+  g = 0.7152,
+  b = 0.0722,
+}
+
 export enum PaletteCase {
   black = 'black',
   electromagnetic = 'electromagnetic',

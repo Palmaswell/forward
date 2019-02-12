@@ -1,46 +1,43 @@
-import * as Color from './color';
+import * as Type from '../types';
+import * as Util from '../utils';
 /**
- * @name Quicksort
- * @description Quicksort is a fast sorting algorithm
- * that takes the dived and conquer approach to sorting list.
- *
- * Running time is an important thing to consider when selecting
- * a sorting algorithm since efficiency is often thought on terms
- * of speed (runtime).
- *
- * Best case run time O(n log n)
- * Avarage case run time O(n log n)
- * Worst case run time O(n_2)
-*/
-
-/**
- * A better quicksort algorithms works in place,
- * by swapping elements within the array,
- * to avoid the memory allocation of more arrays.
- */
-
-/**
- * @name quickColorSort
+ * @name quickSort
  * @param { array } a
  * @param { number } low
  * @param { number } high
  * @param { string } key
  * @param { luminanceCallBack } cb
 */
-
-export function quickColorSort({}): void {
-  return
+export function quickSort({ a, lo, hi, cb }: Type.QuickColorSortProps): void {
+  if (lo < hi) {
+    const pivot = cb(a[Math.floor((lo + hi) / 2)].rgb);
+    const p = partition({ a, lo, hi, p: pivot, cb});
+    quickSort({ a, lo, hi: p.hi, cb});
+    quickSort({ a, lo: p.lo, hi, cb });
+  }
 }
 
-
 /**
- * @name colorPartition
+ * @name partition
  * @param { array } a
  * @param { number } lo
  * @param { number } hi
  * @param { number } p
+ * @param { luminanceCallBack } cb
 */
 
-export function colorPartition({}): number {
-  return 3;
+export function partition({ a, lo, hi, p, cb }: Type.ColorPartitionProps): { lo: number, hi: number} {
+  if (lo <= hi) {
+    if (cb(a[lo].rgb) < p) {
+      return partition({ a, lo: lo + 1, hi, p, cb});
+    }
+    else if (cb(a[hi].rgb) > p) {
+      return partition({ a, lo, hi: hi - 1, p, cb});
+    }
+    if (lo <= hi) {
+      Util.swap(a, lo, hi);
+      return partition({ a, lo: lo + 1, hi: hi - 1, p, cb});
+    }
+  }
+  return { lo, hi };
 }

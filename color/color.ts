@@ -1,9 +1,5 @@
+import * as Type from '../types';
 
-export enum YValues {
-  r = 0.2126,
-  g = 0.7152,
-  b = 0.0722,
-}
 /**
  * @name luminance
  * @type { number }
@@ -18,7 +14,7 @@ export enum YValues {
  *
  */
 
-export function calculateRGBEntry(component: number, y: YValues): number {
+export function calculateRGBEntry(component: number, y: Type.YValues): number {
   const average = component / 255;
 
   return average <= 0.03928
@@ -26,10 +22,10 @@ export function calculateRGBEntry(component: number, y: YValues): number {
       : ((average + 0.055) / 1.055 ) ** 2.4 * y;
 };
 
-export function luminance(sRGB: number[]): number {
-  return calculateRGBEntry(sRGB[0], YValues.r)
-  + calculateRGBEntry(sRGB[1], YValues.g)
-  + calculateRGBEntry(sRGB[2], YValues.b);
+export function luminance(sRGB: Type.RGB): number {
+  return calculateRGBEntry(sRGB[0], Type.YValues.r)
+  + calculateRGBEntry(sRGB[1], Type.YValues.g)
+  + calculateRGBEntry(sRGB[2], Type.YValues.b);
 }
 /**
  * @name contrastRatio
@@ -37,6 +33,13 @@ export function luminance(sRGB: number[]): number {
  * @description Calculate the contrast ratio
  * (L1 + 0.05) / (L2 + 0.05)
  */
-export function contrastRatio(sRGB: number[], sRGB2: number[]): number {
+export function contrastRatio(sRGB: Type.RGB, sRGB2: Type.RGB): number {
   return +((luminance(sRGB) + 0.05) / (luminance(sRGB2) + 0.05)).toFixed(2);
 }
+
+// jede farbe in die paletter
+// obj
+
+// sortierte liste 2 schleife
+// each color with a list
+

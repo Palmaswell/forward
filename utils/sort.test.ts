@@ -3,11 +3,18 @@ import * as Util from './';
 test('swap array elements', () => {
   const arrayMock = [1, 2, 3, 4, 5];
   const arrayMock2 = [1, 3];
-  expect(Util.swap(arrayMock, 1, 2)).toEqual([1, 3, 2, 4, 5]);
-  expect(Util.swap(arrayMock, 1, 2)).toBe(arrayMock);
-  expect(Util.swap(arrayMock, 3, 4)).toEqual([1, 2, 3, 5, 4]);
-  expect(Util.swap(arrayMock2, 0, 1)).toEqual([3, 1]);
-  expect(Util.swap([10, 3, 11, 15, 19, 1], 2, 5)).toEqual([10, 3, 1, 15, 19, 11]);
+  const arrayMock3 = [10, 3, 11, 15, 19, 1];
+  Util.swap(arrayMock, 1, 2);
+
+  expect(arrayMock).toEqual([1, 3, 2, 4, 5]);
+  expect(arrayMock).toBe(arrayMock);
+
+  Util.swap(arrayMock, 2, 3);
+  expect(arrayMock).toEqual([1, 3, 4, 2, 5]);
+  Util.swap(arrayMock2, 0, 1);
+  expect(arrayMock2).toEqual([3, 1]);
+  Util.swap(arrayMock3, 2, 5)
+  expect(arrayMock3).toEqual([10, 3, 1, 15, 19, 11]);
 });
 
 test('quick sort', () => {

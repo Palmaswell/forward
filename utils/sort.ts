@@ -122,8 +122,7 @@ export function partitionImp({ a, lo, hi, p }: Type.PartitionProps): { lo: numbe
  * @param { number } high
  * @description swaps two values in an array
  */
-export function swap(a: number[], low, high): number[] {
+export const swap = (a: Type.Color[] | number[], low, high): void => {
   [a[low], a[high]] = [a[high], a[low]];
-  return a;
 }
 
