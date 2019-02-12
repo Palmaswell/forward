@@ -20,7 +20,7 @@ export enum YValues {
   b = 0.0722,
 }
 
-export enum a11yRatio {
+export enum A11yRatio {
   aa = 4.5,
   aaa = 7,
 }

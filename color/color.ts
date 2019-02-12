@@ -37,9 +37,4 @@ export function contrastRatio(sRGB: Type.RGB, sRGB2: Type.RGB): number {
   return +((luminance(sRGB) + 0.05) / (luminance(sRGB2) + 0.05)).toFixed(2);
 }
 
-// jede farbe in die paletter
-// obj
-
-// sortierte liste 2 schleife
-// each color with a list
 
