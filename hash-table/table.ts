@@ -1,16 +1,15 @@
 import * as Type from '../types';
+import * as Util from '../utils';
 /**
  * @name computeHash
  * @param { string } string
  * @param { number } length
  * @param { number } index
 */
-export function computeHash({s, l, t, i}: Type.ComputeHashProps): number {
+export function computeHash({s, l, t = 0, i = 0}: Type.ComputeHashProps): number {
+  const h = Util.findPrime(l);
   if (i < s.length) {
-    return computeHash({s, l, t: t + s.charCodeAt(i), i: i + 1});
+    return computeHash({s, l: h, t: t + s.charCodeAt(i), i: i + 1});
   }
-  else {
-    console.log(t % 7, 'this is t');
-    return t % l;
-  }
+  return t % h;
 }
