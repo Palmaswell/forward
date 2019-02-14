@@ -10,7 +10,7 @@ export function computeHash({s, l, t, i}: Type.ComputeHashProps): number {
     return computeHash({s, l, t: t + s.charCodeAt(i), i: i + 1});
   }
   else {
-    console.log(t % l, 'this is t');
+    console.log(t % 7, 'this is t');
     return t % l;
   }
 }
