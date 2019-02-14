@@ -1,17 +1,17 @@
 export interface Color {
   name: string;
-  type: PaletteCase;
   rgb: RGB;
+  type?: PaletteCase;
 };
 
 export type RGB = [number, number, number];
 
 export interface EnhancedColor {
   name: string;
-  type: PaletteCase;
   rgb: RGB;
   aa: Map<any, number>;
   aaa: Map<any, number>;
+  type?: PaletteCase;
 }
 
 export enum YValues {

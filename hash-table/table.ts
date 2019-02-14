@@ -11,5 +11,9 @@ export function computeHash({s, l, t = 0, i = 0}: Type.ComputeHashProps): number
   if (i < s.length) {
     return computeHash({s, l: h, t: t + s.charCodeAt(i), i: i + 1});
   }
-  return t % h;
+  return t % l;
+}
+
+export function create(s: number): any[] {
+  return new Array(s);
 }
