@@ -1,7 +1,7 @@
 import * as Hashtbl from '../hash-table';
 import * as Type from '../types';
 
-const arrayMock = [
+const arrayMock: Type.Color = [
   {
     name: 'C64 Purple',
     type: Type.PaletteCase.c64_purple,
@@ -39,16 +39,36 @@ test('compute hash from key string to array index', () => {
   })).toBe(7);
 });
 
-test('create a new hash table with empty buckets', () => {
-  expect(Hashtbl.create(2)).toEqual([
-    undefined,
-    undefined
-  ]);
-  expect(Hashtbl.create(5)).toEqual([
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined
-  ]);
+test('create a hashtable an initialize empty buckets', () => {
+  expect(Hashtbl.create(2)).toMatchObject({
+    bucketArray: [undefined, undefined]
+  });
+  expect(Hashtbl.create(3)).toMatchObject({
+    bucketArray: [undefined, undefined, undefined]
+  });
 });
+
+test('add item to the hash table', () => {
+  const hashTabl = Hashtbl.create(15);
+  hashTabl.set(arrayMock[0]);
+  hashTabl.set(arrayMock[3]);
+  expect(hashTabl.bucketArray[4]).toEqual(arrayMock[0]);
+  expect(hashTabl.bucketArray[9]).toEqual(arrayMock[3]);
+});
+
+test('delete item from hash table', () => {
+  const hashTabl = Hashtbl.create(15);
+  hashTabl.set(arrayMock[0]);
+  expect(hashTabl.bucketArray[4]).toEqual(arrayMock[0]);
+  hashTabl.delete(arrayMock[0].name);
+  expect(hashTabl.bucketArray[4]).toEqual(undefined);
+});
+
+test('find item from hash table', () => {
+  const hashTabl = Hashtbl.create(20);
+  hashTabl.set(arrayMock[0]);
+  expect(hashTabl.bucketArray[9]).toEqual(arrayMock[0]);
+  expect(hashTabl.get(arrayMock[0].name)).toEqual(arrayMock[0]);
+});
+
+

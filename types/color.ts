@@ -9,8 +9,8 @@ export type RGB = [number, number, number];
 export interface EnhancedColor {
   name: string;
   rgb: RGB;
-  aa: Map<any, number>;
-  aaa: Map<any, number>;
+  aa?: Map<string, Color>;
+  aaa?: Map<string, Color>;
   type?: PaletteCase;
 }
 
