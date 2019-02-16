@@ -16,5 +16,5 @@ export interface HashTbl {
 
 export interface Node {
   next: EnhancedColor | null;
-  value: EnhancedColor;
+  value?: EnhancedColor;
 }

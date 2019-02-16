@@ -13,6 +13,16 @@ export function computeHash({s, l, t = 0, i = 0}: Type.ComputeHashProps): number
   return t % l;
 }
 /**
+ * @name createNode
+ * @param { Type.EnhancedColor } v
+*/
+export function createNode(value?: Type.EnhancedColor): Type.Node {
+  return {
+    value,
+    next: null
+  }
+}
+/**
  * @name create
  * @param { number } s
 */
