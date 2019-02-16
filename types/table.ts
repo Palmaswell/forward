@@ -13,3 +13,8 @@ export interface HashTbl {
   get(name: string): EnhancedColor | undefined;
   delete(name: string): void;
 }
+
+export interface Node {
+  next: EnhancedColor | null;
+  value: EnhancedColor;
+}

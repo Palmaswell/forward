@@ -1,4 +1,4 @@
-import * as Hashtbl from '../hash-table';
+import * as Hashtbl from './';
 import * as Type from '../types';
 
 const arrayMock: Type.Color = [
