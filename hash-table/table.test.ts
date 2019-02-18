@@ -22,6 +22,21 @@ const arrayMock: Type.Color = [
     type: Type.PaletteCase.chilean_fire,
     rgb: [205, 97, 51]
   },
+  {
+    name: 'Lynx white',
+    type: Type.PaletteCase.lynx_white,
+    rgb: [245, 246, 250],
+    aaa: [{
+      name: 'Eye Of Newt',
+      type: Type.PaletteCase.eye_of_newt,
+      rgb: [179, 57, 57]
+    }],
+    aa: [{
+      name: 'Eye Of Newt',
+      type: Type.PaletteCase.eye_of_newt,
+      rgb: [179, 57, 57]
+    }]
+  }
 ];
 
 test('compute hash from key string to array index', () => {
@@ -48,29 +63,53 @@ test('create a hashtable an initialize empty buckets', () => {
   });
 });
 
-test('add item to the hash table', () => {
+test('add item to hash table with an empty bucket array slot', () => {
   const hashTabl = Hashtbl.create(15);
   hashTabl.set(arrayMock[0]);
   hashTabl.set(arrayMock[3]);
-  expect(hashTabl.bucketArray[4]).toEqual(arrayMock[0]);
-  expect(hashTabl.bucketArray[9]).toEqual(arrayMock[3]);
+  expect(hashTabl.bucketArray[4]).toEqual({
+    next: null,
+    value: arrayMock[0]
+  });
+  expect(hashTabl.bucketArray[9]).toEqual({
+    next: null,
+    value: arrayMock[3]
+  });
 });
 
-test('delete item from hash table', () => {
-  const hashTabl = Hashtbl.create(15);
-  hashTabl.set(arrayMock[0]);
-  expect(hashTabl.bucketArray[4]).toEqual(arrayMock[0]);
-  hashTabl.delete(arrayMock[0].name);
-  expect(hashTabl.bucketArray[4]).toEqual(undefined);
+test('add item in an already taken bucket array slot', () => {
+  const hashTabl = Hashtbl.create(18);
+  hashTabl.set(arrayMock[4]);
+  expect(hashTabl.bucketArray[16]).toEqual({
+    next: null,
+    value: arrayMock[4]
+  });
+  hashTabl.set(arrayMock[4]);
+  expect(hashTabl.bucketArray[16]).toEqual({
+    next: arrayMock[4],
+    value: arrayMock[4]
+  });
 });
 
-test('find item from hash table', () => {
-  const hashTabl = Hashtbl.create(20);
-  hashTabl.set(arrayMock[0]);
-  expect(hashTabl.bucketArray[9]).toEqual(arrayMock[0]);
-  expect(hashTabl.get(arrayMock[0].name)).toEqual(arrayMock[0]);
+test('delete linked list nodes from hash table', () => {
+  const hashTbl = Hashtbl.create(15);
+  hashTbl.set(arrayMock[0]);
+  expect(hashTbl.bucketArray[4]).toEqual({
+    next: null,
+    value: arrayMock[0]
+  });
+  hashTbl.delete(arrayMock[0]);
+  expect(hashTbl.bucketArray[4]).toEqual(null);
 });
 
+
+
+// test('find item from hash table', () => {
+//   const hashTabl = Hashtbl.create(20);
+//   hashTabl.set(arrayMock[0]);
+//   expect(hashTabl.bucketArray[9]).toEqual(arrayMock[0]);
+//   expect(hashTabl.get(arrayMock[0].name)).toEqual(arrayMock[0]);
+// });
 
 test('create a node object for a linked list', () => {
   expect(Hashtbl.createNode({

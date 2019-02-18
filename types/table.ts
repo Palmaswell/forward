@@ -11,7 +11,7 @@ export interface HashTbl {
   bucketArray: EnhancedColor[] | undefined[];
   set(item: EnhancedColor): void;
   get(name: string): EnhancedColor | undefined;
-  delete(name: string): void;
+  delete(item: EnhancedColor, _curr?: EnhancedColor | null): void;
 }
 
 export interface Node {
