@@ -2,19 +2,47 @@ import styled from '@emotion/styled';
 import * as Type from '../types';
 
 export interface TileProps {
-  color: Type.RGB;
+  bgColor: Type.RGB;
+  copyColor: Type.RGB;
+  copy: string;
+  type: Type.ColorTile;
 }
 
 interface StyledTileProps {
-  color: Type.RGB;
+  type: Type.ColorTile;
+  bgColor: Type.RGB;
+  copyColor: Type.RGB;
 }
 
 const StyledTile = styled.div`
-  background-color: ${(props: StyledTileProps) => `rgb(${props.color.join()})`};
-`
+  width: 100%;
+  height: ${(props: StyledTileProps) =>
+    props.type === Type.ColorTile.primary
+      ? '425px'
+      : '133px'
+  };
+  color: ${(props: StyledTileProps) => {
+    const [r, g, b] = props.copyColor;
+    return `rgb(${r}, ${g}, ${b})`;
+  }};
+  font-size: ${(props: StyledTileProps) =>
+    props.type === Type.ColorTile.primary
+      ? '140px'
+      : '80px'
+  };
+  text-align: center;
+  vertical-align: center;
+  background-color: ${(props: StyledTileProps) => {
+    const [r, g, b] = props.bgColor;
+    return `rgb(${r}, ${g}, ${b})`;
+  }};
+`;
 
-export const Tile: React.SFC<TileProps> = ({ children, color }): JSX.Element => (
-  <StyledTile color={color}>
-    { children }
+export const Tile: React.SFC<TileProps> = ({ copy, bgColor, copyColor, type }): JSX.Element => (
+  <StyledTile
+    copyColor={copyColor}
+    bgColor={bgColor}
+    type={type || Type.ColorTile.primary}>
+    { copy }
   </StyledTile>
-)
+);

@@ -25,6 +25,11 @@ export enum A11yRatio {
   aaa = 7,
 }
 
+export enum ColorTile {
+  primary = 'primary',
+  secondary = 'secondary'
+}
+
 export enum PaletteCase {
   black = 'black',
   electromagnetic = 'electromagnetic',
