@@ -103,13 +103,16 @@ test('delete linked list nodes from hash table', () => {
 });
 
 
-
-// test('find item from hash table', () => {
-//   const hashTabl = Hashtbl.create(20);
-//   hashTabl.set(arrayMock[0]);
-//   expect(hashTabl.bucketArray[9]).toEqual(arrayMock[0]);
-//   expect(hashTabl.get(arrayMock[0].name)).toEqual(arrayMock[0]);
-// });
+test('find item from hash table', () => {
+  const hashTabl = Hashtbl.create(20);
+  hashTabl.set(arrayMock[0]);
+  expect(hashTabl.bucketArray[9]).toEqual({
+    next: null,
+    value: arrayMock[0]
+  });
+  hashTabl.set(arrayMock[0]);
+  expect(hashTabl.get(arrayMock[0])).toEqual(arrayMock[0]);
+});
 
 test('create a node object for a linked list', () => {
   expect(Hashtbl.createNode({

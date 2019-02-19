@@ -37,11 +37,20 @@ export function create(s: number): Type.HashTbl {
       }
       this.bucketArray[key] = node;
     },
-    get(name) {
-      const key = computeHash({s: name, l: this.bucketArray.length});
-      return this.bucketArray[key]
-        ? this.bucketArray[key]
-        : undefined;
+    get(item, _curr) {
+      const key = computeHash({s: item.name, l: this.bucketArray.length});
+      if (!this.bucketArray[key]) {
+        return;
+      }
+      if (this.bucketArray[key].value === item) {
+        return this.bucketArray[key].value;
+      }
+      else if (this.bucketArray[key].next.value === item) {
+        return this.bucketArray[key].next.value;
+      }
+      else {
+        return this.get(item, this.bucketArray[key].next.next.value);
+      }
     },
     delete(item, _curr) {
       const key = computeHash({s: item.name, l: this.bucketArray.length});
@@ -52,7 +61,6 @@ export function create(s: number): Type.HashTbl {
         this.bucketArray[key] = this.bucketArray[key].next;
       }
       else if (this.bucketArray[key].next) {
-        console.log('it should be going in here');
         return this.bucketArray[key].next.value === item
           ? this.bucketArray[key].next = this.bucketArray[key].next.next
           : this.delete(item, this.bucketArray[key].next.next);

@@ -10,7 +10,7 @@ export interface ComputeHashProps {
 export interface HashTbl {
   bucketArray: EnhancedColor[] | undefined[];
   set(item: EnhancedColor): void;
-  get(name: string): EnhancedColor | undefined;
+  get(item: EnhancedColor, _curr?: EnhancedColor | null): EnhancedColor | undefined;
   delete(item: EnhancedColor, _curr?: EnhancedColor | null): void;
 }
 
