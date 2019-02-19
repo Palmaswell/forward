@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/core';
+import { SerializedStyles } from '@emotion/css';
+import { Color } from './colors';
 import * as Type from '../types';
+
 
 export interface TileProps {
   bgColor: Type.RGB;
@@ -14,28 +18,37 @@ interface StyledTileProps {
   copyColor: Type.RGB;
 }
 
+const generateTileStyles = (type: Type.ColorTile): SerializedStyles => {
+  switch(type) {
+    case Type.ColorTile.secondary:
+      const [r, g, b] = Color.black;
+      return css `
+        height: 133px;
+        font-size: 80px;
+        box-shadow: 0 2px 4px rgb(${r}, ${g}, ${b});
+      `;
+    case Type.ColorTile.primary:
+    default:
+    return css `
+      height: 425px;
+      font-size: 140px;
+    `;
+  }
+}
+
 const StyledTile = styled.div`
   width: 100%;
-  height: ${(props: StyledTileProps) =>
-    props.type === Type.ColorTile.primary
-      ? '425px'
-      : '133px'
-  };
   color: ${(props: StyledTileProps) => {
-    const [r, g, b] = props.copyColor;
+    const [r, g, b] = props.copyColor;g
     return `rgb(${r}, ${g}, ${b})`;
   }};
-  font-size: ${(props: StyledTileProps) =>
-    props.type === Type.ColorTile.primary
-      ? '140px'
-      : '80px'
-  };
   text-align: center;
   vertical-align: center;
   background-color: ${(props: StyledTileProps) => {
     const [r, g, b] = props.bgColor;
     return `rgb(${r}, ${g}, ${b})`;
   }};
+  ${(props: StyledTileProps) => generateTileStyles(props.type)}
 `;
 
 export const Tile: React.SFC<TileProps> = ({ copy, bgColor, copyColor, type }): JSX.Element => (
