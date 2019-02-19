@@ -21,6 +21,7 @@ export default class ForwardDocument extends Document {
             padding: ${Component.Size.L}px ${Component.Size.XL}px;
             margin: 0;
             min-height: 100%;
+            background-color: #1E1E1E;
             ${Component.getFont()}
           }
         `}

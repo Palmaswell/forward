@@ -4,12 +4,11 @@ import { SerializedStyles } from '@emotion/css';
 import { Color } from './colors';
 import * as Type from '../types';
 
-
 export interface TileProps {
   bgColor: Type.RGB;
   copyColor: Type.RGB;
   copy: string;
-  type: Type.ColorTile;
+  type?: Type.ColorTile;
 }
 
 interface StyledTileProps {
@@ -37,13 +36,13 @@ const generateTileStyles = (type: Type.ColorTile): SerializedStyles => {
 }
 
 const StyledTile = styled.div`
+  position: relative;
   width: 100%;
   color: ${(props: StyledTileProps) => {
     const [r, g, b] = props.copyColor;g
     return `rgb(${r}, ${g}, ${b})`;
   }};
   text-align: center;
-  vertical-align: center;
   background-color: ${(props: StyledTileProps) => {
     const [r, g, b] = props.bgColor;
     return `rgb(${r}, ${g}, ${b})`;
@@ -51,11 +50,23 @@ const StyledTile = styled.div`
   ${(props: StyledTileProps) => generateTileStyles(props.type)}
 `;
 
+const StyledCopy = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  color: currentColor;
+  font-family: 'Halant';
+  -webkit-font-smoothing: antialiased;
+  transform: translateY(-50%);
+`;
+
 export const Tile: React.SFC<TileProps> = ({ copy, bgColor, copyColor, type }): JSX.Element => (
   <StyledTile
     copyColor={copyColor}
     bgColor={bgColor}
     type={type || Type.ColorTile.primary}>
-    { copy }
+    <StyledCopy>{ copy }</StyledCopy>
   </StyledTile>
 );

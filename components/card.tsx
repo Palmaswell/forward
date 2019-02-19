@@ -5,9 +5,9 @@ import { Color } from './colors';
 import { Size } from './size';
 
 export interface CardProps {
-  copy: string;
-  tile: JSX.Element;
-  type: Type.ColorTile;
+  rgb: string;
+  hex: string;
+  type?: Type.ColorTile;
 }
 
 interface StyledCardProps {
@@ -36,30 +36,50 @@ const StyledCard = styled.figure`${(props: StyledCardProps) => generateCardStyle
 const generateCaptionStyles = (type: Type.ColorTile): SerializedStyles => {
   switch(type) {
     case Type.ColorTile.secondary:
+      const [r1, g1, b1] = Color.white;
       return css`
-        padding: ${Size.M}px ${Size.S}px;
+        color: rgb(${r1}, ${g1}, ${b1});
+        padding: ${Size.M}px 0;
         font-size: 16px;
       `;
     case Type.ColorTile.primary:
     default:
       const [r, g, b] = Color.white
       return css`
-        padding: ${Size.S}px ${Size.M}px;
+        padding: ${Size.S}px ${Size.M}px ${Size.M}px;
         font-size: 28px;
-        background-color: rgb(${r} ${g}, ${b});
+        background-color: rgb(${r}, ${g}, ${b});
       `;
   }
 };
 
 const StyledCaption = styled.figcaption`${(props: StyledCaptionProps) => generateCaptionStyles(props.type)}`;
 
-export const Card: React.SFC<CardProps> = ({ copy, tile, type }): JSX.Element => {
+const StyledSubline = styled.span`
+  display: block;
+  margin-top: 14px;
+  font-size: 14px;
+  color: ${(props: StyledCaptionProps) => {
+    if (props.type === Type.ColorTile.primary) {
+      const [r, g, b] = Color.draculaOrchid;
+      return css`rgb(${r}, ${g}, ${b});`;
+    } else {
+      const [r, g, b] = Color.cityLights;
+      return css`rgb(${r}, ${g}, ${b});`;
+    }
+  }};
+`;
+
+export const Card: React.SFC<CardProps> = ({ children, hex, rgb, type }): JSX.Element => {
   const cardType = type || Type.ColorTile.primary;
   return(
     <StyledCard type={cardType}>
-      {tile}
+      {children}
       <StyledCaption type={cardType}>
-        {copy}
+        {hex}
+        <StyledSubline type={cardType}>
+          {rgb}
+        </StyledSubline>
       </StyledCaption>
     </StyledCard>
   );
