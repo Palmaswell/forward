@@ -1,3 +1,4 @@
+export * from './breakpoint';
 export * from './colors';
 export * from './card';
 export * from './font';

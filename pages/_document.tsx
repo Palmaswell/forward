@@ -29,8 +29,6 @@ export default class ForwardDocument extends Document {
         <Head>
           <meta charSet="utf-8"/>
           <meta name="viewport" content="width=device-width, user-scalable=no" />
-          <title>Forward - color contrast accessibility checker</title>
-          <meta name="description" content="Forward - color contrast accessibility checker" />
           <link
             rel="preload"
             as="font"

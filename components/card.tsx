@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import { css, SerializedStyles } from '@emotion/core';
-import * as Type from '../types';
 import { Color } from './colors';
 import { Size } from './size';
+import * as Type from '../types';
+import * as Util from '../utils';
 
 export interface CardProps {
   rgb: string;
@@ -24,31 +25,32 @@ const generateCardStyles = (type: Type.ColorTile): SerializedStyles => {
       return css``;
     case Type.ColorTile.primary:
     default:
-      const [r, g, b] = Color.black;
       return css`
-        box-shadow: 0 2px 4px rgb(${r}, ${g}, ${b});
+        box-shadow: 0 2px 4px ${Util.toRGBString(Color.black)};
       `;
   };
 };
 
-const StyledCard = styled.figure`${(props: StyledCardProps) => generateCardStyles(props.type)}`;
+const StyledCard = styled.figure`
+  padding: 0;
+  margin: 0;
+  ${(props: StyledCardProps) => generateCardStyles(props.type)}
+`;
 
 const generateCaptionStyles = (type: Type.ColorTile): SerializedStyles => {
   switch(type) {
     case Type.ColorTile.secondary:
-      const [r1, g1, b1] = Color.white;
       return css`
-        color: rgb(${r1}, ${g1}, ${b1});
+        color: ${Util.toRGBString(Color.white)};
         padding: ${Size.M}px 0;
         font-size: 16px;
       `;
     case Type.ColorTile.primary:
     default:
-      const [r, g, b] = Color.white
       return css`
         padding: ${Size.S}px ${Size.M}px ${Size.M}px;
         font-size: 28px;
-        background-color: rgb(${r}, ${g}, ${b});
+        background-color: ${Util.toRGBString(Color.white)};
       `;
   }
 };
@@ -59,15 +61,10 @@ const StyledSubline = styled.span`
   display: block;
   margin-top: 14px;
   font-size: 14px;
-  color: ${(props: StyledCaptionProps) => {
-    if (props.type === Type.ColorTile.primary) {
-      const [r, g, b] = Color.draculaOrchid;
-      return css`rgb(${r}, ${g}, ${b});`;
-    } else {
-      const [r, g, b] = Color.cityLights;
-      return css`rgb(${r}, ${g}, ${b});`;
-    }
-  }};
+  color: ${(props: StyledCaptionProps) => props.type === Type.ColorTile.primary
+    ? Util.toRGBString(Color.draculaOrchid)
+    : Util.toRGBString(Color.cityLights)
+  };
 `;
 
 export const Card: React.SFC<CardProps> = ({ children, hex, rgb, type }): JSX.Element => {
