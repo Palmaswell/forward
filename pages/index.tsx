@@ -16,6 +16,7 @@ export default class IndexPage extends React.Component {
       </Head>
       <h1>A web app will be soon here</h1>
       <Container.Upload />
+      <Container.ColorList />
       <Component.ItemList>
         <Component.Item isActive={false}>
           <Component.Card
