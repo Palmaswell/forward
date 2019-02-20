@@ -30,6 +30,11 @@ export enum ColorTile {
   secondary = 'secondary'
 }
 
+export enum ColorList {
+  primary = 'primary',
+  secondary = 'seconday'
+}
+
 export enum PaletteCase {
   black = 'black',
   electromagnetic = 'electromagnetic',
