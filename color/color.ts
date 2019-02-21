@@ -34,7 +34,10 @@ export function luminance(sRGB: Type.RGB): number {
  * (L1 + 0.05) / (L2 + 0.05)
  */
 export function contrastRatio(sRGB: Type.RGB, sRGB2: Type.RGB): number {
-  return +((luminance(sRGB) + 0.05) / (luminance(sRGB2) + 0.05)).toFixed(2);
+  const light = Math.max(luminance(sRGB), luminance(sRGB2));
+  const dark = Math.min(luminance(sRGB), luminance(sRGB2));
+
+  return +((light + 0.05) / (dark + 0.05)).toFixed(2);
 }
 
 
