@@ -29,12 +29,12 @@ const sortedMock: Type.Color[] = [
   },
 ];
 test('binary search', () => {
-  Color.quickSort({
-    a: Color.palette,
-    lo: 0,
-    hi: Color.palette.length - 1,
-    cb: Color.luminance
-  });
+  Color.quickSort(
+    Color.palette,
+    0,
+    Color.palette.length - 1,
+    Color.luminance
+  );
   expect(Color.search({
     ratio: Type.A11yRatio.aaa,
     el: Color.palette[2],
@@ -56,4 +56,4 @@ test('binary search', () => {
     lo: 0,
     hi: Color.palette.length - 1
   })).toEqual(undefined);
-})
+});

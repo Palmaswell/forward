@@ -2,41 +2,48 @@ import * as Type from '../types';
 import * as Util from '../utils';
 /**
  * @name quickSort
- * @param { array } a
- * @param { number } low
- * @param { number } high
- * @param { string } key
+ * @param { array } arr
+ * @param { number } lo
+ * @param { number } hi
  * @param { luminanceCallBack } cb
 */
-export function quickSort({ a, lo, hi, cb }: Type.QuickColorSortProps): void {
+export function quickSort(
+  arr: Type.Color[],
+  lo: number,
+  hi: number,
+  cb: (sRGB: Type.RGB) => number): void {
   if (lo < hi) {
-    const pivot = cb(a[Math.floor((lo + hi) / 2)].rgb);
-    const p = partition({ a, lo, hi, p: pivot, cb});
-    quickSort({ a, lo, hi: p.hi, cb});
-    quickSort({ a, lo: p.lo, hi, cb });
+    const pivot = cb(arr[Math.floor((lo + hi) / 2)].rgb);
+    const p = partition(arr, lo, hi, pivot, cb);
+    quickSort(arr, lo, p.hi, cb);
+    quickSort(arr, p.lo, hi, cb);
   }
 }
 
 /**
  * @name partition
- * @param { array } a
+ * @param { array } arr
  * @param { number } lo
  * @param { number } hi
- * @param { number } p
+ * @param { number } pivot
  * @param { luminanceCallBack } cb
 */
-
-export function partition({ a, lo, hi, p, cb }: Type.ColorPartitionProps): { lo: number, hi: number} {
+export function partition(
+  arr: Type.Color[],
+  lo: number,
+  hi: number,
+  pivot: number,
+  cb: (sRGB: Type.RGB) => number): { lo: number, hi: number} {
   if (lo <= hi) {
-    if (cb(a[lo].rgb) < p) {
-      return partition({ a, lo: lo + 1, hi, p, cb});
+    if (cb(arr[lo].rgb) < pivot) {
+      return partition(arr, lo + 1, hi, pivot, cb);
     }
-    else if (cb(a[hi].rgb) > p) {
-      return partition({ a, lo, hi: hi - 1, p, cb});
+    else if (cb(arr[hi].rgb) > pivot) {
+      return partition(arr, lo, hi - 1, pivot, cb);
     }
     if (lo <= hi) {
-      Util.swap(a, lo, hi);
-      return partition({ a, lo: lo + 1, hi: hi - 1, p, cb});
+      Util.swap(arr, lo, hi);
+      return partition(arr, lo + 1, hi - 1, pivot, cb);
     }
   }
   return { lo, hi };

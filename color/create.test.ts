@@ -29,48 +29,48 @@ test('sort and create color data', () => {
     },
   ];
 
-  Color.quickSort({
-    a: arrayMock,
-    lo: 0,
-    hi: arrayMock.length - 1,
-    cb: Color.luminance
-  })
+  Color.quickSort(
+    arrayMock,
+    0,
+    arrayMock.length - 1,
+    Color.luminance
+  );
 
   expect(Color.create(arrayMock)).toEqual([
     {
       name: 'Electromagnetic',
       type: Type.PaletteCase.electromagnetic,
       rgb: [47, 54, 64],
-      aa: new Map(),
-      aaa: new Map()
+      aa: [],
+      aaa: []
     },
     {
       name: 'Asbestos',
       type: Type.PaletteCase.asbestos,
       rgb: [127, 140, 141],
-      aa: new Map(),
-      aaa: new Map()
+      aa: [],
+      aaa: []
     },
     {
       name: 'Concrete',
       type: Type.PaletteCase.concrete,
       rgb: [149, 165, 166],
-      aa: new Map(),
-      aaa: new Map()
+      aa: [],
+      aaa: []
     },
     {
       name: 'Silver',
       type: Type.PaletteCase.silver,
       rgb: [189, 195, 199],
-      aa: new Map(),
-      aaa: new Map()
+      aa: [],
+      aaa: []
     },
     {
       name: 'Clouds',
       type: Type.PaletteCase.clouds,
       rgb: [236, 240, 241],
-      aa: new Map(),
-      aaa: new Map()
+      aa: [],
+      aaa: []
     },
   ]);
 
