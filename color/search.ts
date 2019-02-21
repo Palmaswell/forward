@@ -9,26 +9,33 @@ import * as Color from './';
  * @param { number } lo
  * @param { number } hi
  */
+ export function search(
+   ratio: Type.A11yRatio,
+   el: Type.Color,
+   arr: Type.Color[],
+   lo: number,
+   hi: number
+ ): number | undefined {
+  const mid = Math.floor((lo + hi) / 2);
+  const elLux = Color.luminance(el.rgb);
 
- export function search(props: Type.SearchProps): number | null {
-  const mid = Math.floor((props.lo + props.hi) / 2);
-  const elLux = Color.luminance(props.el.rgb);
-
-  const cr = Color.contrastRatio(props.arr[mid].rgb, props.el.rgb);
-  if (Math.round(cr) === props.ratio) {
+  const cr = Color.contrastRatio(arr[mid].rgb, el.rgb);
+  if (Math.round(cr) === ratio) {
     return mid;
-  }
-  if (props.lo < props.hi) {
-    if (cr < props.ratio) {
-      elLux <= 0.5
-        ? props.lo++
-        : props.lo--;
+  } else {
+    if (lo < hi) {
+      if (cr < ratio) {
+        elLux <= 0.5
+          ? lo++
+          : lo--;
+        return search(ratio, el, arr, lo, hi);
+      }
+      else if (cr > ratio) {
+        elLux <= 0.5
+          ? hi--
+          : hi++;
+        return search(ratio, el, arr, lo, hi);
+      }
     }
-    else if (cr > props.ratio) {
-      elLux <= 0.5
-        ? props.hi--
-        : props.hi++;
-    }
-    return search(props);
   }
  }

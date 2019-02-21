@@ -35,25 +35,25 @@ test('binary search', () => {
     Color.palette.length - 1,
     Color.luminance
   );
-  expect(Color.search({
-    ratio: Type.A11yRatio.aaa,
-    el: Color.palette[2],
-    arr: Color.palette,
-    lo: 0,
-    hi: Color.palette.length - 1
-  })).toEqual(20);
-  expect(Color.search({
-    ratio: Type.A11yRatio.aaa,
-    el: Color.palette[25],
-    arr: Color.palette,
-    lo: 0,
-    hi: Color.palette.length - 1
-  })).toEqual(6);
-  expect(Color.search({
-    ratio: Type.A11yRatio.aaa,
-    el: Color.palette[8],
-    arr: Color.palette,
-    lo: 0,
-    hi: Color.palette.length - 1
-  })).toEqual(undefined);
+  expect(Color.search(
+    Type.A11yRatio.aaa,
+    Color.palette[2],
+    Color.palette,
+    0,
+    Color.palette.length - 1
+  )).toEqual(20);
+  expect(Color.search(
+    Type.A11yRatio.aaa,
+    Color.palette[25],
+    Color.palette,
+    0,
+    Color.palette.length - 1
+  )).toEqual(6);
+  expect(Color.search(
+    Type.A11yRatio.aaa,
+    Color.palette[8],
+    Color.palette,
+    0,
+    Color.palette.length - 1
+  )).toEqual(undefined);
 });
