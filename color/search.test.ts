@@ -29,11 +29,31 @@ const sortedMock: Type.Color[] = [
   },
 ];
 test('binary search', () => {
+  Color.quickSort({
+    a: Color.palette,
+    lo: 0,
+    hi: Color.palette.length - 1,
+    cb: Color.luminance
+  });
   expect(Color.search({
-    t: Type.A11yRatio.aaa,
-    e: sortedMock[0],
-    a: sortedMock,
-    l: 0,
-    h: sortedMock.length - 1
-  })).toEqual(2);
+    ratio: Type.A11yRatio.aaa,
+    el: Color.palette[2],
+    arr: Color.palette,
+    lo: 0,
+    hi: Color.palette.length - 1
+  })).toEqual(20);
+  expect(Color.search({
+    ratio: Type.A11yRatio.aaa,
+    el: Color.palette[25],
+    arr: Color.palette,
+    lo: 0,
+    hi: Color.palette.length - 1
+  })).toEqual(6);
+  expect(Color.search({
+    ratio: Type.A11yRatio.aaa,
+    el: Color.palette[8],
+    arr: Color.palette,
+    lo: 0,
+    hi: Color.palette.length - 1
+  })).toEqual(undefined);
 })

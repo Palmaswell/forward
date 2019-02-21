@@ -2,23 +2,33 @@ import * as Type from '../types';
 import * as Color from './';
 /**
  * @name search
- * @param { number } t
- * @param { array } a
+ * @description binary search that finds the position
+ * of a target value within a sorted array
+ * @param { number } ratio
+ * @param { array } arr
+ * @param { number } lo
+ * @param { number } hi
  */
 
- export function search({ t, e, a, l, h }: Type.SearchProps): number | null {
-  const m = Math.floor((l + h) / 2);
-  const cr = Color.contrastRatio(a[m].rgb, e.rgb);
-  if (Math.round(cr) === t) {
-    return m;
+ export function search(props: Type.SearchProps): number | null {
+  const mid = Math.floor((props.lo + props.hi) / 2);
+  const elLux = Color.luminance(props.el.rgb);
+
+  const cr = Color.contrastRatio(props.arr[mid].rgb, props.el.rgb);
+  if (Math.round(cr) === props.ratio) {
+    return mid;
   }
-  if (l < h) {
-    if (cr < t) {
-      search({t, e, a, l: l + 1, h});
+  if (props.lo < props.hi) {
+    if (cr < props.ratio) {
+      elLux <= 0.5
+        ? props.lo++
+        : props.lo--;
     }
-    else if (cr > t) {
-      search({t, e, a, l, h: h - 1});
+    else if (cr > props.ratio) {
+      elLux <= 0.5
+        ? props.hi--
+        : props.hi++;
     }
-    return m;
-   }
+    return search(props);
+  }
  }
