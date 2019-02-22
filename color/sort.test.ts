@@ -24,12 +24,7 @@ test('quick color sort', () => {
       rgb: [53, 59, 72]
     },
   ];
-  Color.quickSort(
-    arrayMock,
-    0,
-    arrayMock.length - 1,
-    Color.luminance
-  );
+  Color.sort(arrayMock, Color.luminance);
 
   expect(arrayMock[1]).toEqual({
     name: 'Dracula Orchid',

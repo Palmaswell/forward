@@ -28,26 +28,38 @@ const sortedMock: Type.Color[] = [
     rgb: [255, 255, 255]
   },
 ];
-test('binary search', () => {
-  Color.quickSort(
+test('Check in a binary search if a color matches the A11y ratio', () => {
+  Color.sort(Color.palette, Color.luminance);
+  expect(Color.search(
     Color.palette,
-    0,
-    Color.palette.length - 1,
-    Color.luminance
-  );
+    Color.palette[4],
+    Type.A11yRatio.aaa
+  )).toEqual(24);
   expect(Color.search(
-    Type.A11yRatio.aaa,
-    Color.palette[2],
-    Color.palette
-  )).toEqual(20);
+    Color.palette,
+    Color.palette[10],
+    Type.A11yRatio.aaa
+  )).toEqual(null);
   expect(Color.search(
-    Type.A11yRatio.aaa,
-    Color.palette[25],
-    Color.palette
-  )).toEqual(6);
-  expect(Color.search(
-    Type.A11yRatio.aaa,
+    Color.palette,
     Color.palette[8],
-    Color.palette
-  )).toEqual(undefined);
+    Type.A11yRatio.aa
+  )).toEqual(26);
+  expect(Color.search(
+    sortedMock,
+    sortedMock[0],
+    Type.A11yRatio.aaa
+  )).toEqual(2);
+  expect(Color.search(
+    Color.palette,
+    Color.palette[20],
+    Type.A11yRatio.aaa,
+    Type.Search.backward
+  )).toEqual(0);
+  expect(Color.search(
+    Color.palette,
+    Color.palette[30],
+    Type.A11yRatio.aaa,
+    Type.Search.backward
+  )).toEqual(6);
 });

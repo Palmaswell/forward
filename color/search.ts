@@ -1,48 +1,76 @@
 import * as Type from '../types';
-import * as Color from './';
+import { contrastRatio } from './color';
 /**
  * @name search
  * @description binary search that finds the position
  * of a target value within a sorted array
- * @param { number } ratio
  * @param { array } arr
+ * @param { Color } el
+ * @param { number } val
+ * @param { string } type
  * @param { number } lo
  * @param { number } hi
  */
- export function quickSearch(
-   ratio: Type.A11yRatio,
-   el: Type.Color,
-   arr: Type.Color[],
-   lo: number,
-   hi: number
- ): number | undefined {
+export function quickSearch(
+  arr: Type.Color[],
+  el: Type.Color,
+  val: Type.A11yRatio,
+  type: Type.Search,
+  lo: number,
+  hi: number): number | null {
   const mid = Math.floor((lo + hi) / 2);
-  const elLux = Color.luminance(el.rgb);
-
-  const cr = Color.contrastRatio(arr[mid].rgb, el.rgb);
-  if (Math.round(cr) === ratio) {
-    return mid;
-  } else {
-    if (lo < hi) {
-      if (cr < ratio) {
-        elLux <= 0.5
-          ? lo++
-          : lo--;
-        return quickSearch(ratio, el, arr, lo, hi);
-      }
-      else if (cr > ratio) {
-        elLux <= 0.5
-          ? hi--
-          : hi++;
-        return quickSearch(ratio, el, arr, lo, hi);
-      }
+  const prev = mid - 1;
+  const next = mid + 1;
+  const midRatio = contrastRatio(arr[mid].rgb, el.rgb);
+  if (lo < hi) {
+    switch (type) {
+      case Type.Search.backward:
+        if (midRatio > val) {
+          if (next <= arr.length - 1) {
+            return contrastRatio(arr[next].rgb, el.rgb) < val
+              ? mid
+              : quickSearch(arr, el, val, type, mid, hi);
+          }
+        }
+        else if (midRatio < val) {
+          if (prev >= 0) {
+            return contrastRatio(arr[prev].rgb, el.rgb) > val
+              ? prev
+              : quickSearch(arr, el, val, type, lo, mid);
+          }
+        }
+        else {
+          return mid;
+        }
+      case Type.Search.forward:
+      default:
+        if (midRatio > val) {
+          if (prev >= 0) {
+            return contrastRatio(arr[prev].rgb, el.rgb) < val
+              ? mid
+              : quickSearch(arr, el, val, type, lo, mid);
+          }
+        }
+        else if (midRatio < val) {
+          if (next <= arr.length - 1) {
+            return contrastRatio(arr[next].rgb, el.rgb) > val
+              ? next
+              : quickSearch(arr, el, val, type, mid, hi);
+          }
+        }
+        else {
+          return mid;
+        }
     }
   }
- }
+  return null;
+};
 
- export function search(
-  ratio: Type.A11yRatio,
+export function search(
+  arr:  Type.Color[],
   el: Type.Color,
-  arr: Type.Color[]) {
-    return quickSearch(ratio, el, arr, 0, arr.length - 1);
- };
+  val: Type.A11yRatio,
+  type?: Type.Search): number | null {
+
+  return quickSearch(arr, el, val, type || Type.Search.forward, 0, arr.length);
+};

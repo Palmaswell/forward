@@ -3,16 +3,11 @@ import * as Color from '../color';
 import * as Type from '../types';
 
 export function sanitizeColors(colors: Type.Color[]): void | Type.EnhancedColor {
-  Color.quickSort(
-    colors,
-    0,
-    Color.palette.length - 1,
-    Color.luminance
-  );
-  for(let i = colors.length; i >= 0; i--) {
-    // Color.search(Type.A11yRatio.aaa, colors[i], )
-    console.log('sorted colors', colors[i], '*****', i);
-  }
+  Color.sort(colors, Color.luminance);
+  // for(let i = colors.length - 1; i >= 30; i--) {
+  //   const aaaIndex = Color.search(Type.A11yRatio.aaa, colors[i], colors);
+  //   console.log('sorted colors', colors[i], '*****', i);
+  // }
 
   // const colorTable = colors.map((color, i) => {
   //   const boo = Color.search(

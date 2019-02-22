@@ -35,6 +35,11 @@ export enum ColorList {
   secondary = 'seconday'
 }
 
+export enum Search {
+  forward = 'forward',
+  backward = 'backward',
+}
+
 export enum PaletteCase {
   black = 'black',
   electromagnetic = 'electromagnetic',

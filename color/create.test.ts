@@ -29,12 +29,7 @@ test('sort and create color data', () => {
     },
   ];
 
-  Color.quickSort(
-    arrayMock,
-    0,
-    arrayMock.length - 1,
-    Color.luminance
-  );
+  Color.sort(arrayMock, Color.luminance);
 
   expect(Color.create(arrayMock)).toEqual([
     {

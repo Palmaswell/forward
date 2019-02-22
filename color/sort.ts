@@ -9,15 +9,22 @@ import * as Util from '../utils';
 */
 export function quickSort(
   arr: Type.Color[],
+  cb: (sRGB: Type.RGB) => number,
   lo: number,
-  hi: number,
-  cb: (sRGB: Type.RGB) => number): void {
+  hi: number
+  ): void {
   if (lo < hi) {
     const pivot = cb(arr[Math.floor((lo + hi) / 2)].rgb);
     const p = partition(arr, lo, hi, pivot, cb);
-    quickSort(arr, lo, p.hi, cb);
-    quickSort(arr, p.lo, hi, cb);
+    quickSort(arr, cb, lo, p.hi);
+    quickSort(arr, cb, p.lo, hi);
   }
+}
+
+export function sort(
+  arr: Type.Color[],
+  cb: (sRGB: Type.RGB) => number) {
+  return quickSort(arr, cb, 0, arr.length - 1);
 }
 
 /**
