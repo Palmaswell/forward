@@ -9,7 +9,7 @@ import * as Color from './';
  * @param { number } lo
  * @param { number } hi
  */
- export function search(
+ export function quickSearch(
    ratio: Type.A11yRatio,
    el: Type.Color,
    arr: Type.Color[],
@@ -28,14 +28,21 @@ import * as Color from './';
         elLux <= 0.5
           ? lo++
           : lo--;
-        return search(ratio, el, arr, lo, hi);
+        return quickSearch(ratio, el, arr, lo, hi);
       }
       else if (cr > ratio) {
         elLux <= 0.5
           ? hi--
           : hi++;
-        return search(ratio, el, arr, lo, hi);
+        return quickSearch(ratio, el, arr, lo, hi);
       }
     }
   }
  }
+
+ export function search(
+  ratio: Type.A11yRatio,
+  el: Type.Color,
+  arr: Type.Color[]) {
+    return quickSearch(ratio, el, arr, 0, arr.length - 1);
+ };

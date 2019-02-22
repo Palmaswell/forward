@@ -9,16 +9,21 @@ export function sanitizeColors(colors: Type.Color[]): void | Type.EnhancedColor 
     Color.palette.length - 1,
     Color.luminance
   );
-  const colorTable = colors.map((c, i) => {
-    const boo = Color.search(
-      Type.A11yRatio.aaa,
-      c,
-      colors,
-      0,
-      colors.length - 1
-    );
-    console.log(boo, i, c, '*********');
-  });
+  for(let i = colors.length; i >= 0; i--) {
+    // Color.search(Type.A11yRatio.aaa, colors[i], )
+    console.log('sorted colors', colors[i], '*****', i);
+  }
+
+  // const colorTable = colors.map((color, i) => {
+  //   const boo = Color.search(
+  //     Type.A11yRatio.aaa,
+  //     color,
+  //     colors,
+  //     0,
+  //     colors.length - 1
+  //   );
+  //   console.log(boo, i, color, '*********');
+  // });
 
 }
 

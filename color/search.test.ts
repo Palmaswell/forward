@@ -38,22 +38,16 @@ test('binary search', () => {
   expect(Color.search(
     Type.A11yRatio.aaa,
     Color.palette[2],
-    Color.palette,
-    0,
-    Color.palette.length - 1
+    Color.palette
   )).toEqual(20);
   expect(Color.search(
     Type.A11yRatio.aaa,
     Color.palette[25],
-    Color.palette,
-    0,
-    Color.palette.length - 1
+    Color.palette
   )).toEqual(6);
   expect(Color.search(
     Type.A11yRatio.aaa,
     Color.palette[8],
-    Color.palette,
-    0,
-    Color.palette.length - 1
+    Color.palette
   )).toEqual(undefined);
 });
