@@ -4,22 +4,42 @@ import * as Type from '../types';
 
 export function sanitizeColors(colors: Type.Color[]): void | Type.EnhancedColor {
   Color.sort(colors, Color.luminance);
-  // for(let i = colors.length - 1; i >= 30; i--) {
-  //   const aaaIndex = Color.search(Type.A11yRatio.aaa, colors[i], colors);
-  //   console.log('sorted colors', colors[i], '*****', i);
-  // }
-
-  // const colorTable = colors.map((color, i) => {
-  //   const boo = Color.search(
-  //     Type.A11yRatio.aaa,
-  //     color,
-  //     colors,
-  //     0,
-  //     colors.length - 1
-  //   );
-  //   console.log(boo, i, color, '*********');
-  // });
-
+  for(let i = colors.length - 1; i >= 0; i--) {
+    if (i >= (colors.length - 1) / 2) {
+      (colors[i] as Type.EnhancedColor).aaa = colors.slice(
+        Color.search(
+          colors,
+          colors[i],
+          Type.A11yRatio.aaa,
+          Type.Search.backward
+        )
+      );
+      (colors[i] as Type.EnhancedColor).aa = colors.slice(
+        Color.search(
+          colors,
+          colors[i],
+          Type.A11yRatio.aa,
+          Type.Search.backward
+        )
+      )
+    }
+    else if (i <= (colors.length - 1) / 2) {
+      (colors[i] as Type.EnhancedColor).aaa = colors.slice(
+        Color.search(
+          colors,
+          colors[i],
+          Type.A11yRatio.aaa
+        )
+      );
+      (colors[i] as Type.EnhancedColor).aa = colors.slice(
+        Color.search(
+          colors,
+          colors[i],
+          Type.A11yRatio.aa
+        )
+      )
+    }
+  }
 }
 
 
