@@ -111,7 +111,7 @@ test('find item from hash table', () => {
     value: arrayMock[0]
   });
   hashTabl.set(arrayMock[0]);
-  expect(hashTabl.get(arrayMock[0])).toEqual(arrayMock[0]);
+  expect(hashTabl.get('C64 Purple')).toEqual(arrayMock[0]);
 });
 
 test('create a node object for a linked list', () => {

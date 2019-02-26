@@ -1,10 +1,13 @@
 import * as React from 'react';
 import * as Color from '../color';
+import * as Hashtbl from '../hash-table';
 import * as Type from '../types';
 
-export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
+export function sanitizeColors(colors: Type.Color[]): Type.HashTbl {
   Color.sort(colors, Color.luminance);
   const enhancedColors = JSON.parse(JSON.stringify(colors));
+  const colorTbl = Hashtbl.create(enhancedColors.length);
+
   for(let i = colors.length - 1; i >= 0; i--) {
     if (i >= (colors.length - 1) / 2) {
       const aaaIndex = Color.search(
@@ -25,6 +28,7 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
       enhancedColors[i].aa = aaIndex === null
       ? []
       : JSON.parse(JSON.stringify(colors.slice(0, aaIndex + 1)));
+      colorTbl.set(enhancedColors[i]);
     }
     else {
       const aaaIndex = Color.search(
@@ -43,17 +47,16 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
       enhancedColors[i].aa = aaIndex === null
       ? []
       : JSON.parse(JSON.stringify(colors.slice(-aaIndex)));
+      colorTbl.set(enhancedColors[i]);
     }
   }
-
-  return enhancedColors;
-}
-
+  return colorTbl;
+};
 
 export function ColorList(): JSX.Element {
   const [count, setCount] = React.useState(0);
-  const foo = sanitizeColors(Color.palette);
-  console.log(foo[0], '*****');
+  const colorTbl = sanitizeColors(Color.palette);
+
   return (
     <>
     <h1>Hello everyone 👋</h1>

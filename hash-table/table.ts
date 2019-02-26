@@ -37,22 +37,22 @@ export function create(s: number): Type.HashTbl {
       }
       this.bucketArray[key] = node;
     },
-    get(item, _curr) {
-      const key = computeHash({s: item.name, l: this.bucketArray.length});
+    get(name) {
+      const key = computeHash({s: name, l: this.bucketArray.length});
       if (!this.bucketArray[key]) {
         return;
       }
-      if (this.bucketArray[key].value === item) {
+      if (this.bucketArray[key].value) {
         return this.bucketArray[key].value;
       }
-      else if (this.bucketArray[key].next.value === item) {
+      else if (this.bucketArray[key].next.value) {
         return this.bucketArray[key].next.value;
       }
       else {
-        return this.get(item, this.bucketArray[key].next.next.value);
+        return this.get(name, this.bucketArray[key].next.next.value);
       }
     },
-    delete(item, _curr) {
+    delete(item) {
       const key = computeHash({s: item.name, l: this.bucketArray.length});
       if (!this.bucketArray[key]) {
         return;
