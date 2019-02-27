@@ -33,7 +33,6 @@ export default class ForwardDocument extends Document {
             rel="preload"
             as="font"
             href="https://fonts.googleapis.com/css?family=Halant|Nunito+Sans" />
-          <style dangerouslySetInnerHTML={{ __html: this.props.css }} />
         </Head>
         <body>
           <Main>

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import * as Color from '../color';
-import * as Component from '../components';
-import * as Type from '../types';
+import * as Color from './color';
+import * as Type from './types';
 
 export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
   Color.sort(colors, Color.luminance);
@@ -50,28 +49,18 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
   return enhancedColors;
 };
 
-export function ColorList(): JSX.Element {
-  const enhancedColors = sanitizeColors(Color.palette);
+export const ColorContext = React.createContext({});
+
+export function Provider(props): JSX.Element {
   return (
-    <Component.ItemList>
-      {
-        enhancedColors.map(color => {
-          return (
-            <Component.Item isActive={true}>
-              <Component.Card
-                type={Type.ColorTile.secondary}
-                rgb="rgb(255, 255, 255)"
-                hex={color.name}>
-              <Component.Tile
-                type={Type.ColorTile.secondary}
-                bgColor={color.rgb}
-                copyColor={color.aaa.length > 0 ? color.aaa[0].rgb : enhancedColors[0].rgb}
-                copy="Aa"/>
-              </Component.Card>
-            </Component.Item>
-          )
-        })
+    <ColorContext.Provider value={{
+      model: {
+        colors: sanitizeColors(Color.palette)
       }
-    </Component.ItemList>
+    }}>
+      {props.children}
+    </ColorContext.Provider>
   );
-}
+};
+
+export const Consumer = ColorContext.Consumer;
