@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { SerializedStyles } from '@emotion/css';
 import * as Type from '../types';
+import * as Util from '../utils';
 
 export interface TileProps {
   bgColor: Type.RGB;
@@ -36,15 +37,9 @@ const generateTileStyles = (type: Type.ColorTile): SerializedStyles => {
 const StyledTile = styled.div`
   position: relative;
   width: 100%;
-  color: ${(props: StyledTileProps) => {
-    const [r, g, b] = props.copyColor;g
-    return `rgb(${r}, ${g}, ${b})`;
-  }};
+  color: ${(props: StyledTileProps) => Util.toRGBString(props.copyColor)};
   text-align: center;
-  background-color: ${(props: StyledTileProps) => {
-    const [r, g, b] = props.bgColor;
-    return `rgb(${r}, ${g}, ${b})`;
-  }};
+  background-color: ${(props: StyledTileProps) => Util.toRGBString(props.bgColor)};
   ${(props: StyledTileProps) => generateTileStyles(props.type)}
 `;
 
