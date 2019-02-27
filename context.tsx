@@ -20,13 +20,13 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
         colors,
         colors[i],
         Type.A11yRatio.aaa,
-        Type.Search.backward
+        Type.Search.upper
       );
       const aaIndex = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aa,
-        Type.Search.backward
+        Type.Search.upper
       );
       enhancedColors[i].aaa = aaaIndex === null
       ? []
