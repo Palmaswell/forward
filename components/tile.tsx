@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { SerializedStyles } from '@emotion/css';
-import { Color } from './colors';
 import * as Type from '../types';
 
 export interface TileProps {
@@ -20,11 +19,10 @@ interface StyledTileProps {
 const generateTileStyles = (type: Type.ColorTile): SerializedStyles => {
   switch(type) {
     case Type.ColorTile.secondary:
-      const [r, g, b] = Color.black;
       return css `
         height: 133px;
         font-size: 80px;
-        box-shadow: 0 2px 4px rgb(${r}, ${g}, ${b});
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .25), 0 7px 20px rgba(0, 0, 0, .10);
       `;
     case Type.ColorTile.primary:
     default:

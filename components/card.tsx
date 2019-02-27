@@ -35,6 +35,8 @@ const generateCardStyles = (type: Type.ColorTile): SerializedStyles => {
 const StyledCard = styled.figure`
   padding: 0;
   margin: 0;
+  font-weight: 600;
+  cursor: pointer;
   ${(props: StyledCardProps) => generateCardStyles(props.type)}
 `;
 
@@ -42,7 +44,7 @@ const generateCaptionStyles = (type: Type.ColorTile): SerializedStyles => {
   switch(type) {
     case Type.ColorTile.secondary:
       return css`
-        color: ${Util.toRGBString(Color.white)};
+        color: ${Util.toRGBString(Color.draculaOrchid)};
         padding: ${Size.M}px 0;
         font-size: 16px;
       `;
@@ -64,7 +66,7 @@ const StyledSubline = styled.span`
   font-size: 14px;
   color: ${(props: StyledCaptionProps) => props.type === Type.ColorTile.primary
     ? Util.toRGBString(Color.draculaOrchid)
-    : Util.toRGBString(Color.cityLights)
+    : Util.toRGBString(Color.blueNights)
   };
 `;
 

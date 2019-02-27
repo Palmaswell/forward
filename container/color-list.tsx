@@ -20,11 +20,11 @@ export const ColorList:
                 type={Type.ColorTile.secondary}
                 name={color.name}
                 rgb={Util.toRGBString(color.rgb)}
-                hex={tinyColor(Util.toRGBString(color.rgb)).toHex()}>
+                hex={`#${tinyColor(Util.toRGBString(color.rgb)).toHex()}`}>
               <Component.Tile
                 type={Type.ColorTile.secondary}
                 bgColor={color.rgb}
-                copyColor={color.aaa.length > 0 ? color.aaa[0].rgb : props.colors[0].rgb}
+                copyColor={color.aaa.length > 0 ? color.aaa[color.aaa.length - 1].rgb : Component.Color.black}
                 copy="Aa"/>
               </Component.Card>
             </Component.Item>

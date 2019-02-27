@@ -2,6 +2,7 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { extractCritical } from 'emotion-server';
 import { css, Global } from '@emotion/core';
 import * as Component from '../components';
+import * as Util from '../utils';
 
 export default class ForwardDocument extends Document {
   private constructor(props) {
@@ -21,7 +22,7 @@ export default class ForwardDocument extends Document {
             padding: ${Component.Size.L}px ${Component.Size.XL}px;
             margin: 0;
             min-height: 100%;
-            background-color: #1E1E1E;
+            background-color: ${Util.toRGBString(Component.Color.white)};
             ${Component.getFont()}
           }
         `}

@@ -6,7 +6,9 @@ export interface ComponentColor {
 export const Color: ComponentColor = {
   black: [0, 0, 0],
   draculaOrchid: [45, 52, 54],
+  blueNights: [53, 59, 72],
   cityLights: [223, 228, 234],
   licorice: [19, 19, 19],
+  lynxWhite: [245, 246, 250],
   white: [255, 255, 255]
 }

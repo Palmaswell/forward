@@ -47,12 +47,12 @@ const generateItemStyles = (props: ItemListProps): SerializedStyles => {
     default:
       return css`
         background-color: ${props.isActive
-          ? Util.toRGBString(Color.licorice)
+          ? Util.toRGBString(Color.lynxWhite)
           : 'transparent;'
         };
         &:hover {
-          background-color: ${Util.toRGBString(Color.licorice)};
-          transition: background 333ms ease-in-out;
+          background-color: ${Util.toRGBString(Color.lynxWhite)};
+          transition: background 333ms ease-out;
         }
       `;
   }
