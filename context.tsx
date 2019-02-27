@@ -16,42 +16,42 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
 
   for(let i = colors.length - 1; i >= 0; i--) {
     if (i >= (colors.length - 1) / 2) {
-      const aaaIndex = Color.search(
+      const aaaResult = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aaa,
         Type.Search.upper
       );
-      const aaIndex = Color.search(
+      const aaResult = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aa,
         Type.Search.upper
       );
-      enhancedColors[i].aaa = aaaIndex === null
-      ? []
-      : JSON.parse(JSON.stringify(colors.slice(0, aaaIndex + 1)));
-      enhancedColors[i].aa = aaIndex === null
-      ? []
-      : JSON.parse(JSON.stringify(colors.slice(0, aaIndex + 1)));
+      enhancedColors[i].aaa = Array.isArray(aaaResult)
+        ? aaaResult
+        : JSON.parse(JSON.stringify(colors.slice(0, aaaResult + 1)));
+      enhancedColors[i].aa = Array.isArray(aaResult)
+        ? aaResult
+        : JSON.parse(JSON.stringify(colors.slice(0, aaResult + 1)));
     }
     else {
-      const aaaIndex = Color.search(
+      const aaaResult = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aaa
       );
-      const aaIndex = Color.search(
+      const aaResult = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aa,
       );
-      enhancedColors[i].aaa = aaaIndex === null
-      ? []
-      : JSON.parse(JSON.stringify(colors.slice(-aaaIndex)));
-      enhancedColors[i].aa = aaIndex === null
-      ? []
-      : JSON.parse(JSON.stringify(colors.slice(-aaIndex)));
+      enhancedColors[i].aaa = Array.isArray(aaaResult)
+      ? aaaResult
+      : JSON.parse(JSON.stringify(colors.slice(-aaaResult)));
+      enhancedColors[i].aa = Array.isArray(aaResult)
+      ? aaResult
+      : JSON.parse(JSON.stringify(colors.slice(-aaResult)));
     }
   }
   return enhancedColors;

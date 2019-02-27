@@ -21,7 +21,7 @@ function lowerSearch<T extends QuickSearch>(
   el: T,
   val: number,
   lo: number,
-  hi: number): number | null {
+  hi: number): number | [] {
   const mid = Math.floor((lo + hi) / 2);
   const prev = mid - 1;
   const next = mid + 1;
@@ -43,7 +43,7 @@ function lowerSearch<T extends QuickSearch>(
       return mid;
     }
   }
-  return null;
+  return [];
 };
 
 function upperSearch<T extends QuickSearch>(
@@ -51,7 +51,7 @@ function upperSearch<T extends QuickSearch>(
   el: T,
   val: number,
   lo: number,
-  hi: number): number | null {
+  hi: number): number | [] {
   const mid = Math.floor((lo + hi) / 2);
   const prev = mid - 1;
   const next = mid + 1;
@@ -73,14 +73,14 @@ function upperSearch<T extends QuickSearch>(
       return mid;
     }
   }
-  return null;
+  return [];
 }
 
 export function search(
   arr:  Type.Color[],
   el: Type.Color,
   val: Type.A11yRatio,
-  type?: Type.Search): number | null {
+  type?: Type.Search): number | [] {
   if (type === Type.Search.upper) {
     return upperSearch(arr, el, val, 0, arr.length);
   }
