@@ -2,6 +2,14 @@ import * as React from 'react';
 import * as Color from './color';
 import * as Type from './types';
 
+export interface ModelProps {
+  colors: Type.EnhancedColor[]
+}
+
+export interface CtxProvider {
+  model: ModelProps;
+}
+
 export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
   Color.sort(colors, Color.luminance);
   const enhancedColors = JSON.parse(JSON.stringify(colors));

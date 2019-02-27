@@ -11,11 +11,15 @@ import { contrastRatio } from './color';
  * @param { number } lo
  * @param { number } hi
  */
-export function quickSearch(
-  arr: Type.Color[],
-  el: Type.Color,
-  val: Type.A11yRatio,
-  type: Type.Search,
+
+interface QuickSearch {
+  rgb: Type.RGB;
+}
+
+function lowerSearch<T extends QuickSearch>(
+  arr: Array<T>,
+  el: T,
+  val: number,
   lo: number,
   hi: number): number | null {
   const mid = Math.floor((lo + hi) / 2);
@@ -23,54 +27,62 @@ export function quickSearch(
   const next = mid + 1;
   const midRatio = contrastRatio(arr[mid].rgb, el.rgb);
   if (lo < hi) {
-    switch (type) {
-      case Type.Search.backward:
-        if (midRatio > val) {
-          if (next <= arr.length - 1) {
-            return contrastRatio(arr[next].rgb, el.rgb) < val
-              ? mid
-              : quickSearch(arr, el, val, type, mid, hi);
-          }
-        }
-        else if (midRatio < val) {
-          if (prev >= 0) {
-            return contrastRatio(arr[prev].rgb, el.rgb) > val
-              ? prev
-              : quickSearch(arr, el, val, type, lo, mid);
-          }
-        }
-        else {
-          return mid;
-        }
-      case Type.Search.forward:
-      default:
-        if (midRatio > val) {
-          if (prev >= 0) {
-            return contrastRatio(arr[prev].rgb, el.rgb) < val
-              ? mid
-              : quickSearch(arr, el, val, type, lo, mid);
-          }
-        }
-        else if (midRatio < val) {
-          if (next <= arr.length - 1) {
-            return contrastRatio(arr[next].rgb, el.rgb) > val
-              ? next
-              : quickSearch(arr, el, val, type, mid, hi);
-          }
-        }
-        else {
-          return mid;
-        }
+    if (midRatio > val && prev >= 0) {
+      if (contrastRatio(arr[prev].rgb, el.rgb) < val) {
+        return mid;
+      }
+      return lowerSearch(arr, el, val, lo, mid);
+    }
+    if (midRatio < val && next < arr.length) {
+      if (contrastRatio(arr[next].rgb, el.rgb) > val) {
+        return next;
+      }
+      return lowerSearch(arr, el, val, mid, hi)
+    }
+    if (mid === val) {
+      return mid;
     }
   }
   return null;
 };
+
+function upperSearch<T extends QuickSearch>(
+  arr: Array<T>,
+  el: T,
+  val: number,
+  lo: number,
+  hi: number): number | null {
+  const mid = Math.floor((lo + hi) / 2);
+  const prev = mid - 1;
+  const next = mid + 1;
+  const midRatio = contrastRatio(arr[mid].rgb, el.rgb);
+  if (lo < hi) {
+    if (midRatio > val && next < arr.length) {
+      if (contrastRatio(arr[next].rgb, el.rgb) < val) {
+        return mid;
+      }
+      return upperSearch(arr, el, val, mid, hi);
+    }
+    if (midRatio < val && prev >= 0) {
+      if (contrastRatio(arr[prev].rgb, el.rgb) > val) {
+        return prev;
+      }
+      return upperSearch(arr, el, val, lo, mid);
+    }
+    if (mid === val) {
+      return mid;
+    }
+  }
+  return null;
+}
 
 export function search(
   arr:  Type.Color[],
   el: Type.Color,
   val: Type.A11yRatio,
   type?: Type.Search): number | null {
-
-  return quickSearch(arr, el, val, type || Type.Search.forward, 0, arr.length);
+  if (type === Type.Search.upper) {
+    return upperSearch(arr, el, val, 0, arr.length);
+  }
+  return lowerSearch(arr, el, val, 0, arr.length);
 };

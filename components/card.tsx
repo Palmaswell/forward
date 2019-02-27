@@ -8,6 +8,7 @@ import * as Util from '../utils';
 export interface CardProps {
   rgb: string;
   hex: string;
+  name: string;
   type?: Type.ColorTile;
 }
 
@@ -67,15 +68,18 @@ const StyledSubline = styled.span`
   };
 `;
 
-export const Card: React.SFC<CardProps> = ({ children, hex, rgb, type }): JSX.Element => {
-  const cardType = type || Type.ColorTile.primary;
+export const Card: React.SFC<CardProps> = (props): JSX.Element => {
+  const cardType = props.type || Type.ColorTile.primary;
   return(
     <StyledCard type={cardType}>
-      {children}
+      {props.children}
       <StyledCaption type={cardType}>
-        {hex}
+        {props.name}
         <StyledSubline type={cardType}>
-          {rgb}
+          {props.hex}
+        </StyledSubline>
+        <StyledSubline type={cardType}>
+          {props.rgb}
         </StyledSubline>
       </StyledCaption>
     </StyledCard>

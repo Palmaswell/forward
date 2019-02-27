@@ -18,7 +18,6 @@ interface StyledItemListProps {
 const StyledItemList = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-flow: column;
   grid-column-gap: ${(props: StyledItemListProps) =>
     props.type === Type.ColorList.primary
       ? ''

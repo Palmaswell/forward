@@ -54,12 +54,12 @@ test('Check in a binary search if a color matches the A11y ratio', () => {
     Color.palette,
     Color.palette[20],
     Type.A11yRatio.aaa,
-    Type.Search.backward
+    Type.Search.upper
   )).toEqual(0);
   expect(Color.search(
     Color.palette,
     Color.palette[30],
     Type.A11yRatio.aaa,
-    Type.Search.backward
+    Type.Search.upper
   )).toEqual(6);
 });

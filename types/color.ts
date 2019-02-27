@@ -36,8 +36,8 @@ export enum ColorList {
 }
 
 export enum Search {
-  forward = 'forward',
-  backward = 'backward',
+  lower = 'lower',
+  upper = 'upper',
 }
 
 export enum PaletteCase {
