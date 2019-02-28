@@ -3,6 +3,7 @@ import * as Component from '../components';
 import * as Type from '../types';
 import * as Color from '../color';
 import tinyColor from 'tinycolor2';
+import uuid from 'uuid/v4';
 
 export interface ColorListProps {
   colors: Type.EnhancedColor[];
@@ -15,7 +16,9 @@ export const ColorList:
       {
         props.colors.map(color => {
           return (
-            <Component.Item isActive={false}>
+            <Component.Item
+              key={uuid()}
+              isActive={false}>
               <Component.Card
                 type={Type.ColorTile.secondary}
                 name={color.name}
