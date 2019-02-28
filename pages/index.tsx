@@ -1,4 +1,4 @@
-import { Consumer, CtxProvider } from '../context';
+import { ColorContext, ColorCtxProvider } from '../context';
 import { css, Global } from '@emotion/core';
 import * as React from 'react';
 import Head from 'next/head';
@@ -7,7 +7,8 @@ import * as Container from '../container';
 import * as Type from '../types';
 import * as Color from '../color';
 
-const IndexPage: React.SFC = (): JSX.Element => {
+export default (): JSX.Element => {
+  const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
   return (
     <>
     <Global
@@ -38,16 +39,7 @@ const IndexPage: React.SFC = (): JSX.Element => {
         Color contrast accessibility checker
       </Component.Headline>
     </Component.TopBar>
-    <Consumer>{
-      ({ model }: CtxProvider) => {
-        console.log(model.colors[0].name);
-        return (
-          <Container.ColorList colors={model.colors} />
-        )
-      }
-    }</Consumer>
+    <Container.ColorList colors={Model.colors} />
     </>
   );
 }
-
-export default IndexPage;

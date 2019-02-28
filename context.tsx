@@ -2,12 +2,14 @@ import * as React from 'react';
 import * as Color from './color';
 import * as Type from './types';
 
-export interface ModelProps {
-  colors: Type.EnhancedColor[]
+export interface ColorModel {
+  colors: Type.EnhancedColor[];
+  activeColor: Type.EnhancedColor | {};
+  setActiveColor: (color: Type.EnhancedColor) => void;
 }
 
-export interface CtxProvider {
-  model: ModelProps;
+export interface ColorCtxProvider {
+  Model: ColorModel;
 }
 
 export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
@@ -59,16 +61,17 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
 
 export const ColorContext = React.createContext({});
 
-export function Provider(props): JSX.Element {
+export function ColorContextProvider(props): JSX.Element {
+  const [activeColor, setActiveColor] = React.useState({});
   return (
     <ColorContext.Provider value={{
-      model: {
-        colors: sanitizeColors(Color.palette)
+      Model: {
+        colors: sanitizeColors(Color.palette),
+        activeColor,
+        setActiveColor
       }
     }}>
       {props.children}
     </ColorContext.Provider>
   );
 };
-
-export const Consumer = ColorContext.Consumer;

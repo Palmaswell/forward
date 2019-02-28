@@ -1,5 +1,4 @@
 import * as Type from '../types';
-import * as Util from '../utils';
 /**
  * @name quickSort
  * @param { array } arr

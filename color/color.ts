@@ -13,7 +13,6 @@ import * as Type from '../types';
  * if B sRGB <= 0.03928 then B = B sRGB /12.92 else B = ((B sRGB +0.055)/1.055) ^ 2.4
  *
  */
-
 export function calculateRGBEntry(component: number, y: Type.YValues): number {
   const average = component / 255;
 
