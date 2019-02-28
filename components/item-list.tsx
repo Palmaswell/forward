@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { css, SerializedStyles, jsx } from '@emotion/core';
+import { css, SerializedStyles } from '@emotion/core';
 import { Breakpoint } from './breakpoint';
 import { Size } from './size';
 import * as Component from './colors';

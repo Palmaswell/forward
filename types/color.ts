@@ -1,3 +1,5 @@
+import { HashTbl } from './table';
+
 export interface Color {
   name: string;
   rgb: RGB;
@@ -12,6 +14,13 @@ export interface EnhancedColor {
   aa?: Color[];
   aaa?: Color[];
   type?: PaletteCase;
+}
+
+export interface ColorModel {
+  colors: EnhancedColor[];
+  colorTbl: HashTbl;
+  activeColor: EnhancedColor | {};
+  setActiveColor: (color: EnhancedColor) => void;
 }
 
 export enum YValues {

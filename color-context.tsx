@@ -1,18 +1,15 @@
 import * as React from 'react';
 import * as Color from './color';
 import * as Type from './types';
-
-export interface ColorModel {
-  colors: Type.EnhancedColor[];
-  activeColor: Type.EnhancedColor | {};
-  setActiveColor: (color: Type.EnhancedColor) => void;
-}
+import * as HashTbl from './hash-table';
 
 export interface ColorCtxProvider {
-  Model: ColorModel;
+  Model: Type.ColorModel;
 }
 
-export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
+const colorTbl = HashTbl.create(Color.palette.length);
+
+function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
   Color.sort(colors, Color.luminance);
   const enhancedColors = JSON.parse(JSON.stringify(colors));
 
@@ -36,6 +33,7 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
       enhancedColors[i].aa = Array.isArray(aaResult)
         ? aaResult
         : JSON.parse(JSON.stringify(colors.slice(0, aaResult + 1)));
+      colorTbl.set(enhancedColors[i]);
     }
     else {
       const aaaResult = Color.search(
@@ -54,6 +52,7 @@ export function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
       enhancedColors[i].aa = Array.isArray(aaResult)
       ? aaResult
       : JSON.parse(JSON.stringify(colors.slice(-aaResult)));
+      colorTbl.set(enhancedColors[i]);
     }
   }
   return enhancedColors;
@@ -67,6 +66,7 @@ export function ColorContextProvider(props): JSX.Element {
     <ColorContext.Provider value={{
       Model: {
         colors: sanitizeColors(Color.palette),
+        colorTbl,
         activeColor,
         setActiveColor
       }
