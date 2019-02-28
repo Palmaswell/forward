@@ -5,7 +5,7 @@ import Head from 'next/head';
 import * as Component from '../components';
 import * as Container from '../container';
 import * as Type from '../types';
-import * as Util from '../utils';
+import * as Color from '../color';
 
 const IndexPage: React.SFC = (): JSX.Element => {
   return (
@@ -16,7 +16,7 @@ const IndexPage: React.SFC = (): JSX.Element => {
         padding: ${Component.Size.L}px ${Component.Size.XL}px;
         margin: 0;
         min-height: 100%;
-        background-color: ${Util.toRGBString(Component.Color.white)};
+        background-color: ${Color.toRGBString(Component.Color.white)};
         ${Component.getFont()}
       }
     `}

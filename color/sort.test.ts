@@ -64,3 +64,20 @@ test('color partition', () => {
     Color.luminance
   )).toEqual({lo: 4, hi: 2});
 });
+
+test('swap array elements', () => {
+  const arrayMock = [1, 2, 3, 4, 5];
+  const arrayMock2 = [1, 3];
+  const arrayMock3 = [10, 3, 11, 15, 19, 1];
+  Color.swap(arrayMock, 1, 2);
+
+  expect(arrayMock).toEqual([1, 3, 2, 4, 5]);
+  expect(arrayMock).toBe(arrayMock);
+
+  Color.swap(arrayMock, 2, 3);
+  expect(arrayMock).toEqual([1, 3, 4, 2, 5]);
+  Color.swap(arrayMock2, 0, 1);
+  expect(arrayMock2).toEqual([3, 1]);
+  Color.swap(arrayMock3, 2, 5)
+  expect(arrayMock3).toEqual([10, 3, 1, 15, 19, 11]);
+});

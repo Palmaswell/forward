@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import { Color } from './colors';
 import { Size } from './size';
-import * as Util from '../utils';
+import * as Component from './colors';
+import * as Color from '../color';
 
 const StyledTopBar = styled.header`
   padding-bottom: ${Size.S}px;
-  border-bottom: 1px solid ${Util.toRGBString(Color.cityLights)};
+  border-bottom: 1px solid ${Color.toRGBString(Component.Color.cityLights)};
   margin-bottom: ${Size.S}px;
 `;
 

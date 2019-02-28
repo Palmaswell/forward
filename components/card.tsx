@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { css, SerializedStyles } from '@emotion/core';
-import { Color } from './colors';
 import { Size } from './size';
+import * as Component from './colors';
 import * as Type from '../types';
-import * as Util from '../utils';
+import * as Color from '../color';
 
 export interface CardProps {
   rgb: string;
@@ -28,7 +28,7 @@ const generateCardStyles = (type: Type.ColorTile): SerializedStyles => {
     case Type.ColorTile.primary:
     default:
       return css`
-        box-shadow: 0 2px 4px ${Util.toRGBString(Color.black)};
+        box-shadow: 0 2px 4px ${Color.toRGBString(Component.Color.black)};
       `;
   };
 };
@@ -45,7 +45,7 @@ const generateCaptionStyles = (type: Type.ColorTile): SerializedStyles => {
   switch(type) {
     case Type.ColorTile.secondary:
       return css`
-        color: ${Util.toRGBString(Color.draculaOrchid)};
+        color: ${Color.toRGBString(Component.Color.draculaOrchid)};
         padding: ${Size.M}px 0;
         font-size: 16px;
       `;
@@ -54,7 +54,7 @@ const generateCaptionStyles = (type: Type.ColorTile): SerializedStyles => {
       return css`
         padding: ${Size.S}px ${Size.M}px ${Size.M}px;
         font-size: 28px;
-        background-color: ${Util.toRGBString(Color.white)};
+        background-color: ${Color.toRGBString(Component.Color.white)};
       `;
   }
 };
@@ -66,8 +66,8 @@ const StyledSubline = styled.span`
   margin-top: 14px;
   font-size: 14px;
   color: ${(props: StyledCaptionProps) => props.type === Type.ColorTile.primary
-    ? Util.toRGBString(Color.draculaOrchid)
-    : Util.toRGBString(Color.blueNights)
+    ? Color.toRGBString(Component.Color.draculaOrchid)
+    : Color.toRGBString(Component.Color.blueNights)
   };
 `;
 

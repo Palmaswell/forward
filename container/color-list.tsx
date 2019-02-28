@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Component from '../components';
 import * as Type from '../types';
-import * as Util from '../utils';
+import * as Color from '../color';
 import tinyColor from 'tinycolor2';
 
 export interface ColorListProps {
@@ -19,8 +19,8 @@ export const ColorList:
               <Component.Card
                 type={Type.ColorTile.secondary}
                 name={color.name}
-                rgb={Util.toRGBString(color.rgb)}
-                hex={`#${tinyColor(Util.toRGBString(color.rgb)).toHex()}`}
+                rgb={Color.toRGBString(color.rgb)}
+                hex={`#${tinyColor(Color.toRGBString(color.rgb)).toHex()}`}
                 onClick={(e) => console.log(e, 'in the component')}>
               <Component.Tile
                 type={Type.ColorTile.secondary}

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { SerializedStyles } from '@emotion/css';
-import { Color } from './colors';
-import * as Util from '../utils';
+import * as Component from './colors';
+import * as Color from '../color';
 import * as Type from '../types';
 
 
@@ -25,7 +25,7 @@ const generateHeadlineStyles = (type: Type.Headline): SerializedStyles => {
     `;
   }
   return css`
-    color: ${Util.toRGBString(Color.americanRiver)};
+    color: ${Color.toRGBString(Component.Color.americanRiver)};
     font-family: 'Nunito Sans', sans-serif;
   `;
 }

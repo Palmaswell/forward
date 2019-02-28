@@ -6,7 +6,24 @@ import * as Util from '../utils';
  * @param { number } lo
  * @param { number } hi
  * @param { luminanceCallBack } cb
+ * @description Quicksort is a fast sorting algorithm
+ * that takes the dived and conquer approach to sorting list.
+ *
+ * Running time is an important thing to consider when selecting
+ * a sorting algorithm since efficiency is often thought on terms
+ * of speed (runtime).
+ *
+ * Best case run time O(n log n)
+ * Avarage case run time O(n log n)
+ * Worst case run time O(n_2)
 */
+
+
+/**
+ * A better quicksort algorithms works in place,
+ * by swapping elements within the array,
+ * to avoid the memory allocation of more arrays.
+ */
 export function quickSort(
   arr: Type.Color[],
   cb: (sRGB: Type.RGB) => number,
@@ -49,9 +66,20 @@ export function partition(
       return partition(arr, lo, hi - 1, pivot, cb);
     }
     if (lo <= hi) {
-      Util.swap(arr, lo, hi);
+      swap(arr, lo, hi);
       return partition(arr, lo + 1, hi - 1, pivot, cb);
     }
   }
   return { lo, hi };
+}
+
+/**
+ * @name swap
+ * @param { array } a
+ * @param { number } low
+ * @param { number } high
+ * @description swaps two values in an array
+ */
+export const swap = (a: Type.Color[] | number[], low, high): void => {
+  [a[low], a[high]] = [a[high], a[low]];
 }

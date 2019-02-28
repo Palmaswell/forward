@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { css, SerializedStyles, jsx } from '@emotion/core';
 import { Breakpoint } from './breakpoint';
-import { Color } from './colors';
 import { Size } from './size';
+import * as Component from './colors';
 import * as Type from '../types';
-import * as Util from '../utils';
+import * as Color from '../color';
 
 export interface ItemListProps {
   isActive: boolean;
@@ -47,11 +47,11 @@ const generateItemStyles = (props: ItemListProps): SerializedStyles => {
     default:
       return css`
         background-color: ${props.isActive
-          ? Util.toRGBString(Color.lynxWhite)
+          ? Color.toRGBString(Component.Color.lynxWhite)
           : 'transparent;'
         };
         &:hover {
-          background-color: ${Util.toRGBString(Color.lynxWhite)};
+          background-color: ${Color.toRGBString(Component.Color.lynxWhite)};
           transition: background 333ms ease-out;
         }
       `;
