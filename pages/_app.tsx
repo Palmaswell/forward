@@ -1,6 +1,6 @@
 import App, { Container } from 'next/app';
 import * as React from 'react';
-import { ColorContextProvider } from '../context';
+import { ColorContextProvider } from '../color-context';
 
 export default class ForwardApp extends App {
   public render(): JSX.Element {

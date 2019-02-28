@@ -1,4 +1,4 @@
-import { ColorContext, ColorCtxProvider } from '../context';
+import { ColorContext, ColorCtxProvider } from '../color-context';
 import { css, Global } from '@emotion/core';
 import * as React from 'react';
 import Head from 'next/head';

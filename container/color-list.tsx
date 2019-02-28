@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Component from '../components';
 import * as Type from '../types';
 import * as Color from '../color';
-import { ColorContext, ColorCtxProvider } from '../context';
+import { ColorContext, ColorCtxProvider } from '../color-context';
 import tinyColor from 'tinycolor2';
 import uuid from 'uuid/v4';
 
@@ -13,7 +13,7 @@ export interface ColorListProps {
 export const ColorList:
   React.FunctionComponent<ColorListProps> = (props): JSX.Element => {
   const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
-  console.log(Model.activeColor);
+
   const handleClick = (color: Type.EnhancedColor): void => {
     Model.setActiveColor(color);
   }
