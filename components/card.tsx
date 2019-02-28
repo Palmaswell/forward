@@ -10,6 +10,7 @@ export interface CardProps {
   hex: string;
   name: string;
   type?: Type.ColorTile;
+  onClick: React.MouseEventHandler<HTMLElement>;
 }
 
 interface StyledCardProps {
@@ -73,7 +74,9 @@ const StyledSubline = styled.span`
 export const Card: React.SFC<CardProps> = (props): JSX.Element => {
   const cardType = props.type || Type.ColorTile.primary;
   return(
-    <StyledCard type={cardType}>
+    <StyledCard
+      onClick={props.onClick}
+      type={cardType}>
       {props.children}
       <StyledCaption type={cardType}>
         {props.name}

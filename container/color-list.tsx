@@ -20,7 +20,8 @@ export const ColorList:
                 type={Type.ColorTile.secondary}
                 name={color.name}
                 rgb={Util.toRGBString(color.rgb)}
-                hex={`#${tinyColor(Util.toRGBString(color.rgb)).toHex()}`}>
+                hex={`#${tinyColor(Util.toRGBString(color.rgb)).toHex()}`}
+                onClick={(e) => console.log(e, 'in the component')}>
               <Component.Tile
                 type={Type.ColorTile.secondary}
                 bgColor={color.rgb}
