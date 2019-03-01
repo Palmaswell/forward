@@ -1,5 +1,5 @@
 import * as Type from '../types';
-
+import tinyColor from 'tinycolor2';
 /**
  * @name luminance
  * @type { number }
@@ -46,3 +46,31 @@ export function toRGBString(sRGB: Type.RGB): string | null {
    : null;
 };
 
+/**
+ * @name create
+ * @description creates a color object containing
+ * necessary information to build UI components
+ * @param { array } arr
+ */
+export function createEnhanced(
+  rawColor: Type.Color,
+  aaa: Type.Color[] | [],
+  aa: Type.Color[] | []
+  ): Type.colorEnhanced {
+  const rgb = rawColor.rgb;
+  return {
+    name: rawColor.name,
+    rgb,
+    aaa,
+    aa,
+    toRGB(): string {
+      return toRGBString(rgb);
+    },
+    toHEX(): string {
+      return tinyColor(toRGBString(rgb)).toHexString();
+    },
+    toHSL(): string {
+      return tinyColor(toRGBString(rgb)).toHslString();
+    }
+  }
+}

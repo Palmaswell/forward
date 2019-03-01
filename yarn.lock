@@ -2852,6 +2852,15 @@ emotion-server@^10.0.6:
   dependencies:
     create-emotion-server "10.0.0"
 
+emotion-theming@^10.0.7:
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/emotion-theming/-/emotion-theming-10.0.7.tgz#0629740840f2ff6b929a7c3d52811187768e91c9"
+  integrity sha512-/dqXTvPA8pRQJRrW6/wpGqu0s0tmtwC27Pk0IOrxDV2F/knbKcd7J/G3T2385NjE+aJO4XJJ7JCNWQkwcjuX0Q==
+  dependencies:
+    "@emotion/weak-memoize" "0.2.2"
+    hoist-non-react-statics "^2.3.1"
+    object-assign "^4.1.1"
+
 emotion@^10.0.6:
   version "10.0.6"
   resolved "https://registry.yarnpkg.com/emotion/-/emotion-10.0.6.tgz#2dc2d759d243a96d74f0833ea5a74c64f875181b"
@@ -3612,6 +3621,11 @@ hoist-non-react-statics@3.2.0:
   integrity sha512-3IascCRfaEkbmHjJnUxWSspIUE1okLPjGTMVXW8zraUo1t3yg1BadKAxAGILHwgoBzmMnzrgeeaDGBvpuPz6dA==
   dependencies:
     react-is "^16.3.2"
+
+hoist-non-react-statics@^2.3.1:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
 hoist-non-react-statics@^3.0.0:
   version "3.3.0"

@@ -1,11 +1,14 @@
 import styled from '@emotion/styled';
+import * as Type from '../types';
 import { Size } from './size';
-import * as Component from './colors';
-import * as Color from '../color';
+
+interface StyledTopBar {
+  theme?: Type.HashTbl;
+}
 
 const StyledTopBar = styled.header`
   padding-bottom: ${Size.S}px;
-  border-bottom: 1px solid ${Color.toRGBString(Component.Color.cityLights)};
+  border-bottom: 1px solid ${(props: StyledTopBar) => props.theme.get('City Lights').toRGB()};
   margin-bottom: ${Size.S}px;
 `;
 

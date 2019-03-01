@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { SerializedStyles } from '@emotion/css';
-import * as Component from './colors';
-import * as Color from '../color';
 import * as Type from '../types';
 
 
@@ -10,22 +8,24 @@ interface HeadlineProps {
   order: Type.HeadlineOrder;
   tag: Type.HeadlineOrder;
   type?: Type.Headline;
+  theme?: Type.HashTbl;
 }
 
 interface StyledHeadlineProps {
   order: Type.HeadlineOrder;
   type?: Type.Headline;
+  theme?: Type.HashTbl;
 }
 
 
-const generateHeadlineStyles = (type: Type.Headline): SerializedStyles => {
-  if (type === Type.Headline.secondary) {
+const generateHeadlineStyles = (props: StyledHeadlineProps): SerializedStyles => {
+  if (props.type === Type.Headline.secondary) {
     return css`
       font-family: 'Halant';
     `;
   }
   return css`
-    color: ${Color.toRGBString(Component.Color.americanRiver)};
+    color: ${props.theme.get('American River').toRGB()};
     font-family: 'Nunito Sans', sans-serif;
   `;
 }
@@ -47,7 +47,7 @@ const StyledHeadline = styled.h1`
   line-height: 1.2;
   letter-spacing: .5px;
   -webkit-font-smoothing: antialiased;
-  ${(props: StyledHeadlineProps) => generateHeadlineStyles(props.type)};
+  ${(props: StyledHeadlineProps) => generateHeadlineStyles(props)};
 `;
 
 export const Headline: React.SFC<HeadlineProps> = (props): JSX.Element => {

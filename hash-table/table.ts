@@ -14,9 +14,9 @@ export function computeHash({s, l, t = 0, i = 0}: Type.ComputeHashProps): number
 }
 /**
  * @name createNode
- * @param { Type.EnhancedColor } v
+ * @param { Type.colorEnhanced } v
 */
-export function createNode(value?: Type.EnhancedColor): Type.Node {
+export function createNode(value?: Type.colorEnhanced): Type.Node {
   return {
     value,
     next: null

@@ -1,11 +1,12 @@
-import { ColorContext, ColorCtxProvider } from '../color-context';
 import { css, Global } from '@emotion/core';
+import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
 import Head from 'next/head';
 import * as Component from '../components';
 import * as Container from '../container';
 import * as Type from '../types';
-import * as Color from '../color';
+import { ColorContext, ColorCtxProvider } from '../color-context';
+
 
 export default (): JSX.Element => {
   const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
@@ -17,7 +18,7 @@ export default (): JSX.Element => {
         padding: ${Component.Size.L}px ${Component.Size.XL}px;
         margin: 0;
         min-height: 100%;
-        background-color: ${Color.toRGBString(Component.Color.white)};
+        background-color: ${Model.colorTbl.get('White').toRGB()};
         ${Component.getFont()}
       }
     `}
@@ -32,14 +33,16 @@ export default (): JSX.Element => {
       as="font"
       href="https://fonts.googleapis.com/css?family=Halant|Nunito+Sans" />
     </Head>
-    <Component.TopBar>
-      <Component.Headline
-        order={Type.HeadlineOrder.h2}
-        tag={Type.HeadlineOrder.h1}>
-        Color contrast accessibility checker
-      </Component.Headline>
-    </Component.TopBar>
-    <Container.ColorList colors={Model.colors} />
+    <ThemeProvider theme={Model.colorTbl}>
+      <Component.TopBar>
+        <Component.Headline
+          order={Type.HeadlineOrder.h2}
+          tag={Type.HeadlineOrder.h1}>
+          Color contrast accessibility checker
+        </Component.Headline>
+      </Component.TopBar>
+      <Container.ColorList colors={Model.colors} />
+    </ThemeProvider>
     </>
   );
 }

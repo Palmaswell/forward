@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { css, SerializedStyles } from '@emotion/core';
 import { Size } from './size';
-import * as Component from './colors';
 import * as Type from '../types';
 import * as Color from '../color';
 
@@ -15,20 +14,22 @@ export interface CardProps {
 
 interface StyledCardProps {
   type: Type.ColorTile;
+  theme?: Type.HashTbl;
 }
 
 interface StyledCaptionProps {
   type: Type.ColorTile;
+  theme?: Type.HashTbl;
 }
 
-const generateCardStyles = (type: Type.ColorTile): SerializedStyles => {
-  switch(type) {
+const generateCardStyles = (props: StyledCardProps): SerializedStyles => {
+  switch(props.type) {
     case Type.ColorTile.secondary:
       return css``;
     case Type.ColorTile.primary:
     default:
       return css`
-        box-shadow: 0 2px 4px ${Color.toRGBString(Component.Color.black)};
+        box-shadow: 0 2px 4px ${props.theme.get('Black').toRGB()};
       `;
   };
 };
@@ -38,14 +39,14 @@ const StyledCard = styled.figure`
   margin: 0;
   font-weight: 600;
   cursor: pointer;
-  ${(props: StyledCardProps) => generateCardStyles(props.type)}
+  ${(props: StyledCardProps) => generateCardStyles(props)}
 `;
 
-const generateCaptionStyles = (type: Type.ColorTile): SerializedStyles => {
-  switch(type) {
+const generateCaptionStyles = (props: StyledCaptionProps): SerializedStyles => {
+  switch(props.type) {
     case Type.ColorTile.secondary:
       return css`
-        color: ${Color.toRGBString(Component.Color.draculaOrchid)};
+        color: ${props.theme.get('Dracula Orchid').toRGB()};
         padding: ${Size.M}px 0;
         font-size: 16px;
       `;
@@ -54,20 +55,20 @@ const generateCaptionStyles = (type: Type.ColorTile): SerializedStyles => {
       return css`
         padding: ${Size.S}px ${Size.M}px ${Size.M}px;
         font-size: 28px;
-        background-color: ${Color.toRGBString(Component.Color.white)};
+        background-color: ${props.theme.get('White').toRGB()};
       `;
   }
 };
 
-const StyledCaption = styled.figcaption`${(props: StyledCaptionProps) => generateCaptionStyles(props.type)}`;
+const StyledCaption = styled.figcaption`${(props: StyledCaptionProps) => generateCaptionStyles(props)}`;
 
 const StyledSubline = styled.span`
   display: block;
   margin-top: 14px;
   font-size: 14px;
   color: ${(props: StyledCaptionProps) => props.type === Type.ColorTile.primary
-    ? Color.toRGBString(Component.Color.draculaOrchid)
-    : Color.toRGBString(Component.Color.blueNights)
+    ? props.theme.get('Dracula Orchid').toRGB()
+    : props.theme.get('Blue Nights').toRGB()
   };
 `;
 

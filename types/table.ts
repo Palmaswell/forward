@@ -1,4 +1,4 @@
-import { EnhancedColor } from './color';
+import { colorEnhanced } from './color';
 
 export interface ComputeHashProps {
   s: string;
@@ -8,13 +8,13 @@ export interface ComputeHashProps {
 }
 
 export interface HashTbl {
-  bucketArray: EnhancedColor[] | undefined[];
-  set(item: EnhancedColor): void;
-  get(name: string): EnhancedColor | undefined;
-  delete(name: EnhancedColor): void;
+  bucketArray: colorEnhanced[] | undefined[];
+  set(item: colorEnhanced): void;
+  get(name: string): colorEnhanced | undefined;
+  delete(name: colorEnhanced): void;
 }
 
 export interface Node {
-  next: EnhancedColor | null;
-  value?: EnhancedColor;
+  next: colorEnhanced | null;
+  value?: colorEnhanced;
 }

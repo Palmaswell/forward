@@ -2,13 +2,12 @@ import styled from '@emotion/styled';
 import { css, SerializedStyles } from '@emotion/core';
 import { Breakpoint } from './breakpoint';
 import { Size } from './size';
-import * as Component from './colors';
 import * as Type from '../types';
-import * as Color from '../color';
 
 export interface ItemListProps {
   isActive: boolean;
   type?: Type.ColorList;
+  theme?: Type.HashTbl;
 }
 
 interface StyledItemListProps {
@@ -47,11 +46,11 @@ const generateItemStyles = (props: ItemListProps): SerializedStyles => {
     default:
       return css`
         background-color: ${props.isActive
-          ? Color.toRGBString(Component.Color.lynxWhite)
+          ? props.theme.get('Lynx White').toRGB()
           : 'transparent;'
         };
         &:hover {
-          background-color: ${Color.toRGBString(Component.Color.lynxWhite)};
+          background-color: ${props.theme.get('Lynx White').toRGB()};
           transition: background 333ms ease-out;
         }
       `;

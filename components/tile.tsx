@@ -5,7 +5,7 @@ import * as Type from '../types';
 import * as Color from '../color';
 
 export interface TileProps {
-  bgColor: Type.RGB;
+  bgColor: string;
   copyColor: Type.RGB;
   copy: string;
   type?: Type.ColorTile;
@@ -13,7 +13,7 @@ export interface TileProps {
 
 interface StyledTileProps {
   type: Type.ColorTile;
-  bgColor: Type.RGB;
+  bgColor: string;
   copyColor: Type.RGB;
 }
 
@@ -39,7 +39,7 @@ const StyledTile = styled.div`
   width: 100%;
   color: ${(props: StyledTileProps) => Color.toRGBString(props.copyColor)};
   text-align: center;
-  background-color: ${(props: StyledTileProps) => Color.toRGBString(props.bgColor)};
+  background-color: ${(props: StyledTileProps) => props.bgColor};
   ${(props: StyledTileProps) => generateTileStyles(props.type)}
 `;
 

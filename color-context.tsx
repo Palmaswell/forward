@@ -9,49 +9,61 @@ export interface ColorCtxProvider {
 
 const colorTbl = HashTbl.create(Color.palette.length);
 
-function sanitizeColors(colors: Type.Color[]): Type.EnhancedColor[] {
+function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
   Color.sort(colors, Color.luminance);
-  const enhancedColors = JSON.parse(JSON.stringify(colors));
+  const enhancedColors = [];
 
   for(let i = colors.length - 1; i >= 0; i--) {
     if (i >= (colors.length - 1) / 2) {
-      const aaaResult = Color.search(
+      const aaaSearch = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aaa,
         Type.Search.upper
       );
-      const aaResult = Color.search(
+      const aaSearch = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aa,
         Type.Search.upper
       );
-      enhancedColors[i].aaa = Array.isArray(aaaResult)
-        ? aaaResult
-        : JSON.parse(JSON.stringify(colors.slice(0, aaaResult + 1)));
-      enhancedColors[i].aa = Array.isArray(aaResult)
-        ? aaResult
-        : JSON.parse(JSON.stringify(colors.slice(0, aaResult + 1)));
+      const aaaResult = Array.isArray(aaaSearch)
+        ? aaaSearch
+        : JSON.parse(JSON.stringify(colors.slice(0, aaaSearch + 1)));
+      const aaResult = Array.isArray(aaSearch)
+        ? aaSearch
+        : JSON.parse(JSON.stringify(colors.slice(0, aaSearch + 1)));
+
+      enhancedColors[i] = Color.createEnhanced(
+        colors[i],
+        aaaResult,
+        aaResult
+      );
       colorTbl.set(enhancedColors[i]);
     }
     else {
-      const aaaResult = Color.search(
+      const aaaSearch = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aaa
       );
-      const aaResult = Color.search(
+      const aaSearch = Color.search(
         colors,
         colors[i],
         Type.A11yRatio.aa,
       );
-      enhancedColors[i].aaa = Array.isArray(aaaResult)
-      ? aaaResult
-      : JSON.parse(JSON.stringify(colors.slice(-aaaResult)));
-      enhancedColors[i].aa = Array.isArray(aaResult)
-      ? aaResult
-      : JSON.parse(JSON.stringify(colors.slice(-aaResult)));
+      const aaaResult = Array.isArray(aaaSearch)
+        ? aaaSearch
+        : JSON.parse(JSON.stringify(colors.slice(aaaSearch, colors.length)));
+      const aaResult = Array.isArray(aaSearch)
+        ? aaSearch
+        : JSON.parse(JSON.stringify(colors.slice(aaSearch, colors.length)));
+
+      enhancedColors[i] = Color.createEnhanced(
+        colors[i],
+        aaaResult,
+        aaResult
+      );
       colorTbl.set(enhancedColors[i]);
     }
   }
@@ -62,15 +74,14 @@ export const ColorContext = React.createContext({});
 
 export function ColorContextProvider(props): JSX.Element {
   const [activeColor, setActiveColor] = React.useState({});
+  const Model: Type.ColorModel = {
+    colors: sanitizeColors(Color.palette),
+    colorTbl,
+    activeColor,
+    setActiveColor
+  };
   return (
-    <ColorContext.Provider value={{
-      Model: {
-        colors: sanitizeColors(Color.palette),
-        colorTbl,
-        activeColor,
-        setActiveColor
-      }
-    }}>
+    <ColorContext.Provider value={{ Model }}>
       {props.children}
     </ColorContext.Provider>
   );

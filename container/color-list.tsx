@@ -1,20 +1,18 @@
 import * as React from 'react';
 import * as Component from '../components';
 import * as Type from '../types';
-import * as Color from '../color';
-import { ColorContext, ColorCtxProvider } from '../color-context';
-import tinyColor from 'tinycolor2';
+import { ColorContext } from '../color-context';
 import uuid from 'uuid/v4';
 
 export interface ColorListProps {
-  colors: Type.EnhancedColor[];
+  colors: Type.colorEnhanced[];
 }
 
 export const ColorList:
   React.FunctionComponent<ColorListProps> = (props): JSX.Element => {
-  const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
+  const { Model } = React.useContext(ColorContext);
 
-  const handleClick = (color: Type.EnhancedColor): void => {
+  const handleClick = (color: Type.colorEnhanced): void => {
     Model.setActiveColor(color);
   }
   return (
@@ -28,13 +26,13 @@ export const ColorList:
               <Component.Card
                 type={Type.ColorTile.secondary}
                 name={color.name}
-                rgb={Color.toRGBString(color.rgb)}
-                hex={`#${tinyColor(Color.toRGBString(color.rgb)).toHex()}`}
+                rgb={color.toRGB()}
+                hex={`${color.toHEX()}`}
                 onClick={() => handleClick(color)}>
               <Component.Tile
                 type={Type.ColorTile.secondary}
-                bgColor={color.rgb}
-                copyColor={color.aaa.length > 0 ? color.aaa[color.aaa.length - 1].rgb : Component.Color.black}
+                bgColor={color.toRGB()}
+                copyColor={color.aaa.length > 0 ? color.aaa[color.aaa.length - 1].rgb : Model.colorTbl.get('Black').rgb}
                 copy="Aa"/>
               </Component.Card>
             </Component.Item>

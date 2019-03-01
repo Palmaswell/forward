@@ -1,6 +1,6 @@
 import * as Color from './color';
 import * as Type from '../types';
-import { palette } from './palette';
+import { palette } from './raw-palette';
 
 test('sRGB Relative luminance in colorimetric spaces', () => {
   expect(Color.luminance([255, 255, 255])).toEqual(1);
@@ -16,20 +16,17 @@ test('sRGB Calculate the contrast ratio', () => {
   expect(Color.contrastRatio(palette[1].rgb, palette[5].rgb)).toEqual(6.41);
 });
 
-const arrayMock: Type.Color | Type.EnhancedColor = [
+const arrayMock: Type.Color[] = [
   {
     name: 'Soothing Breeze',
-    type: Type.PaletteCase.soothing_breeze,
     rgb: [178, 190, 195]
   },
   {
     name: 'City Lights',
-    type: Type.PaletteCase.city_lights,
     rgb: [223, 228, 234]
   },
   {
     name: 'Concrete',
-    type: Type.PaletteCase.concrete,
     rgb: [149, 165, 166]
   }
 ];
@@ -38,3 +35,4 @@ test('tranform RGB array into rgb string', () => {
   expect(Color.toRGBString(arrayMock[1].rgb)).toEqual('rgb(223, 228, 234)');
   expect(Color.toRGBString(arrayMock[2].rgb)).toEqual('rgb(149, 165, 166)');
 });
+

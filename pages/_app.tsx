@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ColorContextProvider } from '../color-context';
 
 export default class ForwardApp extends App {
+
   public render(): JSX.Element {
     const { Component, pageProps } = this.props
     return (

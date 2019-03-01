@@ -3,24 +3,25 @@ import { HashTbl } from './table';
 export interface Color {
   name: string;
   rgb: RGB;
-  type?: PaletteCase;
 };
 
 export type RGB = [number, number, number];
 
-export interface EnhancedColor {
+export interface colorEnhanced {
   name: string;
   rgb: RGB;
-  aa?: Color[];
-  aaa?: Color[];
-  type?: PaletteCase;
+  aaa: Color[] | [];
+  aa: Color[] | [];
+  toRGB(): string;
+  toHEX(): string;
+  toHSL(): string;
 }
 
 export interface ColorModel {
-  colors: EnhancedColor[];
+  colors: colorEnhanced[];
   colorTbl: HashTbl;
-  activeColor: EnhancedColor | {};
-  setActiveColor: (color: EnhancedColor) => void;
+  activeColor: colorEnhanced | {};
+  setActiveColor: (color: colorEnhanced) => void;
 }
 
 export enum YValues {
