@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { css, SerializedStyles } from '@emotion/core';
 import { Size } from './size';
 import * as Type from '../types';
-import * as Color from '../color';
 
 export interface CardProps {
   rgb: string;
