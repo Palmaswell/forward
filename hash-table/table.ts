@@ -53,15 +53,16 @@ export function create(s: number): Type.HashTbl<Type.colorEnhanced> {
       if (!bucket[key]) {
         return;
       }
-      if (bucket[key].value) {
+      if (bucket[key].name === name) {
         return bucket[key].value;
       }
-      else if (bucket[key].next.value) {
-        return bucket[key].next.value;
+      const findItem = (curr: Type.Node, next: Type.Node, name: string) => {
+        if (curr.value.name === name) {
+          return curr.value;
+        }
+        return findItem(next, next.next, name);
       }
-      else {
-        return this.get(name, bucket[key].next.next.value);
-      }
+      return findItem(bucket[key], bucket[key].next, name);
     },
     delete(item) {
       const key = computeHash({s: item.name, l: bucket.length});

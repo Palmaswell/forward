@@ -48,6 +48,36 @@ test('compute hash from key string to array index', () => {
   })).toBe(7);
 });
 
+test('create a node object for a linked list', () => {
+  const color = {
+    name: 'C64 Purple',
+    rgb: [112, 111, 211],
+    aaa: [{
+      name: 'Eye Of Newt',
+      rgb: [179, 57, 57]
+    }],
+    aa: [{
+      name: 'Eye Of Newt',
+      rgb: [179, 57, 57]
+    }]
+  };
+  expect(Hashtbl.createNode(color as Type.colorEnhanced)).toEqual({
+    next: null,
+    value: {
+      name: 'C64 Purple',
+      rgb: [112, 111, 211],
+      aaa: [{
+        name: 'Eye Of Newt',
+        rgb: [179, 57, 57]
+      }],
+      aa: [{
+        name: 'Eye Of Newt',
+        rgb: [179, 57, 57]
+      }]
+    }
+  });
+});
+
 test('create a hashtable an initialize empty buckets', () => {
   expect(Hashtbl.create(2)).toMatchObject({
     bucketArray: [undefined, undefined]
@@ -132,32 +162,20 @@ test('find item from hash table', () => {
   expect(hashTabl.get('C64 Purple')).toEqual(arrayMock[0]);
 });
 
-test('create a node object for a linked list', () => {
-  const color = {
-    name: 'C64 Purple',
-    rgb: [112, 111, 211],
-    aaa: [{
-      name: 'Eye Of Newt',
-      rgb: [179, 57, 57]
-    }],
-    aa: [{
-      name: 'Eye Of Newt',
-      rgb: [179, 57, 57]
-    }]
+test('find an item allocated in a linked list bucket', () => {
+  Color.sort(Color.palette, Color.luminance);
+  const hashTabl = Hashtbl.create(Color.palette.length);
+  const white = {
+    name: 'White',
+    rgb: [255, 255, 255]
   };
-  expect(Hashtbl.createNode(color as Type.colorEnhanced)).toEqual({
-    next: null,
-    value: {
-      name: 'C64 Purple',
-      rgb: [112, 111, 211],
-      aaa: [{
-        name: 'Eye Of Newt',
-        rgb: [179, 57, 57]
-      }],
-      aa: [{
-        name: 'Eye Of Newt',
-        rgb: [179, 57, 57]
-      }]
-    }
-  });
+  const LuckyPoint = {
+    name: 'Lucky Point',
+    rgb: [44, 44, 84]
+  };
+  hashTabl.set(white as Type.colorEnhanced);
+  hashTabl.set(LuckyPoint as Type.colorEnhanced);
+  expect(hashTabl.get('Lucky Point')).toEqual(LuckyPoint);
+  expect(hashTabl.get('White')).toEqual(white);
 });
+
