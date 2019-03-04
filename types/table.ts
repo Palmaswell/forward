@@ -7,14 +7,14 @@ export interface ComputeHashProps {
   i?: number;
 }
 
-export interface HashTbl {
-  bucketArray: colorEnhanced[] | undefined[];
-  set(item: colorEnhanced): void;
-  get(name: string): colorEnhanced | undefined;
-  delete(name: colorEnhanced): void;
+export interface HashTbl<T> {
+  bucketArray: T[] | undefined[];
+  set(item: T): void;
+  get(name: string): T | undefined;
+  delete(name: T): void;
 }
 
 export interface Node {
-  next: colorEnhanced | null;
+  next: Node | null;
   value?: colorEnhanced;
 }

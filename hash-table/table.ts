@@ -22,48 +22,59 @@ export function createNode(value?: Type.colorEnhanced): Type.Node {
     next: null
   }
 }
+
 /**
  * @name create
  * @param { number } s
 */
-export function create(s: number): Type.HashTbl {
+export function create(s: number): Type.HashTbl<Type.colorEnhanced> {
+  const bucket = new Array(s);
   return {
-    bucketArray: new Array(s),
+    bucketArray: bucket,
     set(item) {
-      const key = computeHash({s: item.name, l: this.bucketArray.length});
+      const key = computeHash({ s: item.name, l: bucket.length });
+
       const node = createNode(item);
-      if (this.bucketArray[key]) {
-        node.next = item;
-      }
-      this.bucketArray[key] = node;
-    },
-    get(name) {
-      const key = computeHash({s: name, l: this.bucketArray.length});
-      if (!this.bucketArray[key]) {
+      if (!bucket[key]) {
+        bucket[key] = node;
         return;
       }
-      if (this.bucketArray[key].value) {
-        return this.bucketArray[key].value;
+      const findBucket = (curr: Type.Node, next: Type.Node): Type.Node => {
+        if (next) {
+          return findBucket(next, next.next);
+        }
+        return curr;
       }
-      else if (this.bucketArray[key].next.value) {
-        return this.bucketArray[key].next.value;
+      const freeBucket = findBucket(bucket[key], bucket[key].next);
+      freeBucket.next = node;
+    },
+    get(name) {
+      const key = computeHash({ s: name, l: bucket.length });
+      if (!bucket[key]) {
+        return;
+      }
+      if (bucket[key].value) {
+        return bucket[key].value;
+      }
+      else if (bucket[key].next.value) {
+        return bucket[key].next.value;
       }
       else {
-        return this.get(name, this.bucketArray[key].next.next.value);
+        return this.get(name, bucket[key].next.next.value);
       }
     },
     delete(item) {
-      const key = computeHash({s: item.name, l: this.bucketArray.length});
-      if (!this.bucketArray[key]) {
+      const key = computeHash({s: item.name, l: bucket.length});
+      if (!bucket[key]) {
         return;
       }
-      if (this.bucketArray[key].value === item) {
-        this.bucketArray[key] = this.bucketArray[key].next;
+      if (bucket[key].value === item) {
+        bucket[key] = bucket[key].next;
       }
-      else if (this.bucketArray[key].next) {
-        return this.bucketArray[key].next.value === item
-          ? this.bucketArray[key].next = this.bucketArray[key].next.next
-          : this.delete(item, this.bucketArray[key].next.next);
+      else if (bucket[key].next) {
+        return bucket[key].next.value === item
+          ? bucket[key].next = bucket[key].next.next
+          : this.delete(item, bucket[key].next.next);
       }
     }
   };

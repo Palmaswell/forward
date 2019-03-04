@@ -9,6 +9,7 @@ import { ColorContext, ColorCtxProvider } from '../color-context';
 
 export const Enhanced = () => {
   const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
+  console.log(Model.colorTbl.bucketArray.length, '(((((((((');
   return (
     <>
     <Global styles={Component.getGlobalStyles()}/>
@@ -34,7 +35,7 @@ export const Enhanced = () => {
             name={Model.colorTbl.get('Black').name}
             rgb={Model.colorTbl.get('Black').toRGB()}
             hex={`${Model.colorTbl.get('Black').toHEX()}`}
-            onClick={() => console.log(test)}>
+            onClick={() => console.log('test')}>
             <Component.Tile
             type={Type.ColorTile.primary}
             bgColor={Model.colorTbl.get('Black').toRGB()}

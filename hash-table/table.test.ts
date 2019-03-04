@@ -1,39 +1,33 @@
+import * as Color from '../color';
 import * as Hashtbl from './';
 import * as Type from '../types';
 
-const arrayMock: Type.Color = [
+const arrayMock: any = [
   {
     name: 'C64 Purple',
-    type: Type.PaletteCase.c64_purple,
     rgb: [112, 111, 211]
   },
   {
     name: 'Liberty',
-    type: Type.PaletteCase.liberty,
     rgb: [71, 71, 135]
   },
   {
     name: 'Synthetic Pumpkin',
-    type: Type.PaletteCase.synthetic_pumpkin,
     rgb: [255, 121, 63]
   },
   {
     name: 'Chilean Fire',
-    type: Type.PaletteCase.chilean_fire,
     rgb: [205, 97, 51]
   },
   {
     name: 'Lynx white',
-    type: Type.PaletteCase.lynx_white,
     rgb: [245, 246, 250],
     aaa: [{
       name: 'Eye Of Newt',
-      type: Type.PaletteCase.eye_of_newt,
       rgb: [179, 57, 57]
     }],
     aa: [{
       name: 'Eye Of Newt',
-      type: Type.PaletteCase.eye_of_newt,
       rgb: [179, 57, 57]
     }]
   }
@@ -77,17 +71,41 @@ test('add item to hash table with an empty bucket array slot', () => {
   });
 });
 
-test('add item in an already taken bucket array slot', () => {
-  const hashTabl = Hashtbl.create(18);
-  hashTabl.set(arrayMock[4]);
-  expect(hashTabl.bucketArray[16]).toEqual({
+test('find free bucket for an object with colliding computed hashes', () => {
+  Color.sort(Color.palette, Color.luminance);
+  const hashTabl = Hashtbl.create(Color.palette.length);
+  const white = {
+    name: 'White',
+    rgb: [255, 255, 255]
+  };
+  const LuckyPoint = {
+    name: 'Lucky Point',
+    rgb: [44, 44, 84]
+  };
+
+  hashTabl.set(white as Type.colorEnhanced);
+  expect(hashTabl.bucketArray[18]).toEqual({
     next: null,
-    value: arrayMock[4]
+    value: white
   });
-  hashTabl.set(arrayMock[4]);
-  expect(hashTabl.bucketArray[16]).toEqual({
-    next: arrayMock[4],
-    value: arrayMock[4]
+  hashTabl.set(LuckyPoint as Type.colorEnhanced);
+  expect(hashTabl.bucketArray[18]).toEqual({
+    next: {
+      next: null,
+      value: LuckyPoint
+    },
+    value: white
+  });
+  hashTabl.set(white as Type.colorEnhanced);
+  expect(hashTabl.bucketArray[18]).toEqual({
+    next: {
+      next: {
+        next: null,
+        value: white
+      },
+      value: LuckyPoint
+    },
+    value: white
   });
 });
 
@@ -115,34 +133,29 @@ test('find item from hash table', () => {
 });
 
 test('create a node object for a linked list', () => {
-  expect(Hashtbl.createNode({
+  const color = {
     name: 'C64 Purple',
-    type: Type.PaletteCase.c64_purple,
     rgb: [112, 111, 211],
     aaa: [{
       name: 'Eye Of Newt',
-      type: Type.PaletteCase.eye_of_newt,
       rgb: [179, 57, 57]
     }],
     aa: [{
       name: 'Eye Of Newt',
-      type: Type.PaletteCase.eye_of_newt,
       rgb: [179, 57, 57]
     }]
-  })).toEqual({
+  };
+  expect(Hashtbl.createNode(color as Type.colorEnhanced)).toEqual({
     next: null,
     value: {
       name: 'C64 Purple',
-      type: Type.PaletteCase.c64_purple,
       rgb: [112, 111, 211],
       aaa: [{
         name: 'Eye Of Newt',
-        type: Type.PaletteCase.eye_of_newt,
         rgb: [179, 57, 57]
       }],
       aa: [{
         name: 'Eye Of Newt',
-        type: Type.PaletteCase.eye_of_newt,
         rgb: [179, 57, 57]
       }]
     }
