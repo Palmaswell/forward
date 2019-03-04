@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import tinycolor from 'tinycolor2';
 import { css, SerializedStyles } from '@emotion/core';
 import { Size } from './size';
 import * as Type from '../types';
@@ -22,18 +23,22 @@ interface StyledCaptionProps {
 }
 
 const generateCardStyles = (props: StyledCardProps): SerializedStyles => {
+  const test = tinycolor(props.theme.get('Black').toRGB());
+  test.setAlpha(.5);
   switch(props.type) {
     case Type.ColorTile.secondary:
       return css``;
     case Type.ColorTile.primary:
     default:
       return css`
-        box-shadow: 0 2px 4px ${props.theme.get('Black').toRGB()};
+        box-shadow: 0 2px 4px ${props.theme.get('Black').toRGBA(0.25)},
+        0 9px 20px ${props.theme.get('Black').toRGBA(0.10)};
       `;
   };
 };
 
 const StyledCard = styled.figure`
+  max-width: 500px;
   padding: 0;
   margin: 0;
   font-weight: 600;

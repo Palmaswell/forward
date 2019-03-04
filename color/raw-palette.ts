@@ -58,8 +58,12 @@ export const palette: Type.Color[] = [
     rgb: [247, 241, 227]
   },
   {
-    name: 'Hot Stone',
-    rgb: [247, 241, 227]
+    name: 'Isabelline',
+    rgb: [236, 236, 236]
+  },
+  {
+    name: 'Arsenic',
+    rgb: [68, 68, 68]
   },
   {
     name: 'Summer Sky',

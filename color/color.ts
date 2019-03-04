@@ -71,6 +71,11 @@ export function createEnhanced(
     },
     toHSL(): string {
       return tinyColor(toRGBString(rgb)).toHslString();
+    },
+    toRGBA(alpha: number): string {
+      const color = tinyColor(toRGBString(rgb));
+      color.setAlpha(alpha);
+      return color.toRgbString()
     }
   }
 }

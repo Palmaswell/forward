@@ -7,8 +7,11 @@ interface StyledLayerProps {
 }
 
 const StyledLayer = styled.section`
-  padding: ${Size.S}px ${Size.M}px;
-  background-color: ${(props: StyledLayerProps) => props.theme.get('Lynx White').toRGB()};
+  padding: ${Size.S}px 0;
+  border-bottom: 1px solid ${(props: StyledLayerProps) => props.theme.get('City Lights').toRGB()};
+  &:not(:last-child) {
+  }
+
 `;
 
 export const Layer: React.SFC = (props): JSX.Element => (

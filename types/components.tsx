@@ -8,3 +8,8 @@ export enum HeadlineOrder {
   h2 = 'h2',
   h3 = 'h3'
 }
+
+export enum Layout {
+  default = 'default',
+  custom = 'custom',
+}

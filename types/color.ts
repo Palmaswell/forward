@@ -15,6 +15,7 @@ export interface colorEnhanced {
   toRGB(): string;
   toHEX(): string;
   toHSL(): string;
+  toRGBA(alpha: number): string;
 }
 
 export interface ColorModel {
