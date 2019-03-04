@@ -4,27 +4,22 @@ import * as Type from '../types';
 const sortedMock: Type.Color[] = [
   {
     name: 'Electromagnetic',
-    type: Type.PaletteCase.electromagnetic,
     rgb: [0, 0, 0]
   },
   {
     name: 'Asbestos',
-    type: Type.PaletteCase.asbestos,
     rgb: [127, 140, 141]
   },
   {
     name: 'Concrete',
-    type: Type.PaletteCase.concrete,
     rgb: [149, 165, 166]
   },
   {
     name: 'Silver',
-    type: Type.PaletteCase.silver,
     rgb: [189, 195, 199]
   },
   {
     name: 'Clouds',
-    type: Type.PaletteCase.clouds,
     rgb: [255, 255, 255]
   },
 ];
@@ -34,7 +29,7 @@ test('Check in a binary search if a color matches the A11y ratio', () => {
     Color.palette,
     Color.palette[4],
     Type.A11yRatio.aaa
-  )).toEqual(24);
+  )).toEqual(25);
   expect(Color.search(
     Color.palette,
     Color.palette[10],
@@ -61,5 +56,5 @@ test('Check in a binary search if a color matches the A11y ratio', () => {
     Color.palette[30],
     Type.A11yRatio.aaa,
     Type.Search.upper
-  )).toEqual(6);
+  )).toEqual(7);
 });
