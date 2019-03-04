@@ -8,13 +8,13 @@ interface HeadlineProps {
   order: Type.HeadlineOrder;
   tag: Type.HeadlineOrder;
   type?: Type.Headline;
-  theme?: Type.HashTbl;
+  theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
 interface StyledHeadlineProps {
   order: Type.HeadlineOrder;
   type?: Type.Headline;
-  theme?: Type.HashTbl;
+  theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
 

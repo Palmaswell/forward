@@ -39,12 +39,18 @@ export function contrastRatio(sRGB: Type.RGB, sRGB2: Type.RGB): number {
   return +((light + 0.05) / (dark + 0.05)).toFixed(2);
 }
 
-export function toRGBString(sRGB: Type.RGB): string | null {
+export function toRGBString(sRGB: Type.RGB): string  {
   const [r, g, b] = sRGB;
   return sRGB.length === 3
    ? `rgb(${r}, ${g}, ${b})`
-   : null;
+   : '';
 };
+
+export function toHEX(sRGB: Type.RGB): string  {
+  return sRGB.length === 3
+   ? tinyColor(toRGBString(sRGB)).toHexString()
+   : '';
+}
 
 /**
  * @name create

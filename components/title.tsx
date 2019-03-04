@@ -9,7 +9,7 @@ export interface TitleProps {
 }
 
 interface StyledProps {
-  theme?: Type.HashTbl;
+  theme?:Type.HashTbl<Type.colorEnhanced>;
 }
 
 const StyledTitle = styled.strong`

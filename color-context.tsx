@@ -70,7 +70,7 @@ function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
   return enhancedColors;
 };
 
-export const ColorContext = React.createContext({});
+export const ColorContext: Type.ColorCtxProvider = React.createContext({});
 
 export function ColorContextProvider(props): JSX.Element {
   const [activeColor, setActiveColor] = React.useState({});

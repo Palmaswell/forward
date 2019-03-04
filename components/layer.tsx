@@ -3,7 +3,7 @@ import { Size } from './size';
 import * as Type from '../types';
 
 interface StyledLayerProps {
-  theme?: Type.HashTbl;
+  theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
 const StyledLayer = styled.section`

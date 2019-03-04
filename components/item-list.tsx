@@ -7,35 +7,49 @@ import * as Type from '../types';
 export interface ItemListProps {
   isActive: boolean;
   type?: Type.ColorList;
-  theme?: Type.HashTbl;
+  theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
 interface StyledItemListProps {
   type?: Type.ColorList;
 }
 
+const generateListStyles = (props: StyledItemListProps): SerializedStyles => {
+  switch(props.type) {
+    case Type.ColorList.secondary:
+      return css`
+        @media (min-width: ${Breakpoint.M}) {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media (min-width: ${Breakpoint.XL}) {
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+      `;
+    case Type.ColorList.primary:
+    default:
+      return css`
+        @media (min-width: ${Breakpoint.M}) {
+          grid-template-columns: 1fr 1fr;
+        }
+        @media (min-width: ${Breakpoint.L}) {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media (min-width: ${Breakpoint.XL}) {
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+      `;
+  }
+}
+
 const StyledItemList = styled.ul`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: ${(props: StyledItemListProps) =>
-    props.type === Type.ColorList.primary
-      ? ''
-      : `${Size.XL}px`
-  };
+  grid-template-columns: 1fr;
   justify-items: center;
-  align-items: center;
+  align-items: baseline;
   list-style: none;
   padding-left: 0;
   margin: 0;
-  @media (min-width: ${Breakpoint.M}) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  @media (min-width: ${Breakpoint.L}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-  @media (min-width: ${Breakpoint.XL}) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  }
+  ${(props: StyledItemListProps) => generateListStyles(props)};
 `;
 
 const generateItemStyles = (props: ItemListProps): SerializedStyles => {
@@ -72,10 +86,10 @@ export const ItemList: React.SFC<StyledItemListProps> = ({ children, type }): JS
   </StyledItemList>
 );
 
-export const Item: React.SFC<ItemListProps> = ({ children, isActive, type }): JSX.Element => (
+export const Item: React.SFC<ItemListProps> = (props): JSX.Element => (
   <StyledItem
-    isActive={isActive}
-    type={type || Type.ColorList.primary}>
-    {children}
+    isActive={props.isActive}
+    type={props.type || Type.ColorList.primary}>
+    {props.children}
   </StyledItem>
 );

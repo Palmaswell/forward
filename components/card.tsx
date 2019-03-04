@@ -9,17 +9,17 @@ export interface CardProps {
   hex: string;
   name: string;
   type?: Type.ColorTile;
-  onClick: React.MouseEventHandler<HTMLElement>;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 interface StyledCardProps {
   type: Type.ColorTile;
-  theme?: Type.HashTbl;
+  theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
 interface StyledCaptionProps {
   type: Type.ColorTile;
-  theme?: Type.HashTbl;
+  theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
 const generateCardStyles = (props: StyledCardProps): SerializedStyles => {

@@ -39,7 +39,6 @@ export default (): JSX.Element => {
               </Component.Headline>
             </Component.TopBar>
             <Container.ColorList colors={Model.colors} />
-
         </Component.LayoutItem>
       </Component.Layout>
     </ThemeProvider>

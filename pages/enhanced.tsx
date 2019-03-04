@@ -3,13 +3,12 @@ import { Global } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
 import * as Component from '../components';
-// import * as Container from '../container';
+import * as Container from '../container';
 import * as Type from '../types';
-import { ColorContext, ColorCtxProvider } from '../color-context';
+import { ColorContext } from '../color-context';
 
 export const Enhanced = () => {
-  const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
-  console.log(Model.colorTbl.bucketArray.length, '(((((((((');
+  const { Model } = React.useContext(ColorContext);
   return (
     <>
     <Global styles={Component.getGlobalStyles()}/>
@@ -32,14 +31,13 @@ export const Enhanced = () => {
           <Component.Link href="/"> back</Component.Link>
           <Component.Card
             type={Type.ColorTile.primary}
-            name={Model.colorTbl.get('Black').name}
-            rgb={Model.colorTbl.get('Black').toRGB()}
-            hex={`${Model.colorTbl.get('Black').toHEX()}`}
-            onClick={() => console.log('test')}>
+            name={Model.activeColor.name}
+            rgb={Model.activeColor.toRGB()}
+            hex={`${Model.activeColor.toHEX()}`}>
             <Component.Tile
             type={Type.ColorTile.primary}
-            bgColor={Model.colorTbl.get('Black').toRGB()}
-            copyColor={Model.colorTbl.get('Black').rgb}
+            bgColor={Model.activeColor.toRGB()}
+            copyColor={Model.activeColor.aaa.length > 0 ? Model.activeColor.aaa[Model.activeColor.aaa.length - 1].rgb : Model.colorTbl.get('Black').rgb}
             copy="Aa"/>
           </Component.Card>
         </Component.LayoutItem>
@@ -58,15 +56,36 @@ export const Enhanced = () => {
             <Component.Title
               prefix="AAA"
               copy="Perfect match 🎉" />
+              {
+                Model.activeColor.aaa.length > 0
+                  ? <Container.ColorList
+                      colors={Model.activeColor.aaa}
+                      type={Type.ColorList.secondary} />
+                  : <Component.Headline
+                      order={Type.HeadlineOrder.h3}
+                      tag={Type.HeadlineOrder.h2}>
+                        Unfortunately there are no AAA matches
+                    </Component.Headline>
+              }
           </Component.Layer>
           <Component.Layer>
             <Component.Title
               prefix="AA"
               copy="Works well" />
+              {
+                Model.activeColor.aaa.length > 0
+                  ? <Container.ColorList
+                      colors={Model.activeColor.aa}
+                      type={Type.ColorList.secondary}/>
+                  : <Component.Headline
+                      order={Type.HeadlineOrder.h3}
+                      tag={Type.HeadlineOrder.h2}>
+                        Unfortunately there are no AA matches
+                    </Component.Headline>
+              }
           </Component.Layer>
         </Component.LayoutItem>
       </Component.Layout>
-
     </ThemeProvider>
     </>
   );

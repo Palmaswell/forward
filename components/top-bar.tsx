@@ -3,7 +3,7 @@ import * as Type from '../types';
 import { Size } from './size';
 
 interface StyledTopBar {
-  theme?: Type.HashTbl;
+  theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
 const StyledTopBar = styled.header`
