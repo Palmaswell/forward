@@ -4,7 +4,8 @@ import * as React from 'react';
 import * as Color from '../color';
 import * as Component from '../components';
 import * as Type from '../types';
-import { ColorContext } from '../color-context';
+import { ColorContext, ColorCtxProvider } from '../color-context';
+
 
 export interface ColorListProps {
   colors: Type.colorEnhanced[];
@@ -13,11 +14,12 @@ export interface ColorListProps {
 
 export const ColorList:
   React.FunctionComponent<ColorListProps> = (props): JSX.Element => {
-  const { Model } = React.useContext(ColorContext);
+  const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
   const type = props.type || Type.ColorList.primary;
 
   const handleClick = (color: Type.colorEnhanced): void => {
-    Model.setActiveColor(color);
+    Model.setActiveColor(Model.colorTbl.get(color.name));
+
     if (type === Type.ColorList.primary) {
       Router.push({
         pathname: '/enhanced'
@@ -25,11 +27,13 @@ export const ColorList:
     }
   }
   const handleCopyColor = (color: Type.colorEnhanced): Type.RGB => {
-    if (color.aaa && color.aaa.length > 0) {
-      const i = Math.floor(color.aaa.length / 2);
-      return color.aaa[i].rgb;
+    if (Array.isArray(color.aaa) && color.aaa.length) {
+      const copyColor = color.aaa.find((el: Type.Color) =>
+        Color.contrastRatio(el.rgb, color.rgb) > Type.A11yRatio.aaa
+      );
+      return copyColor.rgb;
     }
-    return Model.colorTbl.get('Black').rgb;
+    return Model.activeColor.rgb;
   }
 
   return (

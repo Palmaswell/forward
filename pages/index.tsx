@@ -26,7 +26,7 @@ export default (): JSX.Element => {
     <ThemeProvider theme={Model.colorTbl}>
       <Component.Layout>
         <Component.LayoutItem
-          bgColor={Model.colorTbl.get('White').toRGB()}>
+          bgColor={Model.colorTbl.get('Isabelline').toRGB()}>
             <Component.TopBar>
               <Component.Headline
                 order={Type.HeadlineOrder.h2}

@@ -21,7 +21,7 @@ export interface colorEnhanced {
 export interface ColorModel {
   colors: colorEnhanced[];
   colorTbl: HashTbl<colorEnhanced>;
-  activeColor: colorEnhanced | {};
+  activeColor: colorEnhanced;
   setActiveColor: (color: colorEnhanced) => void;
 }
 
