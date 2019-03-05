@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { Global } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
@@ -28,9 +27,6 @@ export default (): JSX.Element => {
       <Component.Layout>
         <Component.LayoutItem
           bgColor={Model.colorTbl.get('White').toRGB()}>
-            <Link href="enhanced">
-              <a>test enhanced</a>
-            </Link>
             <Component.TopBar>
               <Component.Headline
                 order={Type.HeadlineOrder.h2}
