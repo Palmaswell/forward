@@ -23,6 +23,37 @@ const sortedMock: Type.Color[] = [
     rgb: [255, 255, 255]
   },
 ];
+
+const sortedMockII: Type.Color[] = [
+  {
+    name: 'Blue Nights',
+    rgb: [59, 68, 70]
+  },
+  {
+    name: 'Synthetic Pumpkin',
+    rgb: [255, 121, 63]
+  },
+  {
+    name: 'Celestial Green',
+    rgb: [51, 217, 178]
+  },
+  {
+    name: 'Mandarin Sorbet',
+    rgb: [255, 177, 66]
+  },
+  {
+    name: 'City Lights',
+    rgb: [223, 228, 234]
+  }
+];
+
+test('check in the binary search if a color meets the AAA color contrast', () => {
+  expect(Color.search(
+    sortedMockII,
+    sortedMockII[0],
+    Type.A11yRatio.aaa,
+  )).toEqual(4);
+});
 test('Check in a binary search if a color matches the A11y ratio', () => {
   Color.sort(Color.palette, Color.luminance);
   expect(Color.search(
