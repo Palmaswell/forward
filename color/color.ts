@@ -69,6 +69,9 @@ export function createEnhanced(
     rgb,
     aaa,
     aa,
+    getLuminance(): number {
+      return luminance(rgb);
+    },
     toRGB(): string {
       return toRGBString(rgb);
     },

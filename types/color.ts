@@ -12,6 +12,7 @@ export interface colorEnhanced {
   rgb: RGB;
   aaa: Color[] | [];
   aa: Color[] | [];
+  getLuminance(): number;
   toRGB(): string;
   toHEX(): string;
   toHSL(): string;

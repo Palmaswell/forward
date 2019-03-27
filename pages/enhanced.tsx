@@ -39,7 +39,7 @@ export const Enhanced = () => {
             <Component.Tile
             type={Type.ColorTile.primary}
             bgColor={Model.activeColor.toRGB()}
-            copyColor={Model.activeColor.aaa.length > 0 ? Model.activeColor.aaa[Model.activeColor.aaa.length - 1].rgb : Model.colorTbl.get('Black').rgb}
+            luminance={Model.activeColor.getLuminance()}
             copy="Aa"/>
           </Component.Card>
         </Component.LayoutItem>

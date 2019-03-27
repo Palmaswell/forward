@@ -25,17 +25,7 @@ export const ColorList:
         pathname: '/enhanced'
       })
     }
-  }
-  const handleCopyColor = (color: Type.colorEnhanced): Type.RGB => {
-    if (Array.isArray(color.aaa) && color.aaa.length) {
-      const copyColor = color.aaa.find((el: Type.Color) =>
-        Color.contrastRatio(el.rgb, color.rgb) > Type.A11yRatio.aaa
-      );
-      return copyColor.rgb;
-    }
-    return Model.activeColor.rgb;
-  }
-
+  };
   return (
     <Component.ItemList type={type}>
       {
@@ -53,8 +43,9 @@ export const ColorList:
               <Component.Tile
                 type={Type.ColorTile.secondary}
                 bgColor={Color.toRGBString(color.rgb)}
-                copyColor={handleCopyColor(color)}
-                copy="Aa"/>
+                luminance={Color.luminance(color.rgb)}
+                copy="Aa"
+                />
               </Component.Card>
             </Component.Item>
           )
