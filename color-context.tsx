@@ -27,17 +27,15 @@ function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
         Type.A11yRatio.aa,
         Type.Search.upper
       );
-      const aaaResult = Array.isArray(aaaSearch)
-        ? aaaSearch
-        : JSON.parse(JSON.stringify(colors.slice(0, aaaSearch + 1)));
-      const aaResult = Array.isArray(aaSearch)
-        ? aaSearch
-        : JSON.parse(JSON.stringify(colors.slice(0, aaSearch + 1)));
 
       enhancedColors[i] = Color.createEnhanced(
         colors[i],
-        aaaResult,
-        aaResult
+        Array.isArray(aaaSearch)
+        ? aaaSearch
+        : JSON.parse(JSON.stringify(colors.slice(0, aaaSearch + 1))).reverse(),
+        Array.isArray(aaSearch)
+        ? aaSearch
+        : JSON.parse(JSON.stringify(colors.slice(0, aaSearch + 1))).reverse()
       );
       colorTbl.set(enhancedColors[i]);
     }
@@ -52,17 +50,15 @@ function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
         colors[i],
         Type.A11yRatio.aa,
       );
-      const aaaResult = Array.isArray(aaaSearch)
-        ? aaaSearch
-        : JSON.parse(JSON.stringify(colors.slice(aaaSearch, colors.length)));
-      const aaResult = Array.isArray(aaSearch)
-        ? aaSearch
-        : JSON.parse(JSON.stringify(colors.slice(aaSearch, colors.length)));
 
       enhancedColors[i] = Color.createEnhanced(
         colors[i],
-        aaaResult,
-        aaResult
+        Array.isArray(aaaSearch)
+        ? aaaSearch
+        : JSON.parse(JSON.stringify(colors.slice(aaaSearch, colors.length))).reverse(),
+        Array.isArray(aaSearch)
+        ? aaSearch
+        : JSON.parse(JSON.stringify(colors.slice(aaSearch, colors.length))).reverse()
       );
       colorTbl.set(enhancedColors[i]);
     }
@@ -75,7 +71,6 @@ export const ColorContext = React.createContext({});
 export function ColorContextProvider(props): JSX.Element {
   const colors = sanitizeColors(Color.palette);
   const [activeColor, setActiveColor] = React.useState(colors[0]);
-  const [contrastRatio, setContrastRatio] = React.useState(0);
   const Model: Type.ColorModel = {
     colors,
     colorTbl,
