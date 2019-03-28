@@ -75,11 +75,12 @@ export const ColorContext = React.createContext({});
 export function ColorContextProvider(props): JSX.Element {
   const colors = sanitizeColors(Color.palette);
   const [activeColor, setActiveColor] = React.useState(colors[0]);
+  const [contrastRatio, setContrastRatio] = React.useState(0);
   const Model: Type.ColorModel = {
     colors,
     colorTbl,
     activeColor,
-    setActiveColor
+    setActiveColor,
   };
   return (
     <ColorContext.Provider value={{ Model }}>

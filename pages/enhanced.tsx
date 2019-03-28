@@ -9,8 +9,6 @@ import { ColorContext, ColorCtxProvider } from '../color-context';
 
 export const Enhanced = () => {
   const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
-  const aaaColorList = Model.activeColor.aaa as Type.colorEnhanced[];
-  const aaColorList = Model.activeColor.aa as Type.colorEnhanced[];
   return (
     <>
     <Global styles={Component.getGlobalStyles()}/>
@@ -61,7 +59,7 @@ export const Enhanced = () => {
               {
                 Model.activeColor.aaa.length > 0
                   ? <Container.ColorList
-                      colors={aaaColorList}
+                      colors={Model.activeColor.aaa}
                       type={Type.ColorList.secondary} />
                   : <Component.Headline
                       order={Type.HeadlineOrder.h3}
@@ -77,7 +75,7 @@ export const Enhanced = () => {
               {
                 Model.activeColor.aaa.length > 0
                   ? <Container.ColorList
-                      colors={aaColorList}
+                      colors={Model.activeColor.aa}
                       type={Type.ColorList.secondary}/>
                   : <Component.Headline
                       order={Type.HeadlineOrder.h3}

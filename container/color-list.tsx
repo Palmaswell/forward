@@ -8,7 +8,7 @@ import { ColorContext, ColorCtxProvider } from '../color-context';
 
 
 export interface ColorListProps {
-  colors: Type.colorEnhanced[];
+  colors: Type.Color[];
   type?: Type.ColorList;
 }
 
@@ -17,7 +17,7 @@ export const ColorList:
   const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
   const type = props.type || Type.ColorList.primary;
 
-  const handleClick = (color: Type.colorEnhanced): void => {
+  const handleClick = (color: Type.Color): void => {
     Model.setActiveColor(Model.colorTbl.get(color.name));
 
     if (type === Type.ColorList.primary) {
@@ -26,6 +26,7 @@ export const ColorList:
       })
     }
   };
+
   return (
     <Component.ItemList type={type}>
       {
@@ -44,7 +45,7 @@ export const ColorList:
                 type={Type.ColorTile.secondary}
                 bgColor={Color.toRGBString(color.rgb)}
                 luminance={Color.luminance(color.rgb)}
-                copy="Aa"
+                copy={color.ratio ?`${color.ratio}` : "Aa"}
                 />
               </Component.Card>
             </Component.Item>

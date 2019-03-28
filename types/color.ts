@@ -3,6 +3,7 @@ import { HashTbl } from './table';
 export interface Color {
   name: string;
   rgb: RGB;
+  ratio?: number;
 };
 
 export type RGB = [number, number, number];
