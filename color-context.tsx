@@ -32,10 +32,10 @@ function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
         colors[i],
         Array.isArray(aaaSearch)
         ? aaaSearch
-        : JSON.parse(JSON.stringify(colors.slice(0, aaaSearch + 1))).reverse(),
+        : JSON.parse(JSON.stringify(colors.slice(0, aaaSearch + 1))),
         Array.isArray(aaSearch)
         ? aaSearch
-        : JSON.parse(JSON.stringify(colors.slice(0, aaSearch + 1))).reverse()
+        : JSON.parse(JSON.stringify(colors.slice(0, aaSearch + 1)))
       );
       colorTbl.set(enhancedColors[i]);
     }
