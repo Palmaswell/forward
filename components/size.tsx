@@ -1,5 +1,6 @@
 export enum Size {
-  XS = 10,
+  XXS = 10,
+  XS = 18,
   S = 24,
   M = 32,
   L = 60,

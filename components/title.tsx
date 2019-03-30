@@ -14,7 +14,7 @@ interface StyledProps {
 
 const StyledTitle = styled.strong`
   display: block;
-  margin: 0 0 ${Size.XS}px;
+  margin: 0 0 ${Size.XXS}px;
   font-weight: normal;
   color: ${(props: StyledProps) => props.theme.get('American River').toRGB()};
   ${getFont()};

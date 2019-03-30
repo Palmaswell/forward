@@ -55,10 +55,13 @@ const StyledItemList = styled.ul`
 const generateItemStyles = (props: ItemListProps): SerializedStyles => {
   switch(props.type) {
     case Type.ColorList.secondary:
-      return css``;
+      return css`
+        padding: ${Size.S}px;
+      `;
     case Type.ColorList.primary:
     default:
       return css`
+        padding: ${Size.S}px ${Size.XS}px;
         background-color: ${props.isActive
           ? props.theme.get('Lynx White').toRGB()
           : 'transparent;'
@@ -74,7 +77,6 @@ const generateItemStyles = (props: ItemListProps): SerializedStyles => {
 const StyledItem = styled.li`
   box-sizing: border-box;
   justify-self: stretch;
-  padding: ${Size.S}px;
   ${(props: ItemListProps) => generateItemStyles(props)}
 `;
 

@@ -18,13 +18,14 @@ interface StyledTileProps {
   theme?: Type.HashTbl<Type.colorEnhanced>;
 }
 
-const generateTileStyles = (type: Type.ColorTile): SerializedStyles => {
+const generateTileStyles = (type: Type.ColorTile, theme: Type.HashTbl<Type.colorEnhanced>): SerializedStyles => {
   switch(type) {
     case Type.ColorTile.secondary:
       return css `
         height: 133px;
-        font-size: 80px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, .25), 0 7px 20px rgba(0, 0, 0, .10);
+        font-size: 60px;
+        box-shadow: 0 2px 4px ${theme.get('Black').toRGBA(.25)}, 0 7px 20px ${theme.get('Black').toRGBA(.10)};
+        text-shadow: 2px 2px 1px ${theme.get('Black').toRGBA(.15)};
       `;
     case Type.ColorTile.primary:
     default:
@@ -44,7 +45,7 @@ const StyledTile = styled.div`
   };
   text-align: center;
   background-color: ${(props: StyledTileProps) => props.bgColor};
-  ${(props: StyledTileProps) => generateTileStyles(props.type)}
+  ${(props: StyledTileProps) => generateTileStyles(props.type, props.theme)}
 `;
 
 const StyledCopy = styled.span`

@@ -26,7 +26,7 @@ export const Enhanced = () => {
       <Component.Layout>
         <Component.LayoutItem
           type={Type.Layout.custom}
-          width={45}
+          width={42}
           bgColor={Model.colorTbl.get('Blue Nights').toRGB()}>
           <Component.Link href="/"> back</Component.Link>
           <Component.Card
@@ -43,7 +43,7 @@ export const Enhanced = () => {
         </Component.LayoutItem>
         <Component.LayoutItem
           type={Type.Layout.custom}
-          width={55}
+          width={58}
           bgColor={Model.colorTbl.get('Isabelline').toRGB()}>
           <Component.TopBar>
             <Component.Headline

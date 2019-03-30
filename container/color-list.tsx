@@ -27,7 +27,7 @@ export const ColorList:
     }
   };
 
-  const setActiveColorRatios = (): void => {
+  const setActiveRatios = (): void => {
     if (Model.activeColor.aaa.length > 0) {
       Model.activeColor.aaa.forEach((color: Type.Color) => (
         color.ratio = Color.contrastRatio(Model.activeColor.rgb, color.rgb)
@@ -39,8 +39,7 @@ export const ColorList:
       ));
     }
   }
-
-  setActiveColorRatios();
+  setActiveRatios();
 
   return (
     <Component.ItemList type={type}>
