@@ -13,3 +13,8 @@ export enum Layout {
   default = 'default',
   custom = 'custom',
 }
+
+export enum CopyTag {
+  div = 'div',
+  p = 'p'
+}

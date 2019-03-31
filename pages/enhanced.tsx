@@ -28,7 +28,7 @@ export const Enhanced = () => {
           type={Type.Layout.custom}
           width={42}
           bgColor={Model.colorTbl.get('Blue Nights').toRGB()}>
-          <Component.Link href="/"> back</Component.Link>
+          <Component.Link href="/"> BACK</Component.Link>
           <Component.Card
             type={Type.ColorTile.primary}
             name={Model.activeColor.name}
@@ -44,7 +44,7 @@ export const Enhanced = () => {
         <Component.LayoutItem
           type={Type.Layout.custom}
           width={58}
-          bgColor={Model.colorTbl.get('Isabelline').toRGB()}>
+          bgColor={Model.colorTbl.get('Lynx White').toRGB()}>
           <Component.TopBar>
             <Component.Headline
               order={Type.HeadlineOrder.h3}

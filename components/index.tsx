@@ -1,5 +1,6 @@
 export * from './active-link';
 export * from './breakpoint';
+export * from './copy';
 export * from './card';
 export * from './font';
 export * from './global';

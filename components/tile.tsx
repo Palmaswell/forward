@@ -25,7 +25,7 @@ const generateTileStyles = (type: Type.ColorTile, theme: Type.HashTbl<Type.color
         height: 133px;
         font-size: 60px;
         box-shadow: 0 2px 4px ${theme.get('Black').toRGBA(.25)}, 0 7px 20px ${theme.get('Black').toRGBA(.10)};
-        text-shadow: 2px 2px 1px ${theme.get('Black').toRGBA(.15)};
+        text-shadow: 1px 1px 1px ${theme.get('Black').toRGBA(.15)};
       `;
     case Type.ColorTile.primary:
     default:
@@ -41,7 +41,7 @@ const StyledTile = styled.div`
   width: 100%;
   color: ${(props: StyledTileProps) => props.luminance > 0.3
     ? props.theme.get('Dracula Orchid').toRGB()
-    : props.theme.get('Clouds').toRGB()
+    : props.theme.get('Lynx White').toRGB()
   };
   text-align: center;
   background-color: ${(props: StyledTileProps) => props.bgColor};

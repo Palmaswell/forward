@@ -40,7 +40,7 @@ const generateCardStyles = (props: StyledCardProps): SerializedStyles => {
 const StyledCard = styled.figure`
   max-width: 500px;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   font-weight: 600;
   cursor: pointer;
   ${(props: StyledCardProps) => generateCardStyles(props)}
