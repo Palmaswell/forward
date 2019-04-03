@@ -27,18 +27,20 @@ export default (): JSX.Element => {
       <Component.Layout>
         <Component.LayoutItem
           bgColor={Model.colorTbl.get('Lynx White').toRGB()}>
-            <Component.Space size={Component.Size.M}>
-              <Component.TopBar>
+          <Component.Space size={[Component.Size.M, Component.Size.L, 0, Component.Size.L]}>
+            <Component.TopBar>
+              <Component.Space size={[0, 0, 0, Component.Size.XS]}>
                 <Component.Headline
                   order={Type.HeadlineOrder.h2}
                   tag={Type.HeadlineOrder.h1}>
                   Color contrast accessibility checker
                 </Component.Headline>
-              </Component.TopBar>
-            </Component.Space>
-            <Component.Space size={Component.Size.M}>
-              <Container.ColorList colors={Model.colors} />
-            </Component.Space>
+              </Component.Space>
+            </Component.TopBar>
+          </Component.Space>
+          <Component.Space size={[0, Component.Size.L]}>
+            <Container.ColorList colors={Model.colors} />
+          </Component.Space>
         </Component.LayoutItem>
       </Component.Layout>
     </ThemeProvider>

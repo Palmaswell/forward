@@ -28,8 +28,10 @@ export const Enhanced = () => {
           type={Type.Layout.custom}
           width={42}
           bgColor={Model.colorTbl.get('Blue Nights').toRGB()}>
-          <Component.Space size={Component.Size.M}>
-            <Component.Link href="/list">back</Component.Link>
+          <Component.Space size={Component.Size.L}>
+            <Component.Space size={[0, 0, Component.Size.M, 0]}>
+              <Component.Link href="/list">back</Component.Link>
+            </Component.Space>
             <Component.Card
               type={Type.ColorTile.primary}
               name={Model.activeColor.name}
@@ -47,20 +49,24 @@ export const Enhanced = () => {
           type={Type.Layout.custom}
           width={58}
           bgColor={Model.colorTbl.get('Lynx White').toRGB()}>
-          <Component.Space size={Component.Size.M}>
+          <Component.Space size={[Component.Size.L, Component.Size.L, 0, Component.Size.L]}>
             <Component.TopBar>
+              <Component.Space size={[0, 0, 0, Component.Size.XS]}>
                 <Component.Headline
                   order={Type.HeadlineOrder.h3}
                   tag={Type.HeadlineOrder.h1}>
                   Match Overview
                 </Component.Headline>
+              </Component.Space>
             </Component.TopBar>
           </Component.Space>
-          <Component.Space size={Component.Size.M}>
+          <Component.Space size={[Component.Size.S, Component.Size.L, Component.Size.S]}>
             <Component.Layer>
+            <Component.Space size={[0, 0, 0, Component.Size.XS]}>
               <Component.Title
-                prefix="AAA"
-                copy="Perfect match 🎉" />
+                  prefix="AAA"
+                  copy="Perfect match 🎉" />
+            </Component.Space>
                 {
                   Model.activeColor.aaa.length > 0
                     ? <Container.ColorList
@@ -74,11 +80,13 @@ export const Enhanced = () => {
                 }
             </Component.Layer>
           </Component.Space>
-          <Component.Space size={Component.Size.M}>
+          <Component.Space size={[Component.Size.S, Component.Size.L, Component.Size.L]}>
           <Component.Layer>
+            <Component.Space size={[0, 0, 0, Component.Size.XS]}>
               <Component.Title
-                prefix="AA"
-                copy="Works well" />
+                  prefix="AA"
+                  copy="Works well" />
+            </Component.Space>
                 {
                   Model.activeColor.aaa.length > 0
                     ? <Container.ColorList
