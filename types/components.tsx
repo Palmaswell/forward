@@ -18,3 +18,8 @@ export enum CopyTag {
   div = 'div',
   p = 'p'
 }
+
+export enum Topbar {
+  primary = 'primary',
+  secondary = 'secondary'
+}
