@@ -28,62 +28,70 @@ export const Enhanced = () => {
           type={Type.Layout.custom}
           width={42}
           bgColor={Model.colorTbl.get('Blue Nights').toRGB()}>
-          <Component.Link href="/"> BACK</Component.Link>
-          <Component.Card
-            type={Type.ColorTile.primary}
-            name={Model.activeColor.name}
-            rgb={Model.activeColor.toRGB()}
-            hex={`${Model.activeColor.toHEX()}`}>
-            <Component.Tile
-            type={Type.ColorTile.primary}
-            bgColor={Model.activeColor.toRGB()}
-            luminance={Model.activeColor.getLuminance()}
-            copy="Aa"/>
-          </Component.Card>
+          <Component.Space size={Component.Size.M}>
+            <Component.Link href="/list">back</Component.Link>
+            <Component.Card
+              type={Type.ColorTile.primary}
+              name={Model.activeColor.name}
+              rgb={Model.activeColor.toRGB()}
+              hex={`${Model.activeColor.toHEX()}`}>
+              <Component.Tile
+              type={Type.ColorTile.primary}
+              bgColor={Model.activeColor.toRGB()}
+              luminance={Model.activeColor.getLuminance()}
+              copy="Aa"/>
+            </Component.Card>
+          </Component.Space>
         </Component.LayoutItem>
         <Component.LayoutItem
           type={Type.Layout.custom}
           width={58}
           bgColor={Model.colorTbl.get('Lynx White').toRGB()}>
-          <Component.TopBar>
-            <Component.Headline
-              order={Type.HeadlineOrder.h3}
-              tag={Type.HeadlineOrder.h1}>
-              Match Overview
-            </Component.Headline>
-          </Component.TopBar>
+          <Component.Space size={Component.Size.M}>
+            <Component.TopBar>
+                <Component.Headline
+                  order={Type.HeadlineOrder.h3}
+                  tag={Type.HeadlineOrder.h1}>
+                  Match Overview
+                </Component.Headline>
+            </Component.TopBar>
+          </Component.Space>
+          <Component.Space size={Component.Size.M}>
+            <Component.Layer>
+              <Component.Title
+                prefix="AAA"
+                copy="Perfect match 🎉" />
+                {
+                  Model.activeColor.aaa.length > 0
+                    ? <Container.ColorList
+                        colors={Model.activeColor.aaa}
+                        type={Type.ColorList.secondary} />
+                    : <Component.Headline
+                        order={Type.HeadlineOrder.h3}
+                        tag={Type.HeadlineOrder.h2}>
+                          Unfortunately there are no AAA matches
+                      </Component.Headline>
+                }
+            </Component.Layer>
+          </Component.Space>
+          <Component.Space size={Component.Size.M}>
           <Component.Layer>
-            <Component.Title
-              prefix="AAA"
-              copy="Perfect match 🎉" />
-              {
-                Model.activeColor.aaa.length > 0
-                  ? <Container.ColorList
-                      colors={Model.activeColor.aaa}
-                      type={Type.ColorList.secondary} />
-                  : <Component.Headline
-                      order={Type.HeadlineOrder.h3}
-                      tag={Type.HeadlineOrder.h2}>
-                        Unfortunately there are no AAA matches
-                    </Component.Headline>
-              }
-          </Component.Layer>
-          <Component.Layer>
-            <Component.Title
-              prefix="AA"
-              copy="Works well" />
-              {
-                Model.activeColor.aaa.length > 0
-                  ? <Container.ColorList
-                      colors={Model.activeColor.aa}
-                      type={Type.ColorList.secondary}/>
-                  : <Component.Headline
-                      order={Type.HeadlineOrder.h3}
-                      tag={Type.HeadlineOrder.h2}>
-                        Unfortunately there are no AA matches
-                    </Component.Headline>
-              }
-          </Component.Layer>
+              <Component.Title
+                prefix="AA"
+                copy="Works well" />
+                {
+                  Model.activeColor.aaa.length > 0
+                    ? <Container.ColorList
+                        colors={Model.activeColor.aa}
+                        type={Type.ColorList.secondary}/>
+                    : <Component.Headline
+                        order={Type.HeadlineOrder.h3}
+                        tag={Type.HeadlineOrder.h2}>
+                          Unfortunately there are no AA matches
+                      </Component.Headline>
+                }
+            </Component.Layer>
+          </Component.Space>
         </Component.LayoutItem>
       </Component.Layout>
     </ThemeProvider>

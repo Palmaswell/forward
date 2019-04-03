@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { SerializedStyles } from '@emotion/css';
-import { Size } from './size';
 import * as Type from '../types';
 
 
@@ -24,7 +23,6 @@ interface StyledHeadlineProps {
 const generateHeadlineStyles = (props: StyledHeadlineProps): SerializedStyles => {
   if (props.type === Type.Headline.secondary) {
     return css`
-      margin-top: ${Size.L}px;
       font-family: 'Halant';
       color: ${props.color};
     `;

@@ -9,6 +9,7 @@ export * from './layer';
 export * from './layout';
 export * from './item-list';
 export * from './size';
+export * from './space';
 export * from './tile';
 export * from './title';
 export * from './top-bar';

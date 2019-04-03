@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import { css, SerializedStyles } from '@emotion/core';
-import { Size } from './size';
 import * as Type from '../types';
 
 export interface LayoutItemProps {
@@ -27,13 +26,11 @@ const generateItemStyles = (props: StyledLayoutItemProps): SerializedStyles => {
     case Type.Layout.custom:
       return css`
         width: ${props.width}vw;
-        padding: ${Size.L}px;
       `;
     case Type.Layout.default:
     default:
       return css`
         width: 100vw;
-        padding: ${Size.L}px ${Size.XL}px;
       `;
   }
 }

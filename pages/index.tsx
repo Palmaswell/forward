@@ -26,37 +26,41 @@ export default (): JSX.Element => {
       <Component.Layout>
         <Component.LayoutItem
           type={Type.Layout.custom}
-          width={40}
+          width={42}
           bgColor={Model.colorTbl.get('Blue Nights').toRGB()}>
-          <Component.Headline
-            color={Model.colorTbl.get('Lynx White').toRGB()}
-            order={Type.HeadlineOrder.h1}
-            tag={Type.HeadlineOrder.h1}
-            type={Type.Headline.secondary}>
-              Design UI's for everyone
-          </Component.Headline>
-          <Component.Copy
-            color={Model.colorTbl.get('Lynx White').toRGB()}
-            tag={Type.CopyTag.p}>
-            The design needs to meet color contrast requirements for people with vision or color perception deficiencies.
-          </Component.Copy>
-          <Component.Link href="/list">Use default palette ></Component.Link>
+          <Component.Space size={[Component.Size.XL, Component.Size.L, Component.Size.L, Component.Size.XL]}>
+            <Component.Headline
+              color={Model.colorTbl.get('Lynx White').toRGB()}
+              order={Type.HeadlineOrder.h1}
+              tag={Type.HeadlineOrder.h1}
+              type={Type.Headline.secondary}>
+                Design UI's for everyone
+            </Component.Headline>
+            <Component.Copy
+              color={Model.colorTbl.get('Lynx White').toRGB()}
+              tag={Type.CopyTag.p}>
+              The design needs to meet color contrast requirements for people with vision or color perception deficiencies.
+            </Component.Copy>
+            <Component.Link href="/list">Use default palette ></Component.Link>
+          </Component.Space>
         </Component.LayoutItem>
         <Component.LayoutItem
           type={Type.Layout.custom}
-          width={60}
+          width={58}
           bgColor={Model.colorTbl.get('Blue Nights').toRGB()}>
-          <Component.Card
-            type={Type.ColorTile.primary}
-            name={Model.colorTbl.get('Fluorescent Red').name}
-            rgb={Model.colorTbl.get('Fluorescent Red').toRGB()}
-            hex={`${Model.colorTbl.get('Fluorescent Red').toHEX()}`}>
-            <Component.Tile
-            type={Type.ColorTile.primary}
-            bgColor={Model.colorTbl.get('Fluorescent Red').toRGB()}
-            luminance={Model.colorTbl.get('Fluorescent Red').getLuminance()}
-            copy="Aa"/>
-          </Component.Card>
+          <Component.Space size={[Component.Size.XL, Component.Size.XL, Component.Size.L, Component.Size.L]}>
+            <Component.Card
+              type={Type.ColorTile.primary}
+              name={Model.colorTbl.get('Fluorescent Red').name}
+              rgb={Model.colorTbl.get('Fluorescent Red').toRGB()}
+              hex={`${Model.colorTbl.get('Fluorescent Red').toHEX()}`}>
+              <Component.Tile
+              type={Type.ColorTile.primary}
+              bgColor={Model.colorTbl.get('Fluorescent Red').toRGB()}
+              luminance={Model.colorTbl.get('Fluorescent Red').getLuminance()}
+              copy="Aa"/>
+            </Component.Card>
+          </Component.Space>
         </Component.LayoutItem>
       </Component.Layout>
     </ThemeProvider>

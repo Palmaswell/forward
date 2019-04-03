@@ -27,14 +27,18 @@ export default (): JSX.Element => {
       <Component.Layout>
         <Component.LayoutItem
           bgColor={Model.colorTbl.get('Lynx White').toRGB()}>
-            <Component.TopBar>
-              <Component.Headline
-                order={Type.HeadlineOrder.h2}
-                tag={Type.HeadlineOrder.h1}>
-                Color contrast accessibility checker
-              </Component.Headline>
-            </Component.TopBar>
-            <Container.ColorList colors={Model.colors} />
+            <Component.Space size={Component.Size.M}>
+              <Component.TopBar>
+                <Component.Headline
+                  order={Type.HeadlineOrder.h2}
+                  tag={Type.HeadlineOrder.h1}>
+                  Color contrast accessibility checker
+                </Component.Headline>
+              </Component.TopBar>
+            </Component.Space>
+            <Component.Space size={Component.Size.M}>
+              <Container.ColorList colors={Model.colors} />
+            </Component.Space>
         </Component.LayoutItem>
       </Component.Layout>
     </ThemeProvider>
