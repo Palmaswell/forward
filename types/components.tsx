@@ -1,3 +1,11 @@
+
+export enum TransitionStatus {
+  entering = 'entering',
+  exiting = 'exiting',
+  entered = 'entered',
+  exited = 'exited'
+}
+
 export enum Headline {
   primary = 'primary',
   secondary = 'secondary'

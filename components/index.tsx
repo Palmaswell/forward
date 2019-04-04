@@ -13,3 +13,4 @@ export * from './space';
 export * from './tile';
 export * from './title';
 export * from './top-bar';
+export * from './transition';
