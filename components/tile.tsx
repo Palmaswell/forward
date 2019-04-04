@@ -7,6 +7,7 @@ export interface TileProps {
   bgColor: string;
   copy: string;
   luminance: number;
+  className?: string;
   type?: Type.ColorTile;
   theme?: Type.HashTbl<Type.colorEnhanced>;
 }
@@ -14,6 +15,7 @@ export interface TileProps {
 interface StyledTileProps {
   bgColor: string;
   luminance: number;
+  className?: string;
   type: Type.ColorTile;
   theme?: Type.HashTbl<Type.colorEnhanced>;
 }
@@ -62,6 +64,7 @@ const StyledCopy = styled.span`
 
 export const Tile: React.SFC<TileProps> = (props): JSX.Element => (
   <StyledTile
+    className={props.className}
     bgColor={props.bgColor}
     luminance={props.luminance}
     type={props.type || Type.ColorTile.primary}>

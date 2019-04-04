@@ -8,11 +8,13 @@ export interface CardProps {
   rgb: string;
   hex: string;
   name: string;
+  className?: string;
   type?: Type.ColorTile;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 interface StyledCardProps {
+  className?: string;
   type: Type.ColorTile;
   theme?: Type.HashTbl<Type.colorEnhanced>;
 }
@@ -80,6 +82,7 @@ export const Card: React.SFC<CardProps> = (props): JSX.Element => {
   const cardType = props.type || Type.ColorTile.primary;
   return(
     <StyledCard
+      className={props.className}
       onClick={props.onClick}
       type={cardType}>
       {props.children}
