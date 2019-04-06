@@ -40,10 +40,10 @@ const StyledTransition = styled.div`
   width: 100vw;
   height: 100vh;
   opacity: 1;
-  background-color: ${(props: StyledTransitionLayer) => props.theme.get('Blue Nights').toRGB()};
-  transition-timing-function: ease;
+  background-color: ${(props: StyledTransitionLayer) => props.theme.get('Celestial Green').toRGBA(.98)};
+  transition-timing-function: cubic-bezier(0.950, 0.050, 0.795, 0.035);
   transition-property: transform;
-  transition-duration: 900ms;
+  transition-duration: 500ms;
   pointer-events: none;
   ${(props: StyledTransitionLayer) => generateTrasition(props.state)};
 `;
@@ -72,12 +72,12 @@ export const TransitionLayer: React.SFC<TransitionLayerProps> = (props): JSX.Ele
             <StyledCard
               type={Type.ColorTile.primary}
               name=""
-              rgb={props.theme.get('Fluorescent Red').toRGB()}
-              hex={`${props.theme.get('Fluorescent Red').toHEX()}`}>
+              rgb={props.theme.get('Liberty').toRGB()}
+              hex={`${props.theme.get('Liberty').toHEX()}`}>
                 <StyledTile
                   type={Type.ColorTile.primary}
-                  bgColor={props.theme.get('Fluorescent Red').toRGB()}
-                  luminance={props.theme.get('Fluorescent Red').getLuminance()}
+                  bgColor={props.theme.get('Liberty').toRGB()}
+                  luminance={props.theme.get('Liberty').getLuminance()}
                   copy=""/>
             </StyledCard>
           </StyledTransition>
