@@ -23,25 +23,21 @@ function lowerSearch<T extends QuickSearch>(
   lo: number,
   hi: number): number | [] {
   const mid = Math.floor((lo + hi) / 2);
-  const prev = mid - 1;
-  const next = mid + 1;
   const midRatio = contrastRatio(arr[mid].rgb, el.rgb);
-  if (lo < hi) {
-    if (midRatio > val && prev >= 0) {
-      if (contrastRatio(arr[prev].rgb, el.rgb) < val) {
-        return mid;
-      }
-      return lowerSearch(arr, el, val, lo, mid);
-    }
-    if (midRatio < val && next < arr.length) {
-      if (contrastRatio(arr[next].rgb, el.rgb) > val) {
-        return next;
-      }
-      return lowerSearch(arr, el, val, mid, hi)
-    }
-    if (mid === val) {
-      return mid;
-    }
+
+  if (midRatio === val) {
+    return mid;
+  }
+  if (midRatio > val && mid - 1 >= 0) {
+    return contrastRatio(arr[mid - 1].rgb, el.rgb) < val
+      ? mid
+      : lowerSearch(arr, el, val, lo, mid);
+  }
+
+  if (midRatio < val && mid + 1 < arr.length) {
+    return contrastRatio(arr[mid + 1].rgb, el.rgb) > val
+      ? mid + 1
+      : lowerSearch(arr, el, val, mid, hi);
   }
   return [];
 };
@@ -53,25 +49,21 @@ function upperSearch<T extends QuickSearch>(
   lo: number,
   hi: number): number | [] {
   const mid = Math.floor((lo + hi) / 2);
-  const prev = mid - 1;
-  const next = mid + 1;
   const midRatio = contrastRatio(arr[mid].rgb, el.rgb);
-  if (lo < hi) {
-    if (midRatio > val && next < arr.length) {
-      if (contrastRatio(arr[next].rgb, el.rgb) < val) {
-        return mid;
-      }
-      return upperSearch(arr, el, val, mid, hi);
-    }
-    if (midRatio < val && prev >= 0) {
-      if (contrastRatio(arr[prev].rgb, el.rgb) > val) {
-        return prev;
-      }
-      return upperSearch(arr, el, val, lo, mid);
-    }
-    if (mid === val) {
-      return mid;
-    }
+
+  if (midRatio === val) {
+    return mid;
+  }
+
+  if (midRatio > val && mid + 1 < arr.length) {
+    return contrastRatio(arr[mid + 1].rgb, el.rgb) < val
+      ? mid
+      : upperSearch(arr, el, val, mid, hi);
+  }
+  if (midRatio < val && mid - 1 >= 0) {
+    return contrastRatio(arr[mid - 1].rgb, el.rgb) > val
+      ? mid - 1
+      : upperSearch(arr, el, val, lo, mid);
   }
   return [];
 }
