@@ -16,54 +16,62 @@ interface QuickSearch {
   rgb: Type.RGB;
 }
 
-function lowerSearch<T extends QuickSearch>(
+export function binarySearch<T extends QuickSearch>(
+  arr: Array<T>,
+  el: T,
+  val: number,
+  lo: number,
+  hi: number,
+  type: Type.Search): number | [] {
+  const mid = Math.floor((lo + hi) / 2);
+  if (contrastRatio(arr[mid].rgb, el.rgb) === val) {
+    return mid;
+  }
+  if (type === Type.Search.upper) {
+    return high(arr, el, val, 0, arr.length);
+  }
+  return low(arr, el, val, 0, arr.length);
+}
+
+export function low<T extends QuickSearch>(
+  arr: Array<T>,
+  el: T,
+  val: number,
+  lo: number,
+  hi: number): number | [] {
+    const mid = Math.floor((lo + hi) / 2);
+    const currentRatio = contrastRatio(arr[mid].rgb, el.rgb);
+    if (currentRatio > val && mid - 1 >= 0) {
+      return contrastRatio(arr[mid - 1].rgb, el.rgb) < val
+        ? mid
+        : low(arr, el, val, lo, mid);
+    }
+
+    if (currentRatio < val && mid + 1 < arr.length) {
+      return contrastRatio(arr[mid + 1].rgb, el.rgb) > val
+        ? mid + 1
+        : low(arr, el, val, mid, hi);
+    }
+    return [];
+}
+
+export function high<T extends QuickSearch>(
   arr: Array<T>,
   el: T,
   val: number,
   lo: number,
   hi: number): number | [] {
   const mid = Math.floor((lo + hi) / 2);
-  const midRatio = contrastRatio(arr[mid].rgb, el.rgb);
-
-  if (midRatio === val) {
-    return mid;
-  }
-  if (midRatio > val && mid - 1 >= 0) {
-    return contrastRatio(arr[mid - 1].rgb, el.rgb) < val
-      ? mid
-      : lowerSearch(arr, el, val, lo, mid);
-  }
-
-  if (midRatio < val && mid + 1 < arr.length) {
-    return contrastRatio(arr[mid + 1].rgb, el.rgb) > val
-      ? mid + 1
-      : lowerSearch(arr, el, val, mid, hi);
-  }
-  return [];
-};
-
-function upperSearch<T extends QuickSearch>(
-  arr: Array<T>,
-  el: T,
-  val: number,
-  lo: number,
-  hi: number): number | [] {
-  const mid = Math.floor((lo + hi) / 2);
-  const midRatio = contrastRatio(arr[mid].rgb, el.rgb);
-
-  if (midRatio === val) {
-    return mid;
-  }
-
-  if (midRatio > val && mid + 1 < arr.length) {
+  const currentRatio = contrastRatio(arr[mid].rgb, el.rgb);
+  if (currentRatio > val && mid + 1 < arr.length) {
     return contrastRatio(arr[mid + 1].rgb, el.rgb) < val
       ? mid
-      : upperSearch(arr, el, val, mid, hi);
+      : high(arr, el, val, mid, hi);
   }
-  if (midRatio < val && mid - 1 >= 0) {
+  if (currentRatio < val && mid - 1 >= 0) {
     return contrastRatio(arr[mid - 1].rgb, el.rgb) > val
       ? mid - 1
-      : upperSearch(arr, el, val, lo, mid);
+      : high(arr, el, val, lo, mid);
   }
   return [];
 }
@@ -73,8 +81,6 @@ export function search(
   el: Type.Color,
   val: Type.A11yRatio,
   type?: Type.Search): number | [] {
-  if (type === Type.Search.upper) {
-    return upperSearch(arr, el, val, 0, arr.length);
-  }
-  return lowerSearch(arr, el, val, 0, arr.length);
+  const defaultType = type || Type.Search.lower;
+  return binarySearch(arr, el, val, 0, arr.length, defaultType);
 };
