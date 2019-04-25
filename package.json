@@ -30,7 +30,10 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-emotion": "^10.0.6",
-    "jest": "^23.6.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "jest": "24.7.1",
+    "jest-styled-components": "^6.3.1",
     "nodemon": "^1.18.9",
     "typescript": "^3.2.2"
   },
