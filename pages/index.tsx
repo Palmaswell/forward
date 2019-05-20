@@ -1,10 +1,10 @@
-import Head from "next/head";
-import { Global } from "@emotion/core";
-import { ThemeProvider } from "emotion-theming";
-import * as React from "react";
-import * as Component from "../components";
-import * as Type from "../types";
-import { ColorContext, ColorCtxProvider } from "../model";
+import Head from 'next/head';
+import { Global } from '@emotion/core';
+import { ThemeProvider } from 'emotion-theming';
+import * as React from 'react';
+import * as Component from '../components';
+import * as Type from '../types';
+import { ColorContext, ColorCtxProvider } from '../container/provider';
 
 export default class extends React.Component {
   public state = {

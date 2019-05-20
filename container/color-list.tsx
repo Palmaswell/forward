@@ -1,10 +1,10 @@
 import uuid from "uuid/v4";
 import Router from "next/router";
-import * as React from "react";
-import * as Color from "../color";
-import * as Component from "../components";
-import * as Type from "../types";
-import { ColorContext, ColorCtxProvider } from "../model";
+import * as React from 'react';
+import * as Color from '../color';
+import * as Component from '../components';
+import * as Type from '../types';
+import { ColorContext, ColorCtxProvider } from './provider';
 
 export interface ColorListProps {
   colors: Type.Color[];
