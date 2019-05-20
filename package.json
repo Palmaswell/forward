@@ -18,7 +18,7 @@
     "@babel/plugin-proposal-decorators": "^7.3.0",
     "@emotion/core": "^10.0.6",
     "@emotion/styled": "^10.0.6",
-    "@types/jest": "^24.0.0",
+    "@types/jest": "^24.0.13",
     "@types/koa": "^2.0.48",
     "@types/next": "8.0.1",
     "@types/node": "^10.12.21",
@@ -32,9 +32,12 @@
     "babel-plugin-emotion": "^10.0.6",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
-    "jest": "24.7.1",
+    "jest": "^24.8.0",
+    "jest-axe": "^3.1.1",
+    "jest-dom": "^3.2.2",
     "jest-styled-components": "^6.3.1",
     "nodemon": "^1.18.9",
+    "react-testing-library": "^7.0.1",
     "typescript": "^3.2.2"
   },
   "dependencies": {

@@ -62,6 +62,7 @@ function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
 }
 
 export const ColorContext = React.createContext({});
+console.log(sanitizeColors(Color.palette))
 
 export function ColorContextProvider(props): JSX.Element {
   const colors = sanitizeColors(Color.palette);
