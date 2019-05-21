@@ -9,4 +9,11 @@ describe('Color Element', () => {
     expect(colorEl.getHEXString()).toBe('#f5f6fa');
     expect(colorEl.getHSLString()).toBe('hsl(228, 33%, 97%)');
   });
+  test('AA and AAA set empty array from binary search', () => {
+    const colorEl = Color.createElement([245, 246, 250], 'Lynx White');
+    colorEl.setAA([]);
+    colorEl.setAAA([]);
+    expect(colorEl.getAA()).toEqual([]);
+    expect(colorEl.getAAA()).toEqual([]);
+  });
 });

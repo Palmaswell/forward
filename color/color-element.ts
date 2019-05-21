@@ -11,15 +11,15 @@ export interface ColorElementContext {
   getHEXString(): string;
   getHSLString(): string;
   getRGBAString(alpha: number): string;
-  setAA(colors: ColorProps[]): void;
-  setAAA(colors: ColorProps[]): void;
+  setAA(colors: number | ColorProps[]): void;
+  setAAA(colors: number | ColorProps[]): void;
 }
 
 export function createElement(rgb: RGB, name: string): ColorElementContext {
   const internalRGB = rgb;
   const internalName = name;
-  let aa: ColorProps[];
-  let aaa: ColorProps[];
+  let aa: ColorProps[] | [];
+  let aaa: ColorProps[] | [];
   return {
     getName() {
       return internalName;
@@ -47,11 +47,15 @@ export function createElement(rgb: RGB, name: string): ColorElementContext {
       color.setAlpha(alpha);
       return color.toRgbString();
     },
-    setAA(colors: ColorProps[]) {
-      aa = colors;
+    setAA(colors: number | ColorProps[]) {
+      if (Array.isArray(colors)) {
+        aa = Array.from(colors);
+      }
     },
-    setAAA(colors: ColorProps[]) {
-      aaa = colors;
+    setAAA(colors: number | ColorProps[]) {
+      if (Array.isArray(colors)) {
+        aaa = Array.from(colors);
+      }
     }
   }
 }
