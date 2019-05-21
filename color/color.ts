@@ -1,5 +1,39 @@
 import * as Type from '../types';
 import tinyColor from 'tinycolor2';
+export interface ColorProps {
+  name: string;
+  rgb: RGB;
+  ratio?: number;
+};
+
+export type RGB = [number, number, number];
+
+export enum YValues {
+  r = 0.2126,
+  g = 0.7152,
+  b = 0.0722,
+}
+
+export enum A11yRatio {
+  aa = 4.5,
+  aaa = 7,
+}
+
+export enum ColorTile {
+  primary = 'primary',
+  secondary = 'secondary'
+}
+
+export enum ColorList {
+  primary = 'primary',
+  secondary = 'seconday'
+}
+
+export enum Search {
+  lower = 'lower',
+  upper = 'upper',
+}
+
 /**
  * @name luminance
  * @type { number }

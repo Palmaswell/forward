@@ -1,25 +1,25 @@
 import tinyColor from 'tinycolor2';
 import * as Color from './';
-import * as Type from '../types';
+import { ColorProps, RGB } from './color';
 
 export interface ColorElementContext {
   getName(): string;
-  getAA(): Type.Color[];
-  getAAA(): Type.Color[];
-  getRGB(): Type.RGB;
+  getAA(): ColorProps[];
+  getAAA(): ColorProps[];
+  getRGB(): RGB;
   getRGBString(): string;
   getHEXString(): string;
   getHSLString(): string;
   getRGBAString(alpha: number): string;
-  setAA(colors: Type.Color[]): void;
-  setAAA(colors: Type.Color[]): void;
+  setAA(colors: ColorProps[]): void;
+  setAAA(colors: ColorProps[]): void;
 }
 
-export function createElement(rgb: Type.RGB, name: string): ColorElementContext {
+export function createElement(rgb: RGB, name: string): ColorElementContext {
   const internalRGB = rgb;
   const internalName = name;
-  let aa: Type.Color[];
-  let aaa: Type.Color[];
+  let aa: ColorProps[];
+  let aaa: ColorProps[];
   return {
     getName() {
       return internalName;
@@ -47,10 +47,10 @@ export function createElement(rgb: Type.RGB, name: string): ColorElementContext 
       color.setAlpha(alpha);
       return color.toRgbString();
     },
-    setAA(colors: Type.Color[]) {
+    setAA(colors: ColorProps[]) {
       aa = colors;
     },
-    setAAA(colors: Type.Color[]) {
+    setAAA(colors: ColorProps[]) {
       aaa = colors;
     }
   }
