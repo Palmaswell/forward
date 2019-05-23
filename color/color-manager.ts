@@ -1,6 +1,6 @@
 import * as Color from './';
 import * as HashTbl from '../hash-table';
-import { ColorProps, } from './color';
+import { ColorProps, Search, } from './color';
 import { createElement, ColorElementContext } from './color-element';
 import * as Type from '../types';
 
@@ -23,9 +23,13 @@ export function createManager(): ColorManagerContext {
       Color.sort(newColors, Color.luminance);
       newColors.forEach((c, i: number) => {
         const color = createElement(c.rgb, c.name);
-        // if (i >= (newColors.length - 1) / 2) {
-        //   color.setAA()
-        // }
+        if (i >= (newColors.length - 1) / 2) {
+          color.setAA(newColors, Search.upper);
+          color.setAAA(newColors, Search.upper);
+        } else {
+          color.setAA(newColors, Search.lower);
+          color.setAAA(newColors, Search.lower);
+        }
         colors.push(color);
       });
     },

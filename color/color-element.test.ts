@@ -1,17 +1,6 @@
 import * as Color from './';
-import { ColorProps, A11yRatio } from './color';
+import { ColorProps, A11yRatio, Search } from './color';
 describe('Color Element', () => {
-  // const colors: ColorProps[] = [
-  //   {name: 'Electromagnetic', rgb: [47, 54, 64]},
-  //   {name: 'Swan White', rgb: [247, 241, 227]},
-  //   {name: 'White', rgb: [255, 255, 255]},
-  //   {name: 'Dracula Orchid', rgb: [45, 52, 54]},
-  //   {name: 'Black', rgb: [0, 0, 0]},
-  //   {name: 'Blue Nights', rgb: [53, 59, 72]},
-  //   {name: 'Isabelline', rgb: [236, 236, 236]},
-  //   {name: 'Arsenic', rgb: [68, 68, 68]}
-  // ];
-
   const colors:  ColorProps[] = [
     {name: 'Blue Nights', rgb: [59, 68, 70]},
     {name: 'Synthetic Pumpkin', rgb: [255, 121, 63]},
@@ -31,24 +20,23 @@ describe('Color Element', () => {
     expect(colorEl.getHEXString()).toBe('#f5f6fa');
     expect(colorEl.getHSLString()).toBe('hsl(228, 33%, 97%)');
   });
-  test('Color element contains AA and AAA colors', () => {
+  test('Search for correspondintg AA and AAA contrast', () => {
     const colorEl = Color.createElement([59, 68, 70], 'Blue Nights');
     Color.sort(colors, Color.luminance);
-    colorEl.setAA([]);
-    colorEl.setAAA([]);
-    expect(colorEl.getAA()).toEqual([]);
-    expect(colorEl.getAAA()).toEqual([]);
-
-    colorEl.setAA(colors);
-    colorEl.setAAA(colors);
-    const idx = Color.search(
+    colorEl.setAA(colors, Search.lower);
+    colorEl.setAAA(colors, Search.lower);
+    const aa = Color.search(
       colors,
       {rgb: colorEl.getRGB(), name: colorEl.getName()},
       A11yRatio.aa
     ) as number;
+    const aaa = Color.search(
+      colors,
+      {rgb: colorEl.getRGB(), name: colorEl.getName()},
+      A11yRatio.aaa
+    ) as number;
 
-    const result = JSON.parse(JSON.stringify(colors.slice(idx)));
-    expect(colorEl.getAA()).toEqual(result);
-    expect(colorEl.getAAA()).toEqual(result);
+    expect(colorEl.getAA()).toEqual(JSON.parse(JSON.stringify(colors.slice(aa))));
+    expect(colorEl.getAAA()).toEqual(JSON.parse(JSON.stringify(colors.slice(aaa))));
   })
 });
