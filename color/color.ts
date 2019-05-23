@@ -7,12 +7,14 @@ export interface ColorProps {
 };
 
 export type RGB = [number, number, number];
+export type A11yLevel = 'aa' | 'aaa';
 
 export enum YValues {
   r = 0.2126,
   g = 0.7152,
   b = 0.0722,
 }
+
 
 export enum A11yRatio {
   aa = 4.5,

@@ -1,6 +1,6 @@
 import tinyColor from 'tinycolor2';
 import * as Color from './';
-import { ColorProps, RGB } from './color';
+import { A11yRatio, ColorProps, RGB } from './color';
 
 export interface ColorElementContext {
   getName(): string;
@@ -11,15 +11,31 @@ export interface ColorElementContext {
   getHEXString(): string;
   getHSLString(): string;
   getRGBAString(alpha: number): string;
-  setAA(colors: number | ColorProps[]): void;
-  setAAA(colors: number | ColorProps[]): void;
+  setAA(colors: ColorProps[]): void;
+  setAAA(colors: ColorProps[]): void;
 }
 
 export function createElement(rgb: RGB, name: string): ColorElementContext {
   const internalRGB = rgb;
   const internalName = name;
-  let aa: ColorProps[] | [];
-  let aaa: ColorProps[] | [];
+  const aa: ColorProps[] | [] = [];
+  const aaa: ColorProps[] | [] = [];
+  const setEnhancedContrast = (colors: ColorProps[], levelArr, ratio: A11yRatio) => {
+    if (!Array.isArray(colors)) {
+      return;
+    }
+    const idx: number | []  = Color.search(
+      colors,
+      { rgb: internalRGB, name: internalName },
+      ratio
+    );
+
+    Array.isArray(idx)
+      ? levelArr.concat(idx)
+      : levelArr.concat(JSON.parse(JSON.stringify(colors.slice(idx))));
+
+  };
+
   return {
     getName() {
       return internalName;
@@ -42,20 +58,16 @@ export function createElement(rgb: RGB, name: string): ColorElementContext {
     getHSLString() {
       return tinyColor(Color.toRGBString(internalRGB)).toHslString();
     },
-    getRGBAString(alpha: number) {
+    getRGBAString(alpha) {
       const color = tinyColor(Color.toRGBString(internalRGB));
       color.setAlpha(alpha);
       return color.toRgbString();
     },
-    setAA(colors: number | ColorProps[]) {
-      if (Array.isArray(colors)) {
-        aa = Array.from(colors);
-      }
+    setAA(colors) {
+      setEnhancedContrast(colors, aa, A11yRatio.aa);
     },
-    setAAA(colors: number | ColorProps[]) {
-      if (Array.isArray(colors)) {
-        aaa = Array.from(colors);
-      }
+    setAAA(colors) {
+      setEnhancedContrast(colors, aaa, A11yRatio.aaa);
     }
   }
 }
