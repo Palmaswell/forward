@@ -2,7 +2,7 @@ import * as React from 'react';
 import uuid from 'uuid/v3';
 // import Cookie from 'js-cookie';
 
-export const Upload: React.SFC = (): JSX.Element => {
+export function Upload(): JSX.Element {
   return (
     <>
       <input

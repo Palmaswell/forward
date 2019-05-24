@@ -30,38 +30,10 @@ describe("Color Manager", () => {
     expect(colorManager.getElements().map(c => c.getRGB())).toEqual(
       sortedColors.map(c => c.rgb)
     );
-    expect(colorManager.getElements().map(e => e.getAA())).toEqual([
-      [
-        { name: "Isabelline", rgb: [236, 236, 236] },
-        { name: "Swan White", rgb: [247, 241, 227] },
-        { name: "White", rgb: [255, 255, 255] }
-      ],
-      [
-        { name: "Isabelline", rgb: [236, 236, 236] },
-        { name: "Swan White", rgb: [247, 241, 227] },
-        { name: "White", rgb: [255, 255, 255] }
-      ],
-      [
-        { name: "Isabelline", rgb: [236, 236, 236] },
-        { name: "Swan White", rgb: [247, 241, 227] },
-        { name: "White", rgb: [255, 255, 255] }
-      ],
-      [
-        { name: "Isabelline", rgb: [236, 236, 236] },
-        { name: "Swan White", rgb: [247, 241, 227] },
-        { name: "White", rgb: [255, 255, 255] }
-      ],
-      [
-        { name: "Black", rgb: [0, 0, 0] },
-        { name: "Dracula Orchid", rgb: [45, 52, 54] },
-        { name: "Electromagnetic", rgb: [47, 54, 64] },
-        { name: "Blue Nights", rgb: [53, 59, 72] },
-        { name: "Arsenic", rgb: [68, 68, 68] },
-        { name: "Isabelline", rgb: [236, 236, 236] }
-      ],
-      [],
-      [],
-      []
-    ]);
+    expect(colorManager.getElements()[0].getAA()).toEqual( [
+      { name: "Isabelline", rgb: [236, 236, 236] },
+      { name: "Swan White", rgb: [247, 241, 227] },
+      { name: "White", rgb: [255, 255, 255] }
+    ],);
   });
 });

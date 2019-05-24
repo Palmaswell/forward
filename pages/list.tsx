@@ -6,6 +6,7 @@ import * as React from 'react';
 import * as Component from '../components';
 import * as Container from '../container';
 import * as Type from '../types';
+import { ColorExtendedProps } from '../color';
 
 export default class extends React.Component {
   public state = {
@@ -41,14 +42,13 @@ export default class extends React.Component {
             href="https://fonts.googleapis.com/css?family=Halant|Nunito+Sans"
           />
         </Head>
-        <ColorContext.Consumer>
-          {consumer => {
-            const { Model } = consumer as ColorCtxProvider;
+        <Container.BuiltInConsumer>
+          {(builtInCtx: Type.HashTbl<ColorExtendedProps>) => {
             return (
-              <ThemeProvider theme={Model.colorTbl}>
+              <ThemeProvider theme={builtInCtx}>
                 <Component.Layout>
                   <Component.LayoutItem
-                    bgColor={Model.colorTbl.get("Lynx White").toRGB()}
+                    bgColor={builtInCtx.get("Lynx White").toRGB()}
                   >
                     <Component.Space
                       size={[
@@ -70,18 +70,23 @@ export default class extends React.Component {
                       </Component.TopBar>
                     </Component.Space>
                     <Component.Space size={[0, Component.Size.L]}>
-                      <Container.ColorList colors={Model.colors} />
+                      <Container.ColorManagerConsumer>
+                        {(ctx) => {
+                          console.log(ctx.getElements().map(c => c.getAA()))
+                          return <Container.ColorList colorContext={ctx} />
+                        }}
+                      </Container.ColorManagerConsumer>
                     </Component.Space>
                   </Component.LayoutItem>
                 </Component.Layout>
                 <Component.TransitionLayer
-                  theme={Model.colorTbl}
+                  theme={builtInCtx}
                   transition={this.state.isTransitioning}
                 />
               </ThemeProvider>
             );
           }}
-        </ColorContext.Consumer>
+        </Container.BuiltInConsumer>
       </>
     );
   }

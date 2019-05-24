@@ -6,6 +6,7 @@ export interface ColorElementContext {
   getName(): string;
   getAA(): ColorProps[];
   getAAA(): ColorProps[];
+  getLuminance(): number;
   getRGB(): RGB;
   getRGBString(): string;
   getHEXString(): string;
@@ -24,7 +25,7 @@ export function createElement(rgb: RGB, name: string): ColorElementContext {
     switch(dir) {
       case Search.lower:
         return JSON.parse(JSON.stringify(colors.slice(idx, colors.length)));
-      case Search.upper:
+        case Search.upper:
         return JSON.parse(JSON.stringify(colors.slice(0, idx + 1)));
     }
   }
@@ -36,6 +37,7 @@ export function createElement(rgb: RGB, name: string): ColorElementContext {
       colors,
       { rgb: rgb, name: name },
       ratio,
+      dir
     );
     switch(ratio) {
       case A11yRatio.aa:
@@ -63,6 +65,9 @@ export function createElement(rgb: RGB, name: string): ColorElementContext {
     },
     getAAA() {
       return aaa;
+    },
+    getLuminance() {
+      return Color.luminance(internalRGB)
     },
     getRGBString() {
       return Color.toRGBString(internalRGB);

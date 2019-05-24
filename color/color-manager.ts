@@ -1,6 +1,4 @@
 import * as Color from './';
-import * as HashTbl from '../hash-table';
-import * as Type from '../types';
 import { ColorProps, Search, } from './color';
 import { createElement, ColorElementContext } from './color-element';
 
@@ -32,6 +30,9 @@ export function createManager(): ColorManagerContext {
           color.setAAA(newColors, Search.lower);
         }
         colors.push(color);
+        if (i === 0) {
+          activeColor = color;
+        }
       });
     },
     getActiveColor() {

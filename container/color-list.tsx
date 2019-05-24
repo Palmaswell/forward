@@ -7,7 +7,8 @@ import * as Type from '../types';
 import { ColorContext, ColorCtxProvider } from './provider';
 
 export interface ColorListProps {
-  colors: Type.Color[];
+  colorContext?: Color.ColorManagerContext;
+  colors?: Type.Color[];
   type?: Type.ColorList;
 }
 
@@ -17,9 +18,8 @@ export const ColorList: React.FunctionComponent<ColorListProps> = (
   const { Model } = React.useContext(ColorContext) as ColorCtxProvider;
   const type = props.type || Type.ColorList.primary;
 
-  const handleClick = (color: Type.Color): void => {
-    Model.setActiveColor(Model.colorTbl.get(color.name));
-
+  const handleClick = (colorContext, color): void => {
+    colorContext.setActiveColor(color);
     if (type === Type.ColorList.primary) {
       Router.push({
         pathname: "/enhanced"
@@ -27,7 +27,13 @@ export const ColorList: React.FunctionComponent<ColorListProps> = (
     }
   };
 
-  const setActiveRatios = (): void => {
+  const handleRatioLabel = (colorContext): void => {
+    const aaa = colorContext.getActiveColor().getAAA();
+    if (aaa.length > 0) {
+      aaa.forEach(c => {
+
+      });
+    }
     if (Model.activeColor.aaa.length > 0) {
       Model.activeColor.aaa.forEach(
         (color: Type.Color) =>
@@ -41,25 +47,24 @@ export const ColorList: React.FunctionComponent<ColorListProps> = (
       );
     }
   };
-  setActiveRatios();
-
+  const { colorContext } = props;
   return (
     <Component.ItemList type={type}>
-      {props.colors.map(color => {
+      {colorContext.getElements().map(color => {
         return (
           <Component.Item key={uuid()} isActive={false}>
             <Component.Card
               type={Type.ColorTile.secondary}
-              name={color.name}
-              rgb={Color.toRGBString(color.rgb)}
-              hex={`${Color.toHEX(color.rgb)}`}
-              onClick={() => handleClick(color)}
+              name={color.getName()}
+              rgb={Color.toRGBString(color.getRGB())}
+              hex={`${Color.toHEX(color.getRGB())}`}
+              onClick={() => handleClick(colorContext, color)}
             >
               <Component.Tile
                 type={Type.ColorTile.secondary}
-                bgColor={Color.toRGBString(color.rgb)}
-                luminance={Color.luminance(color.rgb)}
-                copy={color.ratio ? `${color.ratio}` : "Aa"}
+                bgColor={Color.toRGBString(color.getRGB())}
+                luminance={Color.luminance(color.getRGB())}
+                copy={"Aa"}
               />
             </Component.Card>
           </Component.Item>
