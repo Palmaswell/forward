@@ -1,6 +1,6 @@
 import App, { Container } from 'next/app';
 import * as React from 'react';
-import { ColorContextProvider } from '../container/provider';
+import { BuiltInProvider, ColorContextProvider } from '../container';
 
 export default class ForwardApp extends App {
   public render(): JSX.Element {
@@ -8,7 +8,9 @@ export default class ForwardApp extends App {
     return (
       <Container>
         <ColorContextProvider>
-          <Component {...pageProps} />
+          <BuiltInProvider>
+            <Component {...pageProps} />
+          </BuiltInProvider>
         </ColorContextProvider>
       </Container>
     );

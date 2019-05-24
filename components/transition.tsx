@@ -1,20 +1,21 @@
+import * as Type from '../types';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { SerializedStyles } from '@emotion/css';
 import { Transition } from 'react-transition-group';
+import { ColorExtendedProps } from '../color';
 import { Card } from './card';
 import { Tile } from './tile';
-import * as Type from '../types';
 
 export interface TransitionLayerProps {
   transition: boolean;
   state?: Type.TransitionStatus;
-  theme?: Type.HashTbl<Type.colorEnhanced>;
+  theme?: Type.HashTbl<ColorExtendedProps>;
 }
 
 interface StyledTransitionLayer {
   state: Type.TransitionStatus;
-  theme?: Type.HashTbl<Type.colorEnhanced>;
+  theme?: Type.HashTbl<ColorExtendedProps>;
 }
 
 const generateTrasition = (state: Type.TransitionStatus): SerializedStyles  => {

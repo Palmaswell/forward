@@ -1,19 +1,20 @@
 import * as Color from './';
 import * as HashTbl from '../hash-table';
+import * as Type from '../types';
 import { ColorProps, Search, } from './color';
 import { createElement, ColorElementContext } from './color-element';
-import * as Type from '../types';
 
 export interface ColorManagerContext {
   addElements(colors: ColorProps[]): void;
+  getActiveColor(): ColorElementContext;
   getElements(): ColorElementContext[];
-  getTable(): Type.HashTbl<ColorElementContext>;
-  createHashTbl(colors: ColorProps[]): void;
+  removeElements(colors: ColorElementContext[]): void;
+  setActiveColor(color: ColorElementContext);
 }
 
 export function createManager(): ColorManagerContext {
   const colors = [];
-  let colorTbl;
+  let activeColor;
   return {
     addElements(cols) {
       if (cols.length < 1 ) {
@@ -33,17 +34,23 @@ export function createManager(): ColorManagerContext {
         colors.push(color);
       });
     },
+    getActiveColor() {
+      return activeColor;
+    },
     getElements() {
       return colors;
     },
-    getTable() {
-      return colorTbl;
-    },
-    createHashTbl(cols) {
-      if (cols.length < 1) {
+    removeElements() {
+      if (colors.length < 1) {
         return;
       }
-      colorTbl = HashTbl.create(cols.length);
+      colors.splice(0);
+    },
+    setActiveColor(color) {
+      if (colors.length < 1) {
+        return;
+      }
+      activeColor = colors.find(c => c.getName() === color.getName());
     }
   }
 }

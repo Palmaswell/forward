@@ -6,6 +6,16 @@ export interface ColorProps {
   ratio?: number;
 };
 
+export interface ColorExtendedProps {
+  name: string;
+  rgb: RGB;
+  getLuminance(): number;
+  toRGB(): string;
+  toHEX(): string;
+  toHSL(): string;
+  toRGBA(alpha: number): string;
+}
+
 export type RGB = [number, number, number];
 export type A11yLevel = 'aa' | 'aaa';
 
@@ -105,6 +115,33 @@ export function createEnhanced(
     rgb,
     aaa,
     aa,
+    getLuminance(): number {
+      return luminance(rgb);
+    },
+    toRGB(): string {
+      return toRGBString(rgb);
+    },
+    toHEX(): string {
+      return tinyColor(toRGBString(rgb)).toHexString();
+    },
+    toHSL(): string {
+      return tinyColor(toRGBString(rgb)).toHslString();
+    },
+    toRGBA(alpha: number): string {
+      const color = tinyColor(toRGBString(rgb));
+      color.setAlpha(alpha);
+      return color.toRgbString()
+    }
+  }
+}
+
+export function createColor(
+  rawColor: ColorProps,
+  ): ColorExtendedProps {
+  const rgb = rawColor.rgb;
+  return {
+    name: rawColor.name,
+    rgb,
     getLuminance(): number {
       return luminance(rgb);
     },
