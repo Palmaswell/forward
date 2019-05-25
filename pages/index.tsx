@@ -69,9 +69,12 @@ export default function(): JSX.Element {
                     <Container.ColorManagerConsumer>
                       {ctx => {
                         return (
+                          <>
+                          <Container.Upload ctx={ctx} />
                           <Component.LinkBtn onClick={() => handleClick(ctx)}>
                             Use default palette >
                           </Component.LinkBtn>
+                          </>
                         );
                       }}
                   </Container.ColorManagerConsumer>

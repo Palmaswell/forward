@@ -8,6 +8,7 @@ export * from './headline';
 export * from './layer';
 export * from './layout';
 export * from './link';
+export * from './input';
 export * from './loading';
 export * from './item-list';
 export * from './size';

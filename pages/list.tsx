@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import uuid from 'uuid/v4';
 import Router from 'next/router';
+import Cookie from 'js-cookie';
 import { Global } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
@@ -24,6 +25,7 @@ export default class extends React.Component {
 
   public handleClick = (colorContext, color): void => {
     colorContext.setActiveColor(color);
+    Cookie.set('active', colorContext.getActiveColor());
     Router.push({
       pathname: "/enhanced"
     });

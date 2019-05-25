@@ -10,10 +10,6 @@ import * as Type from '../types';
 import { ColorExtendedProps } from '../color';
 
 export default class extends React.Component {
-  public static async getInitialProps(foo) {
-    console.log(foo, '********')
-    return foo;
-  }
   public state = {
     isTransitioning: false
   };
@@ -27,7 +23,6 @@ export default class extends React.Component {
   }
 
   private handleClick = (colorContext, i): void => {
-    console.log(colorContext.getActiveColor().getAAA()[i])
     const elements = colorContext.getElements();
     const activeColor = elements.find(c => {
       return c.getName() === colorContext.getActiveColor().getAAA()[i];
