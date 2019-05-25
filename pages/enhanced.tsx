@@ -1,13 +1,19 @@
-import Head from "next/head";
-import { Global } from "@emotion/core";
-import { ThemeProvider } from "emotion-theming";
-import * as React from "react";
-import * as Component from "../components";
-import * as Container from "../container";
-import * as Type from "../types";
-import { ColorExtendedProps } from "../color";
+import Head from 'next/head';
+import uuid from 'uuid/v4';
+import { Global } from '@emotion/core';
+import { ThemeProvider } from 'emotion-theming';
+import * as React from 'react';
+import * as Component from '../components';
+import * as Container from '../container';
+import * as Color from '../color';
+import * as Type from '../types';
+import { ColorExtendedProps } from '../color';
 
 export default class extends React.Component {
+  public static async getInitialProps(foo) {
+    console.log(foo, '********')
+    return foo;
+  }
   public state = {
     isTransitioning: false
   };
@@ -18,6 +24,17 @@ export default class extends React.Component {
 
   public componentWillUnmount(): void {
     this.setState({ ...this.state, isTransitioning: false });
+  }
+
+  private handleClick = (colorContext, i): void => {
+    console.log(colorContext.getActiveColor().getAAA()[i])
+    const elements = colorContext.getElements();
+    const activeColor = elements.find(c => {
+      return c.getName() === colorContext.getActiveColor().getAAA()[i];
+    });
+    if (activeColor) {
+      colorContext.setActiveColor(activeColor);
+    }
   }
 
   public render(): JSX.Element {
@@ -47,7 +64,6 @@ export default class extends React.Component {
               <ThemeProvider theme={builtInCtx}>
                 <Container.ColorManagerConsumer>
                   {colorManagerContext => {
-                    console.log(colorManagerContext.getElements().map(c => c.getAA()))
                     return (
                       <>
                         <Component.Layout>
@@ -133,10 +149,26 @@ export default class extends React.Component {
                                 </Component.Space>
                                 {colorManagerContext.getActiveColor().getAAA()
                                   .length > 0 ? (
-                                  <Container.ColorList
-                                    colors={colorManagerContext.getActiveColor().getAAA()}
-                                    type={Type.ColorList.secondary}
-                                  />
+                                    <Component.ItemList type={Type.ColorList.secondary}>
+                                      {colorManagerContext.getActiveColor().getAAA().map((color, i) => (
+                                        <Component.Item key={uuid()} isActive={false}>
+                                          <Component.Card
+                                            type={Type.ColorTile.secondary}
+                                            name={color.name}
+                                            rgb={Color.toRGBString(color.rgb)}
+                                            hex={Color.toHEX(color.rgb)}
+                                            onClick={() => this.handleClick(colorManagerContext, i)}
+                                          >
+                                            <Component.Tile
+                                              type={Type.ColorTile.secondary}
+                                              bgColor={Color.toRGBString(color.rgb)}
+                                              luminance={Color.luminance(color.rgb)}
+                                              copy={`${Color.contrastRatio(color.rgb, colorManagerContext.getActiveColor().getRGB())}`}
+                                            />
+                                          </Component.Card>
+                                        </Component.Item>
+                                      ))}
+                                    </Component.ItemList>
                                 ) : (
                                   <Component.Headline
                                     order={Type.HeadlineOrder.h3}
@@ -165,10 +197,26 @@ export default class extends React.Component {
                                 </Component.Space>
                                 {colorManagerContext.getActiveColor().getAA()
                                   .length > 0 ? (
-                                  <Container.ColorList
-                                    colors={colorManagerContext.getActiveColor().getAA()}
-                                    type={Type.ColorList.secondary}
-                                  />
+                                    <Component.ItemList type={Type.ColorList.secondary}>
+                                    {colorManagerContext.getActiveColor().getAA().map((color, i) => (
+                                      <Component.Item key={uuid()} isActive={false}>
+                                        <Component.Card
+                                          type={Type.ColorTile.secondary}
+                                          name={color.name}
+                                          rgb={Color.toRGBString(color.rgb)}
+                                          hex={Color.toHEX(color.rgb)}
+                                          onClick={() => this.handleClick(colorManagerContext, i)}
+                                        >
+                                          <Component.Tile
+                                            type={Type.ColorTile.secondary}
+                                            bgColor={Color.toRGBString(color.rgb)}
+                                            luminance={Color.luminance(color.rgb)}
+                                            copy={`${Color.contrastRatio(color.rgb, colorManagerContext.getActiveColor().getRGB())}`}
+                                          />
+                                        </Component.Card>
+                                      </Component.Item>
+                                    ))}
+                                  </Component.ItemList>
                                 ) : (
                                   <Component.Headline
                                     order={Type.HeadlineOrder.h3}

@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { ColorContext, ColorCtxProvider } from '../container/provider';
+import uuid from 'uuid/v4';
+import Router from 'next/router';
 import { Global } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
@@ -19,6 +20,13 @@ export default class extends React.Component {
 
   public componentWillUnmount(): void {
     this.setState({ ...this.state, isTransitioning: false });
+  }
+
+  public handleClick = (colorContext, color): void => {
+    colorContext.setActiveColor(color);
+    Router.push({
+      pathname: "/enhanced"
+    });
   }
 
   public render(): JSX.Element {
@@ -72,8 +80,28 @@ export default class extends React.Component {
                     <Component.Space size={[0, Component.Size.L]}>
                       <Container.ColorManagerConsumer>
                         {(ctx) => {
-                          console.log(ctx.getElements().map(c => c.getAA()))
-                          return <Container.ColorList colorContext={ctx} />
+                          return(
+                            <Component.ItemList type={Type.ColorList.primary}>
+                            {ctx.getElements().map(color => (
+                              <Component.Item key={uuid()} isActive={false}>
+                                <Component.Card
+                                  type={Type.ColorTile.secondary}
+                                  name={color.getName()}
+                                  rgb={color.getRGBString()}
+                                  hex={color.getHEXString()}
+                                  onClick={() => this.handleClick(ctx, color)}
+                                >
+                                  <Component.Tile
+                                    type={Type.ColorTile.secondary}
+                                    bgColor={color.getRGBString()}
+                                    luminance={color.getLuminance()}
+                                    copy="Aa"
+                                  />
+                                </Component.Card>
+                              </Component.Item>
+                            ))}
+                            </Component.ItemList>
+                          );
                         }}
                       </Container.ColorManagerConsumer>
                     </Component.Space>
