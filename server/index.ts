@@ -17,10 +17,22 @@ app.prepare().then(() => {
   server.use(logger());
 
   router.get('/', async ctx => {
+    const { req, res } = ctx;
     const query = {
-      file: ctx.cookies.get('file')
-    }
-    await app.render(ctx.req, ctx.res, '/', query);
+      colors: JSON.stringify(ctx.cookies.get('colors'))
+    };
+
+    await app.render(req, res, '/', query);
+    ctx.respond = false;
+  });
+
+  router.get('/list', async ctx => {
+    const { req, res } = ctx;
+    const query = {
+      colors: JSON.stringify(ctx.cookies.get('colors'))
+    };
+
+    await app.render(req, res, '/list', query);
     ctx.respond = false;
   });
 

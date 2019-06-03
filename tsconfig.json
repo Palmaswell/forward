@@ -20,5 +20,7 @@
       "es2017",
     ],
   },
-  "types": ["@emotion/core"]
+  "types": ["@emotion/core"],
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*"]
 }

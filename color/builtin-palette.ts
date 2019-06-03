@@ -1,3 +1,4 @@
+import * as Color from './';
 import * as Type from '../types';
 
 export const palette: Type.Color[] = [
@@ -129,4 +130,5 @@ export const palette: Type.Color[] = [
     name: 'Chilean Fire',
     rgb: [205, 97, 51]
   },
-]
+];
+

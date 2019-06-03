@@ -1,5 +1,51 @@
 import * as Type from '../types';
 import tinyColor from 'tinycolor2';
+export interface ColorProps {
+  name: string;
+  rgb: RGB;
+  ratio?: number;
+};
+
+export interface ColorExtendedProps {
+  name: string;
+  rgb: RGB;
+  getLuminance(): number;
+  toRGB(): string;
+  toHEX(): string;
+  toHSL(): string;
+  toRGBA(alpha: number): string;
+}
+
+export type RGB = [number, number, number];
+export type A11yLevel = 'aa' | 'aaa';
+
+export enum YValues {
+  r = 0.2126,
+  g = 0.7152,
+  b = 0.0722,
+}
+
+
+export enum A11yRatio {
+  aa = 4.5,
+  aaa = 7,
+}
+
+export enum ColorTile {
+  primary = 'primary',
+  secondary = 'secondary'
+}
+
+export enum ColorList {
+  primary = 'primary',
+  secondary = 'seconday'
+}
+
+export enum Search {
+  lower = 'lower',
+  upper = 'upper',
+}
+
 /**
  * @name luminance
  * @type { number }
@@ -69,6 +115,33 @@ export function createEnhanced(
     rgb,
     aaa,
     aa,
+    getLuminance(): number {
+      return luminance(rgb);
+    },
+    toRGB(): string {
+      return toRGBString(rgb);
+    },
+    toHEX(): string {
+      return tinyColor(toRGBString(rgb)).toHexString();
+    },
+    toHSL(): string {
+      return tinyColor(toRGBString(rgb)).toHslString();
+    },
+    toRGBA(alpha: number): string {
+      const color = tinyColor(toRGBString(rgb));
+      color.setAlpha(alpha);
+      return color.toRgbString()
+    }
+  }
+}
+
+export function createColor(
+  rawColor: ColorProps,
+  ): ColorExtendedProps {
+  const rgb = rawColor.rgb;
+  return {
+    name: rawColor.name,
+    rgb,
     getLuminance(): number {
       return luminance(rgb);
     },

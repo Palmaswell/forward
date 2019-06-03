@@ -1,7 +1,7 @@
-import * as React from 'react';
-import * as Color from './color';
-import * as Type from './types';
-import * as HashTbl from './hash-table';
+import * as React from "react";
+import * as Color from "../color";
+import * as Type from "../types";
+import * as HashTbl from "../hash-table";
 
 export interface ColorCtxProvider {
   Model: Type.ColorModel;
@@ -13,7 +13,7 @@ function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
   Color.sort(colors, Color.luminance);
   const enhancedColors = [];
 
-  for(let i = colors.length - 1; i >= 0; i--) {
+  for (let i = colors.length - 1; i >= 0; i--) {
     if (i >= (colors.length - 1) / 2) {
       const aaaSearch = Color.search(
         colors,
@@ -31,40 +31,35 @@ function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
       enhancedColors[i] = Color.createEnhanced(
         colors[i],
         Array.isArray(aaaSearch)
-        ? aaaSearch
-        : JSON.parse(JSON.stringify(colors.slice(0, aaaSearch + 1))),
+          ? aaaSearch
+          : JSON.parse(JSON.stringify(colors.slice(0, aaaSearch + 1))),
         Array.isArray(aaSearch)
-        ? aaSearch
-        : JSON.parse(JSON.stringify(colors.slice(0, aaSearch + 1)))
+          ? aaSearch
+          : JSON.parse(JSON.stringify(colors.slice(0, aaSearch + 1)))
       );
       colorTbl.set(enhancedColors[i]);
-    }
-    else {
-      const aaaSearch = Color.search(
-        colors,
-        colors[i],
-        Type.A11yRatio.aaa
-      );
-      const aaSearch = Color.search(
-        colors,
-        colors[i],
-        Type.A11yRatio.aa,
-      );
+    } else {
+      const aaaSearch = Color.search(colors, colors[i], Type.A11yRatio.aaa);
+      const aaSearch = Color.search(colors, colors[i], Type.A11yRatio.aa);
 
       enhancedColors[i] = Color.createEnhanced(
         colors[i],
         Array.isArray(aaaSearch)
-        ? aaaSearch
-        : JSON.parse(JSON.stringify(colors.slice(aaaSearch, colors.length))).reverse(),
+          ? aaaSearch
+          : JSON.parse(
+              JSON.stringify(colors.slice(aaaSearch, colors.length))
+            ).reverse(),
         Array.isArray(aaSearch)
-        ? aaSearch
-        : JSON.parse(JSON.stringify(colors.slice(aaSearch, colors.length))).reverse()
+          ? aaSearch
+          : JSON.parse(
+              JSON.stringify(colors.slice(aaSearch, colors.length))
+            ).reverse()
       );
       colorTbl.set(enhancedColors[i]);
     }
   }
   return enhancedColors;
-};
+}
 
 export const ColorContext = React.createContext({});
 
@@ -75,11 +70,11 @@ export function ColorContextProvider(props): JSX.Element {
     colors,
     colorTbl,
     activeColor,
-    setActiveColor,
+    setActiveColor
   };
   return (
     <ColorContext.Provider value={{ Model }}>
       {props.children}
     </ColorContext.Provider>
   );
-};
+}
