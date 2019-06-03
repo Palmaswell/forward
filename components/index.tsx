@@ -5,6 +5,7 @@ export * from './card';
 export * from './font';
 export * from './global';
 export * from './headline';
+export * from './header';
 export * from './layer';
 export * from './layout';
 export * from './link';

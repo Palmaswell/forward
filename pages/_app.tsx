@@ -9,7 +9,6 @@ export default class ForwardApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
-    console.log('%%%%%', pageProps)
     return { pageProps }
   }
   public render(): JSX.Element {

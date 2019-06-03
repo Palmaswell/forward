@@ -1,38 +1,29 @@
-import Head from 'next/head';
-import Router from 'next/router';
-import { Global } from '@emotion/core';
-import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
+import Cookie from 'js-cookie';
+import Router from 'next/router';
+import { ThemeProvider } from 'emotion-theming';
+import { ColorExtendedProps } from '../color';
 import * as Color from '../color';
 import * as Component from '../components';
 import * as Container from '../container';
 import * as Type from '../types';
-import { ColorExtendedProps } from '../color';
 
-export default function(): JSX.Element {
-  const handleClick = (ctx): void => {
-    ctx.addElements(Color.palette);
-    Router.push({
-      pathname: "/list"
-    });
-  };
+
+const handleClick = (ctx): void => {
+  ctx.addElements(Color.palette);
+  Cookie.set('colors', Color.palette);
+  Router.push({
+    pathname: '/list'
+  });
+};
+
+export default function Index(): JSX.Element {
   return (
     <>
-      <Global styles={Component.getGlobalStyles()} />
-      <Head>
-        <title>Forward - color contrast accessibility checker</title>
-        <meta
-          name="description"
-          content="Forward - color contrast accessibility checker"
+      <Component.Header
+        title="Forward - color contrast accessibility checker"
+        description="Forward - color contrast accessibility checker"
         />
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, user-scalable=no" />
-        <link
-          rel="preload"
-          as="font"
-          href="https://fonts.googleapis.com/css?family=Halant|Nunito+Sans"
-        />
-      </Head>
       <Container.BuiltInConsumer>
         {(builtInCtx: Type.HashTbl<ColorExtendedProps>) => {
           return (
