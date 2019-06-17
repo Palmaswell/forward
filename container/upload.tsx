@@ -3,6 +3,7 @@ import Cookie from 'js-cookie';
 import Router from 'next/router';
 import uuid from 'uuid/v3';
 import { ColorManagerContext, palette } from '../color';
+import * as Component from '../components';
 
 export interface UploadProps {
   ctx: ColorManagerContext
@@ -26,12 +27,10 @@ export function Upload(props: UploadProps): JSX.Element {
   }
   return (
     <>
-      <input
+      <Component.FileButton
         accept=".json, application/json"
         value="Upload colors"
-        id={uuid('upload', '1b671a64-40d5-491e-99b0-da01ff1f3341')}
-        type="file"
-        multiple
+        type={Component.ButtonTypes.file}
         onChange={e => handleChange(e)}
         />
     </>
