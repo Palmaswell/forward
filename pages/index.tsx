@@ -61,9 +61,13 @@ export default function Index(): JSX.Element {
                       {ctx => {
                         return (
                           <>
-                          <Container.Upload ctx={ctx} />
+                            <Component.Space
+                              size={[Component.Size.S, 0]}
+                              >
+                            <Container.Upload ctx={ctx} />
+                          </Component.Space>
                           <Component.LinkBtn onClick={() => handleClick(ctx)}>
-                            Use default palette
+                            Use default palette >
                           </Component.LinkBtn>
                           </>
                         );

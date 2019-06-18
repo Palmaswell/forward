@@ -29,7 +29,7 @@ export function Upload(props: UploadProps): JSX.Element {
     <>
       <Component.FileButton
         accept=".json, application/json"
-        value="Upload colors"
+        copy="Upload colors"
         type={Component.ButtonTypes.file}
         onChange={e => handleChange(e)}
         />

@@ -11,7 +11,8 @@ export enum ButtonTypes {
 }
 
 export interface ButtonProps {
-  value: string;
+  copy: string;
+  testId?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -26,7 +27,7 @@ interface StyledButtonProps {
 
 const generateBtnStyles = (props: StyledButtonProps): SerializedStyles => css`
   padding: ${Size.XXS + 2}px ${Size.XS}px ${Size.XXS}px;
-  background-color: ${props.theme.get('Lynx White').toRGB()};
+  background-color: ${props.theme.get('White').toRGB()};
   cursor: pointer;
   ${getFont()}
 `;
@@ -44,6 +45,7 @@ const StyledInputButton = styled.input`
 const StyledInputLabel = styled.label`
   display: inline-block;
   white-space: nowrap;
+  box-shadow: 0 2px 4px ${(props) => props.theme.get('Black').toRGBA(.4)};
   ${(props: StyledButtonProps) => generateBtnStyles(props)}
 `;
 
@@ -53,22 +55,23 @@ const StyledButton = styled.button`
 
 export const FileButton = (props: ButtonProps & InputButtonProps): JSX.Element => {
   const id = uuid('upload', '1b671a64-40d5-491e-99b0-da01ff1f3341');
+  const { accept, copy, type, onChange} = props;
   return (
     <>
       <StyledInputButton
-        accept={props.accept}
-        value={props.value}
+        accept={accept}
         id={id}
-        type={props.type}
-        onChange={props.onChange}
+        type={type}
+        data-testid={props.testId}
+        onChange={onChange}
         />
-      <StyledInputLabel htmlFor={id}>{props.value}</StyledInputLabel>
+      <StyledInputLabel htmlFor={id}>{copy}</StyledInputLabel>
     </>
   )
 };
 
 export const Button = (props: ButtonProps): JSX.Element => (
-  <StyledButton onChange={props.onChange}>
-    {props.value}
+  <StyledButton data-testid={props.testId} onChange={props.onChange}>
+    {props.copy}
   </StyledButton>
 );
