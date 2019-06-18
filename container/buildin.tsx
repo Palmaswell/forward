@@ -7,7 +7,7 @@ Color.sort(builtinPalette, Color.luminance);
 const builtInContext = HashTbl.create(builtinPalette.length);
 builtinPalette.forEach(c => builtInContext.set(Color.createColor(c)));
 
-export const BuiltInCtx = React.createContext({});
+export const BuiltInCtx = React.createContext(builtInContext);
 export const BuiltInConsumer = BuiltInCtx.Consumer;
 
 export function BuiltInProvider(props) {
