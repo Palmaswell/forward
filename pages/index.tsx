@@ -48,7 +48,7 @@ export default function Index(): JSX.Element {
                       tag={Type.HeadlineOrder.h1}
                       type={Type.Headline.secondary}
                     >
-                      Design UI's for everyone
+                      Design UIs for everyone
                     </Component.Headline>
                     <Component.Copy
                       color={builtInCtx.get("Lynx White").toRGB()}
@@ -66,8 +66,8 @@ export default function Index(): JSX.Element {
                               >
                             <Container.Upload ctx={ctx} />
                           </Component.Space>
-                          <Component.LinkBtn onClick={() => handleClick(ctx)}>
-                            Use default palette >
+                          <Component.LinkBtn color={builtInCtx.get('White').toRGB()} onClick={() => handleClick(ctx)}>
+                            Use default palette
                           </Component.LinkBtn>
                           </>
                         );
