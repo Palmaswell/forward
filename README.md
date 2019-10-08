@@ -1,7 +1,32 @@
 # Forward
 
 > Check for automated AA and AAA conformance color contrast according to the WCAG
->
+
+Forward is an automated accessibility color contrast checker that receives a color palette as the input and returns all its possible AA and AAA color contrast combinations.
+
+
+## Uploading Colors
+Currently, you can upload a color palette in JSON format. It's an array containing color objects. 
+Each object has a `"name"` property and a `"rgb"` property containing an array with the rgb values [r, g, b].
+
+### JSON File Example
+```js
+[
+  {
+    "name": "Light Pink",
+    "rgb": [255, 176, 193]
+  },
+  {
+    "name": "Cyclamen",
+    "rgb": [243, 116, 174]
+  },
+  {
+    "name": "Light Crimson",
+    "rgb": [234, 99, 140]
+  }
+}
+```
+
 
 ## Develop
 
@@ -18,7 +43,6 @@
   # In a second terminal window
   yarn test --watchAll
 ```
-
 
 ## Contribute
 
