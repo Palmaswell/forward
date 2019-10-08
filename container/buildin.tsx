@@ -4,7 +4,7 @@ import * as HashTbl from '../hash-table';
 
 const builtinPalette = Array.from(Color.palette);
 Color.sort(builtinPalette, Color.luminance);
-const builtInContext = HashTbl.create(builtinPalette.length);
+const builtInContext = HashTbl.create();
 builtinPalette.forEach(c => builtInContext.set(Color.createColor(c)));
 
 export const BuiltInCtx = React.createContext(builtInContext);
