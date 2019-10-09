@@ -1,18 +1,9 @@
-import * as Type from '../types';
-import * as Util from '../utils';
-import { ColorExtendedProps } from '../color';
-export interface ComputeHashProps {
-  s: string;
-  l: number;
-  t?: number;
-  i?: number;
-}
+import * as Type from '../../types';
+import * as Util from '../../utils';
+import { ColorExtendedProps } from '../../color';
 
-export interface HashTbl<T> {
-  bucketArray: T[] | undefined[];
-  set(item: T): void;
-  get(name: string): T | undefined;
-  delete(name: T): void;
+export interface HashTbl<T> extends Type.HashTbl<T> {
+  bucketArray: T[] | [];
 }
 
 export interface Node {
@@ -47,7 +38,7 @@ export function createNode(value?: any): Type.Node {
  * @name create
  * @param { number } s
 */
-export function create(s: number): Type.HashTbl<ColorExtendedProps> {
+export function create(s: number): HashTbl<ColorExtendedProps> {
   const bucket = new Array(s);
   return {
     bucketArray: bucket,

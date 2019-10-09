@@ -7,11 +7,11 @@ export interface ColorCtxProvider {
   Model: Type.ColorModel;
 }
 
-const colorTbl = HashTbl.create(Color.palette.length);
+const colorTbl = HashTbl.create(Color.palette.length) as Type.HashTbl<Type.colorEnhanced>;
 
 function sanitizeColors(colors: Type.Color[]): Type.colorEnhanced[] {
   Color.sort(colors, Color.luminance);
-  const enhancedColors = [];
+  const enhancedColors: Type.colorEnhanced[] = [];
 
   for (let i = colors.length - 1; i >= 0; i--) {
     if (i >= (colors.length - 1) / 2) {
