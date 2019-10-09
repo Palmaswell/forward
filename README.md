@@ -1,6 +1,7 @@
 # Forward
 
-> AA and AAA conformance color contrast checker according to the WCAG
+> Check for automated AA and AAA conformance color contrast according to the WCAG
+[![CircleCI](https://circleci.com/gh/Palmaswell/focus-manager.svg?style=svg)](https://circleci.com/gh/Palmaswell/focus-manager)
 
 Forward is an automated accessibility color contrast checker that receives a color palette as the input and returns all its possible AA and AAA color contrast combinations.
 
