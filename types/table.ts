@@ -1,4 +1,5 @@
 import { colorEnhanced } from './color';
+import { ColorExtendedProps } from '../color';
 export interface ComputeHashProps {
   s: string;
   l: number;
@@ -7,13 +8,16 @@ export interface ComputeHashProps {
 }
 
 export interface HashTbl<T> {
-  bucketArray: T[] | undefined[];
   set(item: T): void;
   get(name: string): T | undefined;
-  delete(name: T): void;
+  delete(item: T): void;
 }
 
 export interface Node {
   next: Node | null;
   value?: colorEnhanced;
+}
+
+export interface CreateHashFactory {
+  mapImpl: (s: number) => HashTbl<ColorExtendedProps>;
 }
