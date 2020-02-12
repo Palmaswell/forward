@@ -1,5 +1,5 @@
-import * as Color from './';
-import * as Type from '../types';
+import * as Color from '..';
+import * as Type from '../../types';
 
 const sortedMock: Type.Color[] = [
   {

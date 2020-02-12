@@ -1,6 +1,6 @@
-import * as Color from './color';
-import * as Type from '../types';
-import { palette } from './builtin-palette';
+import * as Color from '../color';
+import * as Type from '../../types';
+import { palette } from '../builtin-palette';
 
 test('sRGB Relative luminance in colorimetric spaces', () => {
   expect(Color.luminance([255, 255, 255])).toEqual(1);

@@ -1,5 +1,5 @@
-import * as Color from "./";
-import { ColorProps } from "./color";
+import * as Color from "..";
+import { ColorProps } from "../color";
 
 const colors: ColorProps[] = [
   { name: "Electromagnetic", rgb: [47, 54, 64] },
