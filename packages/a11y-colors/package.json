@@ -1,0 +1,25 @@
+{
+  "name": "a11y-colors",
+  "version": "0.2.0",
+  "description": "Accessible contrast colors",
+  "main": "dist/index.js",
+  "repository": "https://github.com/Palmaswell/forward",
+  "author": "Mauricio Palma<mauricio.palma@woodlikeocean.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc --module commonjs --target es6 --outDir lib/",
+    "test": "jest",
+    "test:coverage": "npm test -- --coverage",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
+  },
+  "dependencies": {
+    "tinycolor2": "^1.4.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.2",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.0",
+    "ts-lint": "^4.5.1"
+  }
+}

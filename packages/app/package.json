@@ -1,0 +1,51 @@
+{
+  "name": "a11y-app",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Accessible color contrast web tool",
+  "repository": "https://github.com/Palmaswell/forward",
+  "license": "MIT",
+  "author": " Mauricio Palma<mauricio.palma@woodlikeocean.com>",
+  "main": "index.js",
+  "scripts": {
+    "build": "next build && tsc --project tsconfig.server.json",
+    "dev": "nodemon",
+    "start": "next start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
+    "a11y-colors": "0.2.0",
+    "cookie-parser": "^1.4.4",
+    "cookies": "^0.8.0",
+    "emotion": "^10.0.27",
+    "emotion-server": "^10.0.27",
+    "emotion-theming": "^10.0.27",
+    "js-cookie": "^2.2.1",
+    "koa": "^2.11.0",
+    "koa-logger": "^3.2.1",
+    "next": "^9.2.1",
+    "nookies": "^2.0.8",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-transition-group": "^4.3.0",
+    "ts-node": "^8.6.2",
+    "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@types/js-cookie": "^2.2.4",
+    "@types/koa": "^2.11.1",
+    "@types/next": "^9.0.0",
+    "@types/node": "^13.7.1",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "@types/tinycolor2": "^1.4.2",
+    "@types/uuid": "^3.4.7",
+    "babel-plugin-emotion": "^10.0.27",
+    "react-testing-library": "^8.0.1",
+    "typescript": "^3.7.5"
+  }
+}

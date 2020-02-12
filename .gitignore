@@ -10,3 +10,4 @@ now.json
 dist
 forward.file
 .forward
+lib

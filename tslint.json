@@ -1,0 +1,12 @@
+
+{
+  "rules": {
+    "no-default-export": false,
+    "no-require-imports": false,
+    "no-var-requires": false,
+    "prefer-method-signature": false
+  },
+  "linterOptions": {
+    "exclude": ["**/dist/**", "**/lib/**", "**/node_modules/**"]
+  }
+}
