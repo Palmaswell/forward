@@ -1,4 +1,3 @@
-import * as Color from './';
 import * as Type from '../types';
 
 export const palette: Type.Color[] = [

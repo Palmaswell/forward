@@ -1,8 +1,7 @@
-const Koa = require('koa');
-const logger = require('koa-logger');
-const Router = require('koa-router');
-const next = require('next');
-const uuid = require('uuid/v3');
+import Koa from 'koa';
+import logger from 'koa-logger';
+import Router from 'koa-router';
+import next from 'next';
 
 const port = parseInt(process.env.PORT, 10) || 8080;
 const dev = process.env.NODE_ENV !== 'production';

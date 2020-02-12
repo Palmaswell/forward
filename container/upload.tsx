@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Cookie from 'js-cookie';
 import Router from 'next/router';
-import uuid from 'uuid/v3';
 import { ColorManagerContext, palette } from '../color';
 import * as Component from '../components';
 

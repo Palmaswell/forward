@@ -1,7 +1,5 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { getFont } from './font';
-import { Size } from './size';
 
 const StyledInput = styled.input`
   width: 0.1px;
