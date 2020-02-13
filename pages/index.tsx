@@ -4,8 +4,8 @@ import Router from 'next/router';
 
 import * as Color from '../color';
 import * as Component from '../components';
-import * as Container from '../context';
 import * as Type from '../types';
+import { BuiltInConsumer, ColorManagerConsumer, Upload } from '../context';
 import { ColorExtendedProps } from '../color';
 
 const handleClick = (ctx): void => {
@@ -23,7 +23,7 @@ export default function Index(): JSX.Element {
         title="Forward - color contrast accessibility checker"
         description="Forward - color contrast accessibility checker"
       />
-      <Container.BuiltInConsumer>
+      <BuiltInConsumer>
         {(builtInCtx: Type.HashTbl<ColorExtendedProps>) => (
           <>
             <Component.Layout>
@@ -51,12 +51,12 @@ export default function Index(): JSX.Element {
                     The design needs to meet color contrast requirements for
                     people with vision or color perception deficiencies.
                   </Component.Copy>
-                  <Container.ColorManagerConsumer>
+                  <ColorManagerConsumer>
                     {ctx => {
                       return (
                         <>
                           <Component.Space size={[Component.Size.S, 0]}>
-                            <Container.Upload ctx={ctx} />
+                            <Upload ctx={ctx} />
                           </Component.Space>
                           <Component.LinkBtn
                             color={builtInCtx.get('White').toRGB()}
@@ -66,7 +66,7 @@ export default function Index(): JSX.Element {
                         </>
                       );
                     }}
-                  </Container.ColorManagerConsumer>
+                  </ColorManagerConsumer>
                 </Component.Space>
               </Component.LayoutItem>
               <Component.LayoutItem
@@ -100,7 +100,7 @@ export default function Index(): JSX.Element {
             <Component.TransitionLayer theme={builtInCtx} transition={false} />
           </>
         )}
-      </Container.BuiltInConsumer>
+      </BuiltInConsumer>
     </>
   );
 }
