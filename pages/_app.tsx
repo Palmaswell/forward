@@ -1,4 +1,5 @@
 import * as React from 'react';
+import App from 'next/app';
 import { ThemeProvider } from 'emotion-theming';
 
 import {
@@ -8,8 +9,10 @@ import {
 } from '../context';
 import { ColorExtendedProps } from '../color';
 import { HashTbl } from '../types';
+import { AppPropsType } from 'next/dist/next-server/lib/utils';
 
-export default function ForwardApp({ Component, pageProps }): JSX.Element {
+export default function ForwardApp(props: AppPropsType): JSX.Element {
+  const { Component, pageProps } = props;
   return (
     <BuiltInProvider>
       <BuiltInConsumer>
@@ -24,3 +27,8 @@ export default function ForwardApp({ Component, pageProps }): JSX.Element {
     </BuiltInProvider>
   );
 }
+
+ForwardApp.getInitialProps = async appContext => {
+  const appProps = await App.getInitialProps(appContext);
+  return { ...appProps };
+};
