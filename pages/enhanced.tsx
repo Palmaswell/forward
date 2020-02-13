@@ -55,205 +55,192 @@ export default class extends React.Component {
         </Head>
         <BuiltInConsumer>
           {(builtInCtx: Type.HashTbl<ColorExtendedProps>) => (
-            <>
-              <ColorManagerConsumer>
-                {colorManagerContext => {
-                  return (
-                    <>
-                      <Component.Layout>
-                        <Component.LayoutItem
-                          type={Type.Layout.custom}
-                          width={42}
-                          bgColor={builtInCtx.get('Blue Nights').toRGB()}>
-                          <Component.Space size={Component.Size.L}>
-                            <Component.Space size={[0, 0, Component.Size.M, 0]}>
-                              <Component.Link href="/list">back</Component.Link>
-                            </Component.Space>
-                            <Component.Card
+            <ColorManagerConsumer>
+              {colorManagerContext => {
+                return (
+                  <>
+                    <Component.Layout>
+                      <Component.LayoutItem
+                        type={Type.Layout.custom}
+                        width={42}
+                        bgColor={builtInCtx.get('Blue Nights').toRGB()}>
+                        <Component.Space size={Component.Size.L}>
+                          <Component.Space size={[0, 0, Component.Size.M, 0]}>
+                            <Component.Link href="/list">back</Component.Link>
+                          </Component.Space>
+                          <Component.Card
+                            type={Type.ColorTile.primary}
+                            name={colorManagerContext
+                              .getActiveColor()
+                              .getName()}
+                            rgb={colorManagerContext
+                              .getActiveColor()
+                              .getRGBString()}
+                            hex={`${colorManagerContext
+                              .getActiveColor()
+                              .getHEXString()}`}>
+                            <Component.Tile
                               type={Type.ColorTile.primary}
-                              name={colorManagerContext
-                                .getActiveColor()
-                                .getName()}
-                              rgb={colorManagerContext
+                              bgColor={colorManagerContext
                                 .getActiveColor()
                                 .getRGBString()}
-                              hex={`${colorManagerContext
+                              luminance={colorManagerContext
                                 .getActiveColor()
-                                .getHEXString()}`}>
-                              <Component.Tile
-                                type={Type.ColorTile.primary}
-                                bgColor={colorManagerContext
-                                  .getActiveColor()
-                                  .getRGBString()}
-                                luminance={colorManagerContext
-                                  .getActiveColor()
-                                  .getLuminance()}
-                                copy="Aa"
+                                .getLuminance()}
+                              copy="Aa"
+                            />
+                          </Component.Card>
+                        </Component.Space>
+                      </Component.LayoutItem>
+                      <Component.LayoutItem
+                        type={Type.Layout.custom}
+                        width={58}
+                        bgColor={builtInCtx.get('Lynx White').toRGB()}>
+                        <Component.Space
+                          size={[
+                            Component.Size.L,
+                            Component.Size.L,
+                            0,
+                            Component.Size.L,
+                          ]}>
+                          <Component.TopBar>
+                            <Component.Space
+                              size={[0, 0, 0, Component.Size.XS]}>
+                              <Component.Headline
+                                order={Type.HeadlineOrder.h3}
+                                tag={Type.HeadlineOrder.h1}>
+                                Match Overview
+                              </Component.Headline>
+                            </Component.Space>
+                          </Component.TopBar>
+                        </Component.Space>
+                        <Component.Space
+                          size={[
+                            Component.Size.S,
+                            Component.Size.L,
+                            Component.Size.S,
+                          ]}>
+                          <Component.Layer>
+                            <Component.Space
+                              size={[0, 0, 0, Component.Size.XS]}>
+                              <Component.Title
+                                prefix="AAA"
+                                copy="Perfect match 🎉"
                               />
-                            </Component.Card>
-                          </Component.Space>
-                        </Component.LayoutItem>
-                        <Component.LayoutItem
-                          type={Type.Layout.custom}
-                          width={58}
-                          bgColor={builtInCtx.get('Lynx White').toRGB()}>
-                          <Component.Space
-                            size={[
-                              Component.Size.L,
-                              Component.Size.L,
-                              0,
-                              Component.Size.L,
-                            ]}>
-                            <Component.TopBar>
-                              <Component.Space
-                                size={[0, 0, 0, Component.Size.XS]}>
-                                <Component.Headline
-                                  order={Type.HeadlineOrder.h3}
-                                  tag={Type.HeadlineOrder.h1}>
-                                  Match Overview
-                                </Component.Headline>
-                              </Component.Space>
-                            </Component.TopBar>
-                          </Component.Space>
-                          <Component.Space
-                            size={[
-                              Component.Size.S,
-                              Component.Size.L,
-                              Component.Size.S,
-                            ]}>
-                            <Component.Layer>
-                              <Component.Space
-                                size={[0, 0, 0, Component.Size.XS]}>
-                                <Component.Title
-                                  prefix="AAA"
-                                  copy="Perfect match 🎉"
-                                />
-                              </Component.Space>
-                              {colorManagerContext.getActiveColor().getAAA()
-                                .length > 0 ? (
-                                <Component.ItemList
-                                  type={Type.ColorList.secondary}>
-                                  {colorManagerContext
-                                    .getActiveColor()
-                                    .getAAA()
-                                    .map((color, i) => (
-                                      <Component.Item
-                                        key={uuid()}
-                                        isActive={false}>
-                                        <Component.Card
+                            </Component.Space>
+                            {colorManagerContext.getActiveColor().getAAA()
+                              .length > 0 ? (
+                              <Component.ItemList
+                                type={Type.ColorList.secondary}>
+                                {colorManagerContext
+                                  .getActiveColor()
+                                  .getAAA()
+                                  .map((color, i) => (
+                                    <Component.Item
+                                      key={uuid()}
+                                      isActive={false}>
+                                      <Component.Card
+                                        type={Type.ColorTile.secondary}
+                                        name={color.name}
+                                        rgb={Color.toRGBString(color.rgb)}
+                                        hex={Color.toHEX(color.rgb)}
+                                        onClick={() =>
+                                          this.handleClick(
+                                            colorManagerContext,
+                                            i
+                                          )
+                                        }>
+                                        <Component.Tile
                                           type={Type.ColorTile.secondary}
-                                          name={color.name}
-                                          rgb={Color.toRGBString(color.rgb)}
-                                          hex={Color.toHEX(color.rgb)}
-                                          onClick={() =>
-                                            this.handleClick(
-                                              colorManagerContext,
-                                              i
-                                            )
-                                          }>
-                                          <Component.Tile
-                                            type={Type.ColorTile.secondary}
-                                            bgColor={Color.toRGBString(
-                                              color.rgb
-                                            )}
-                                            luminance={Color.luminance(
-                                              color.rgb
-                                            )}
-                                            copy={`${Color.contrastRatio(
-                                              color.rgb,
-                                              colorManagerContext
-                                                .getActiveColor()
-                                                .getRGB()
-                                            )}`}
-                                          />
-                                        </Component.Card>
-                                      </Component.Item>
-                                    ))}
-                                </Component.ItemList>
-                              ) : (
-                                <Component.Headline
-                                  order={Type.HeadlineOrder.h3}
-                                  tag={Type.HeadlineOrder.h2}>
-                                  Unfortunately there are no AAA matches
-                                </Component.Headline>
-                              )}
-                            </Component.Layer>
-                          </Component.Space>
-                          <Component.Space
-                            size={[
-                              Component.Size.S,
-                              Component.Size.L,
-                              Component.Size.L,
-                            ]}>
-                            <Component.Layer>
-                              <Component.Space
-                                size={[0, 0, 0, Component.Size.XS]}>
-                                <Component.Title
-                                  prefix="AA"
-                                  copy="Works well"
-                                />
-                              </Component.Space>
-                              {colorManagerContext.getActiveColor().getAA()
-                                .length > 0 ? (
-                                <Component.ItemList
-                                  type={Type.ColorList.secondary}>
-                                  {colorManagerContext
-                                    .getActiveColor()
-                                    .getAA()
-                                    .map((color, i) => (
-                                      <Component.Item
-                                        key={uuid()}
-                                        isActive={false}>
-                                        <Component.Card
+                                          bgColor={Color.toRGBString(color.rgb)}
+                                          luminance={Color.luminance(color.rgb)}
+                                          copy={`${Color.contrastRatio(
+                                            color.rgb,
+                                            colorManagerContext
+                                              .getActiveColor()
+                                              .getRGB()
+                                          )}`}
+                                        />
+                                      </Component.Card>
+                                    </Component.Item>
+                                  ))}
+                              </Component.ItemList>
+                            ) : (
+                              <Component.Headline
+                                order={Type.HeadlineOrder.h3}
+                                tag={Type.HeadlineOrder.h2}>
+                                Unfortunately there are no AAA matches
+                              </Component.Headline>
+                            )}
+                          </Component.Layer>
+                        </Component.Space>
+                        <Component.Space
+                          size={[
+                            Component.Size.S,
+                            Component.Size.L,
+                            Component.Size.L,
+                          ]}>
+                          <Component.Layer>
+                            <Component.Space
+                              size={[0, 0, 0, Component.Size.XS]}>
+                              <Component.Title prefix="AA" copy="Works well" />
+                            </Component.Space>
+                            {colorManagerContext.getActiveColor().getAA()
+                              .length > 0 ? (
+                              <Component.ItemList
+                                type={Type.ColorList.secondary}>
+                                {colorManagerContext
+                                  .getActiveColor()
+                                  .getAA()
+                                  .map((color, i) => (
+                                    <Component.Item
+                                      key={uuid()}
+                                      isActive={false}>
+                                      <Component.Card
+                                        type={Type.ColorTile.secondary}
+                                        name={color.name}
+                                        rgb={Color.toRGBString(color.rgb)}
+                                        hex={Color.toHEX(color.rgb)}
+                                        onClick={() =>
+                                          this.handleClick(
+                                            colorManagerContext,
+                                            i
+                                          )
+                                        }>
+                                        <Component.Tile
                                           type={Type.ColorTile.secondary}
-                                          name={color.name}
-                                          rgb={Color.toRGBString(color.rgb)}
-                                          hex={Color.toHEX(color.rgb)}
-                                          onClick={() =>
-                                            this.handleClick(
-                                              colorManagerContext,
-                                              i
-                                            )
-                                          }>
-                                          <Component.Tile
-                                            type={Type.ColorTile.secondary}
-                                            bgColor={Color.toRGBString(
-                                              color.rgb
-                                            )}
-                                            luminance={Color.luminance(
-                                              color.rgb
-                                            )}
-                                            copy={`${Color.contrastRatio(
-                                              color.rgb,
-                                              colorManagerContext
-                                                .getActiveColor()
-                                                .getRGB()
-                                            )}`}
-                                          />
-                                        </Component.Card>
-                                      </Component.Item>
-                                    ))}
-                                </Component.ItemList>
-                              ) : (
-                                <Component.Headline
-                                  order={Type.HeadlineOrder.h3}
-                                  tag={Type.HeadlineOrder.h2}>
-                                  Unfortunately there are no AA matches
-                                </Component.Headline>
-                              )}
-                            </Component.Layer>
-                          </Component.Space>
-                        </Component.LayoutItem>
-                      </Component.Layout>
-                      <Component.TransitionLayer
-                        theme={builtInCtx}
-                        transition={this.state.isTransitioning}
-                      />
-                    </>
-                  );
-                }}
-              </ColorManagerConsumer>
-            </>
+                                          bgColor={Color.toRGBString(color.rgb)}
+                                          luminance={Color.luminance(color.rgb)}
+                                          copy={`${Color.contrastRatio(
+                                            color.rgb,
+                                            colorManagerContext
+                                              .getActiveColor()
+                                              .getRGB()
+                                          )}`}
+                                        />
+                                      </Component.Card>
+                                    </Component.Item>
+                                  ))}
+                              </Component.ItemList>
+                            ) : (
+                              <Component.Headline
+                                order={Type.HeadlineOrder.h3}
+                                tag={Type.HeadlineOrder.h2}>
+                                Unfortunately there are no AA matches
+                              </Component.Headline>
+                            )}
+                          </Component.Layer>
+                        </Component.Space>
+                      </Component.LayoutItem>
+                    </Component.Layout>
+                    <Component.TransitionLayer
+                      theme={builtInCtx}
+                      transition={this.state.isTransitioning}
+                    />
+                  </>
+                );
+              }}
+            </ColorManagerConsumer>
           )}
         </BuiltInConsumer>
       </>
