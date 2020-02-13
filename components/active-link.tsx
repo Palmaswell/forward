@@ -31,4 +31,4 @@ const ActiveLink: React.SFC<ActiveLinkProps> = (props): JSX.Element => {
     </StyledLink>
   )
 }
-export const Link = withRouter(ActiveLink);
+export const Link = withRouter<any>(ActiveLink);

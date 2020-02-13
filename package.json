@@ -27,7 +27,6 @@
     "@types/react-dom": "16.8.2",
     "@types/tinycolor2": "^1.4.1",
     "@types/uuid": "^3.4.4",
-    "@zeit/next-typescript": "^1.1.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^25.0.0",
     "babel-plugin-emotion": "^10.0.6",
@@ -39,7 +38,7 @@
     "jest-styled-components": "^6.3.1",
     "nodemon": "^1.18.9",
     "react-testing-library": "^7.0.1",
-    "typescript": "^3.2.2"
+    "typescript": "3.7.5"
   },
   "dependencies": {
     "add": "^2.0.6",
@@ -54,7 +53,7 @@
     "koa-router": "^7.4.0",
     "mobx": "^5.9.0",
     "mobx-react": "^5.4.3",
-    "next": "8.0.1",
+    "next": "9.2.1",
     "nookies": "^2.0.6",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

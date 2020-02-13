@@ -1,5 +1,5 @@
-import * as Color from './';
-import { ColorProps, A11yRatio, Search } from './color';
+import * as Color from '..';
+import { ColorProps, A11yRatio, Search } from '../color';
 describe('Color Element', () => {
   const colors:  ColorProps[] = [
     {name: 'Blue Nights', rgb: [59, 68, 70]},

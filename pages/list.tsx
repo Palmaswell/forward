@@ -1,9 +1,7 @@
 import Cookie from 'js-cookie';
-import Head from 'next/head';
 import nookies from 'nookies';
 import Router from 'next/router';
 import uuid from 'uuid/v4';
-import { Global } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
 import * as React from 'react';
 import * as Component from '../components';
