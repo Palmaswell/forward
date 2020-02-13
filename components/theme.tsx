@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ThemeProvider } from 'emotion-theming';
-import { BuiltInCtx, BuiltInProvider } from '../container/buildin';
+import { BuiltInCtx, BuiltInProvider } from '../context/buildin';
 
 export const Theme = (props): JSX.Element => {
   const ctx = React.useContext(BuiltInCtx);

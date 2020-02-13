@@ -9,8 +9,9 @@ builtinPalette.forEach(c => builtInContext.set(Color.createColor(c)));
 
 export const BuiltInCtx = React.createContext(builtInContext);
 export const BuiltInConsumer = BuiltInCtx.Consumer;
+BuiltInCtx.displayName = 'BuiltInCtx'
 
-export function BuiltInProvider(props) {
+export function BuiltInProvider(props): JSX.Element {
   return (
     <BuiltInCtx.Provider value={builtInContext}>
       {props.children}

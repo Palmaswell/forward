@@ -4,6 +4,7 @@ import * as Color from '../color';
 export const colorManagerContext = Color.createManager();
 export const ColorManagerCtx = React.createContext(colorManagerContext);
 export const ColorManagerConsumer = ColorManagerCtx.Consumer;
+ColorManagerCtx.displayName = 'ColorManagerCtx';
 
 export function ColorManagerProvider(props): JSX.Element {
   return (
